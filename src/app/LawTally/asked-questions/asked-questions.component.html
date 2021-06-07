@@ -1,0 +1,87 @@
+<div class="inner-page-middle-seciton-main">
+    <div class="black-bg-section" (click)="menuclose()"></div>
+    <app-sidebar></app-sidebar>
+
+    <div class="inner-page-middle-seciton">
+        <app-dashboard-header></app-dashboard-header>
+
+        <div class="dashboard-page-content-seciton inquiries-page-content-seciton">
+            <div class="notification-head-section-main">
+                <div class="notification-head-section">
+                    Asked Questions
+                </div>
+                <div class="breadcurm-section-block">
+                    <ul>
+                        <li><a routerLink="/lawyer-directory/dashboard">Home</a><span><i
+                                    class="fal fa-angle-right"></i></span></li>
+                        <li>Asked Questions</li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-8 col-xl-9 p-l-0">
+                    <div class="check-records" *ngIf="usersService.questionMsg == 'No Questions to display.'">
+                        <div class="no-records-found-section">
+                            <div class="no-records-found-txt">No records found</div>
+                        </div>
+                    </div>
+                    <div class="check-records" *ngIf="usersService.questionMsg == 'Question displayed successfully.'">
+                        <div class="message-section-main"
+                            *ngFor="let question of usersService.getQuestionList | paginate : {itemsPerPage: 5, currentPage: cp}">
+                            <div class="message-date-time-section">
+                                <div class="message-date-time-block">
+                                    {{ question.created_at }}
+                                </div>
+                            </div>
+                            <div class="message-text-content-section-main">
+                                <div class="message-text-content-section">
+                                    <div class="message-text-head-section">
+                                        <span>From :</span> {{question.full_name}} ( {{ question.user_email }} )
+                                    </div>
+                                    <div class="message-text-content">
+                                        {{ question.question }}
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <a routerLink="/lawyer-directory/question-details" (click)="questionDetail(question.id)"
+                                class="inquiries-view-details-btn">View Details</a>
+                        </div>
+                        <div class="pagenation-seciton-block" *ngIf="usersService.getQuestionList != '' && usersService.getQuestionList?.length>5">
+                            <pagination-controls (pageChange)="cp=$event"></pagination-controls>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-4 col-xl-3 p-r-0">
+                    <div class="margin-top-20 responsiv-filter-section">
+                        <div class="filter-head-section">
+                            Filters
+                        </div>
+                        <div class="filters-block-main">
+                            <div class="filters-block-head">
+                                Filter By Practice Area
+                            </div>
+                            <div class="filter-head-checkbox"
+                                *ngFor="let practice_area of usersService.practiceAreaList  ">
+                                <div class="check-box">
+                                    <input id="{{ practice_area._id }}" class="filled-in" type="checkbox"
+                                        (change)="onChange($event.target.checked,practice_area._id )">
+                                    <label for="{{ practice_area._id }}">{{ practice_area.name }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-arrow-section">
+                        <i class="fal fa-filter"></i>
+                        <i class="fal fa-times"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

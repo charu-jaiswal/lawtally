@@ -1,0 +1,41 @@
+<div class="blank-div-section"></div>
+    
+<!-- HEADER -->
+    <app-main-header></app-main-header>
+
+    <div class="blog-tab-section how-it-works-banner-section"> 
+        <div class="main-blog-bx">
+            <div class="main-blog-img">
+                <img src="assets/images/how-it-works-banner-img.jpg" alt="img" />
+            </div>
+            <div class="how-it-works-banner-content">
+                <div class="how-it-works-banner-head">
+                    <h1>Privacy Policy - Lawtally</h1>
+                </div>
+
+                <div class="how-it-works-meni-head">
+                   
+                    <div class="bottom-underline-white"></div>
+                </div>
+               
+                <div class="breadcurm-section-main">
+                    <ul>
+                        <li><a routerLink="/">Home</a> <span class="breadcurm-arrow-section"><i class="fal fa-angle-right"></i></span></li>
+                        <li>Privacy Policy</li>
+                    </ul>
+                </div>                
+            </div>
+        </div>               
+    </div>
+    <div class="lawtally-trems-section">
+        <div class="container">
+            <div class="lawtally-content" [innerHTML]="usersService.CmsPages">
+            </div>
+        </div>
+    </div>    
+
+<!-- FOOTER  -->
+    <app-main-footer></app-main-footer>
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

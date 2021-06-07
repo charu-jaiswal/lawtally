@@ -1,0 +1,11 @@
+.star {
+    font-size: 30px;
+    color: #5e5959;
+  }
+
+  .filled {
+    color: #fac227fb;
+  }
+  .was-this-just-drop{position: relative;}
+  .was-this-just-drop span{position: absolute;top: 5px;right: 15px;font-size: 27px;}
+  .question-form-submit .add-doctor-menu:hover{background-color: transparent;color: #ff3b4b;}

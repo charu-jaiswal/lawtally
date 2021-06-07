@@ -1,0 +1,33 @@
+.input-symbol-euro {
+    position: relative;
+}
+.input-symbol-euro input {padding-left:18px;text-indent: 15px;}
+.input-symbol-euro:before {
+    position: absolute;
+    top: -1px;
+    content:"$";
+    left: 20px;
+}[type=checkbox].filled-in+label:after, [type=checkbox].filled-in+label:before {
+    content: '';
+    left: 17px;
+    position: absolute;
+    transition: border .25s, background-color .25s, width .2s .1s, height .2s .1s, top .2s .1s, left .2s .1s;
+    z-index: 1;
+}[type=checkbox]+label {
+    position: relative;
+    padding-left: 43px;
+    cursor: pointer;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    font-weight: 400;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+    margin-bottom: 15px;
+} 
+/* .optioncolor {
+background-color: red;
+    } */

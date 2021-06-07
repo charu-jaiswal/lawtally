@@ -1,0 +1,40 @@
+<div class="blank-div-section"></div>
+
+<!-- HEADER -->
+<app-main-header></app-main-header>
+
+<div class="how-it-works-contnet-section-main questions-on-business-main questions-on-business-details-main">
+    <div class="breadcurm-questions-on-business">
+        <div class="container">
+            <ul>
+                <li><a href="/">Home</a><span><i class="fal fa-angle-right"></i></span></li>
+                <li><a href="javascript:void(0)" routerLink="/lawyer-directory/enquiry">All
+                        Enquiries</a><span><i class="fal fa-angle-right"></i></span></li>
+                <li>Enquiry Details</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8" *ngIf="enquiryData">
+                <div class="business-details-section-block">
+                    <div class="business-details-block-head">
+                        From : {{ enquiryData.get_user_details.full_name }} ( {{ enquiryData.get_user_details.email }} )
+                    </div>
+                    <div class="guides-label-section">
+                        <i class="fas fa-user-circle"></i>{{ enquiryData.phone_no }} | {{ enquiryData.created_at }}
+                    </div>
+                    <div class="business-details-block-content">
+                        <p>{{ enquiryData.inquiry }} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<app-main-footer></app-main-footer>
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

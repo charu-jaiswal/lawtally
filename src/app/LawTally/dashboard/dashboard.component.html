@@ -1,0 +1,144 @@
+<div class="inner-page-middle-seciton-main">
+    <div class="black-bg-section" (click)="menuclose()"></div>
+    <app-sidebar></app-sidebar>
+
+    <div class="inner-page-middle-seciton">
+        <app-dashboard-header></app-dashboard-header>
+
+        <div class="dashboard-page-content-seciton">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3 dash-responsive-cols-section">
+                    <div class="dash-cate-section" routerLink="/lawyer-directory/enquiry">
+                        <div class="dash-cate-section-count">
+                            <div class="dash-cate-section-count-deg">
+                                {{dashboardData?.tot_inquiries}}
+                            </div>
+                            <div class="dash-cate-section-count-name">
+                                Total Enquiries Received
+                            </div>
+                        </div>
+                        <div class="dash-cate-section-icon">
+                            <img src="assets/images/dash-icon-1.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3 dash-responsive-cols-section">
+                    <div class="dash-cate-section">
+                        <div class="dash-cate-section-count">
+                            <div class="dash-cate-section-count-deg">
+                                {{dashboardData?.tot_profile_count}}
+                            </div>
+                            <div class="dash-cate-section-count-name">
+                                Total Profile Visitors
+                            </div>
+                        </div>
+                        <div class="dash-cate-section-icon">
+                            <img src="assets/images/dash-icon-2.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3 dash-responsive-cols-section">
+                    <div class="dash-cate-section">
+                        <div class="dash-cate-section-count">
+                            <div class="dash-cate-section-count-deg">
+                               total money 
+                            </div>
+                            <div class="dash-cate-section-count-name">
+                                Total Spending
+                            </div>
+                        </div>
+                        <div class="dash-cate-section-icon">
+                            <img src="assets/images/dash-icon-3.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3 dash-responsive-cols-section">
+                    <div class="dash-cate-section">
+                        <div class="dash-cate-section-count">
+                            <div class="dash-cate-section-count-deg">
+                                {{dashboardData?.tot_favourites}}
+                            </div>
+                            <div class="dash-cate-section-count-name">
+                                Added You to Favourites
+                            </div>
+                        </div>
+                        <div class="dash-cate-section-icon">
+                            <img src="assets/images/dash-icon-4.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <div class="dashboard-profile-visitor">
+                        <div class="dashboard-profile-visitor-head">
+                            Profile Visitors
+                        </div>
+                        <div class="dashboard-profile-visitor-graph">
+                            
+                            <div class="p-2">
+                                <canvas baseChart width="400" height="200"
+                                    [datasets]="chartProfileVisitors.lineChartData"
+                                    [labels]="chartProfileVisitors.lineChartLabels"
+                                    [options]="chartProfileVisitors.lineChartOptions"
+                                    [colors]="chartProfileVisitors.lineChartColors"
+                                    [legend]="chartProfileVisitors.lineChartLegend" [chartType]="'line'"></canvas>
+                            </div>
+                            <div class="row">
+                                <div class="col mt-1 mb-2 text-center">
+                                    <button type="button" class="btn btn-primary btn-sm" (click)="ProfileViews('P')">
+                                        <i class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp;
+                                        Previous
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm ml-2"
+                                        [disabled]="!isNextAvailable" (click)="ProfileViews('N')">
+                                        Next&nbsp;
+                                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+              <!--charu Start  Bar Chart-->
+                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <div class="dashboard-profile-visitor">
+                        <div class="dashboard-profile-visitor-head">
+                         User Activity
+                        </div>
+                        <div class="dashboard-profile-visitor-graph">
+                           <div style="display: block">
+                                <canvas baseChart
+                                        [datasets]="barChartData"
+                                        [labels]="barChartLabels"
+                                        [legend]="barChartLegend"
+                                        [chartType]="barChartType"
+                                        [options]="chartOption"
+                                        >
+                                    </canvas>
+                                    <!-- (chartHover)="chartHovered($event)" -->
+                                        <!-- (chartClick)="chartClicked($event)" -->
+                              </div>
+                         
+                        </div>
+                    </div>
+                </div> 
+               <!--charu End Bar Chart-->
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <div class="dashboard-profile-visitor">
+                        <div class="dashboard-profile-visitor-head">
+                            Case Demographics
+                        </div>
+                        <div class="dashboard-profile-visitor-graph">
+                            <!-- <img src="assets/images/dashboard-chart2.jpg" alt="" /> -->
+                            <canvas baseChart *ngIf="chartCaseDemographics.doughnutChartData[0][0]"
+                                [data]="chartCaseDemographics.doughnutChartData"
+                                [labels]="chartCaseDemographics.doughnutChartLabels" [chartType]="'doughnut'">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

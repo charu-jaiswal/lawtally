@@ -1,0 +1,8 @@
+.mode {
+    width: 20em;
+    border: 2px solid;
+    padding: 1em;
+    border-radius: 10px;
+    height: 6.5em;
+    cursor: pointer;
+}

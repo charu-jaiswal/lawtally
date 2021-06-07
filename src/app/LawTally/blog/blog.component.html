@@ -1,0 +1,79 @@
+<div class="blank-div-section"></div>
+
+<!-- HEADER -->
+    <app-main-header></app-main-header>
+
+<div class="blog-tab-section">  
+          
+    <mat-tab-group (selectedTabChange)="tabChanged($event)">
+        <mat-tab  *ngFor="let blog_category of usersService.BlogCategory " [label]="blog_category" >
+            <ng-template mat-tab-label>
+                <span>{{blog_category.title | titlecase}}</span>
+            </ng-template>
+            <ng-template matTabContent>
+                <div class="main-blog-section" *ngIf="usersService.BlogListingMsg == 'Blogs displayed successfully.'">
+                    <div class="main-blog-bx"  *ngFor="let blog of usersService.BlogListing | slice:0:1 ">
+                        <div class="main-blog-img">
+                            <img src="{{blog.blogs_image}}" alt="blog-1" *ngIf="blog.blogs_image!=''">
+                            <img src="assets/images/main-blog.jpg" alt="blog-1" *ngIf="blog.blogs_image==''">
+                        </div>
+                       
+
+                        <div class="container">
+                            <div class="main-bx-txt">
+                                    <h4>{{blog.category_title }}</h4>
+                                <a href="javascript:void(0)" routerLink="/lawyer-directory/blog-details" (click)="blogDetails(blog.id)">
+                                    <h2>{{blog.short_description}}</h2>
+                                </a>    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-section" *ngIf="usersService.BlogListing.length >= 2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4" *ngFor="let blog_lower of usersService.BlogListing | slice:1:10000  | paginate : {itemsPerPage:9 , currentPage: cp}">
+                                    <div class="blog-bx">
+                                        <div class="blog-img-bx"  >
+                                            <img src="{{blog_lower.blogs_image}}" alt="blog-1" *ngIf="blog_lower.blogs_image!=''">
+                                            <img src="assets/images/main-blog.jpg" alt="blog-1" *ngIf="blog_lower.blogs_image==''">
+
+                                        </div>
+
+                                        <div class="blog-txt-bx">
+                                            <a href="javascript:void(0)" routerLink="/lawyer-directory/blog-details" (click)="blogDetails(blog_lower.id)">
+                                                <h4>{{ blog_lower.category_title }}</h4>
+                                                <h2>{{ blog_lower.short_description }}</h2>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pagenation-seciton-block" *ngIf="usersService.BlogListing != ''  && usersService.getQuestionList?.length>9">
+                                <pagination-controls (pageChange)="cp=$event"></pagination-controls>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                    <!-- <div class="blog-section" *ngIf="usersService.BlogListing.length < 1">
+                        <div class="no-records-found-section">
+                            <div class="no-records-found-txt">No Blogs found</div>
+                        </div> 
+                    </div> -->
+                </div>
+                <div class="main-blog-section"  *ngIf="usersService.BlogListingMsg == 'No Blogs found.'">
+                    <div class="no-records-found-section">
+                        <div class="no-records-found-txt">No Blogs found</div>
+                    </div> 
+                </div>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>     
+</div>
+
+<!-- FOOTER -->
+    <app-main-footer></app-main-footer>
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

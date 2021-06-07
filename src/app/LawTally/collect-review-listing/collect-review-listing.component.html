@@ -1,0 +1,143 @@
+    <div class="inner-page-middle-seciton-main">
+        <div class="black-bg-section"></div>
+        <div class="inner-page-menu-section">
+            <div class="inner-page-logo-section">
+                <a href="index.html">                    
+                    <img src="assets/images/logo-white.png" alt="" />
+                </a>
+            </div>
+            <app-sidebar></app-sidebar>
+            <!-- <div class="inner-page-menus">
+                <ul>
+                    <li><a href="dashboard.html"><span class="dash-menu-icon dash-icon"></span> <span class="dash-menu-icon-text">Dashboard</span></a></li>
+                    <li><a href="javascript:void(0)"><span class="dash-menu-icon profile-icon"></span> <span class="dash-menu-icon-text">Profile</span></a></li>
+                    <li><a href="subscriptions-plan.html"><span class="dash-menu-icon subscrip-icon"></span> <span class="dash-menu-icon-text">Subscriptions</span></a></li>
+                    <li><a href="notification.html"><span class="dash-menu-icon noti-icon"></span> <span class="dash-menu-icon-text">Notification</span></a></li>
+                    <li><a href="review.html"><span class="dash-menu-icon review-icon"></span> <span class="dash-menu-icon-text">Reviews</span></a></li>
+                    <li><a href="inquiries.html"><span class="dash-menu-icon inquiries-icon"></span> <span class="dash-menu-icon-text">Inquiries</span></a></li>
+                    <li><a href="transaction-history.html"><span class="dash-menu-icon transaction-icon"></span> <span class="dash-menu-icon-text">Transaction History</span></a></li>
+                    <li><a href="javascript:void(0)"><span class="dash-menu-icon widget-icon"></span> <span class="dash-menu-icon-text">Widget</span></a></li>
+                    <li><a href="javascript:void(0)"><span class="dash-menu-icon setting-icon"></span> <span class="dash-menu-icon-text">Setting</span></a></li>
+                </ul>
+            </div> -->
+        </div>
+        <div class="inner-page-middle-seciton">
+            <app-dashboard-header></app-dashboard-header>
+        <!-- <div class="inner-page-header-seciton">
+            <div class="menu-icon-section"></div>
+            <div class="notification-user-drop-seciton">
+                <div class="notification-icon-seciton">
+                    <span class="noti-icon-menu">12</span>
+                </div>
+                <div class="user-profile-section">
+                    <span class="user-profile-name"><span class="user-profile-name-span">Ryan More</span> <i class="fal fa-angle-down"></i></span>
+                    <span class="user-profile-img">
+                        <img src="assets/images/unknown-man.jpg" alt="" />
+                    </span>
+                    <ul class="user-profile-drop-seciton">
+                        <li><a href="javascript:void(0)">Dashboard</a></li>
+                        <li><a href="javascript:void(0)">Profile</a></li>
+                        <li><a href="javascript:void(0)">Setting</a></li>
+                        <li><a href="javascript:void(0)">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div> -->
+        <div class="dashboard-page-content-seciton collect-review-section-main">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3 dash-responsive-cols-section">
+                    <div class="dash-cate-section">
+                        <div class="dash-cate-section-count">
+                            <div class="dash-cate-section-count-deg">
+                                {{usersService.Invitation_Cnt}}
+                            </div>
+                            <div class="dash-cate-section-count-name">
+                                Invitation Delivered
+                            </div>
+                        </div>
+                        <div class="dash-cate-section-icon">
+                            <img src="assets/images/collect-reviews-icon1.png" alt="" />
+                        </div>
+                    </div>
+                    <div class="dash-cate-section">
+                        <div class="dash-cate-section-count">
+                            <div class="dash-cate-section-count-deg">
+                               {{usersService.Verified_Review_Cnt}}
+                            </div>
+                            <div class="dash-cate-section-count-name">
+                                Verified Reviews
+                            </div>
+                        </div>
+                        <div class="dash-cate-section-icon">
+                            <img src="assets/images/collect-reviews-icon2.png" alt="" />
+                        </div>
+                    </div>
+                    <div class="dash-cate-section">
+                        <div class="dash-cate-section-count">
+                            <div class="dash-cate-section-count-deg">
+                                {{usersService.LawTally_Score}}%
+                            </div>
+                            <div class="dash-cate-section-count-name">
+                                LawTally score
+                            </div>
+                        </div>
+                        <div class="dash-cate-section-icon">
+                            <img src="assets/images/collect-reviews-icon3.png" alt="" />
+                        </div>
+                    </div>
+                </div>                                          
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 collect-reviews-graph-section">
+                    <div class="dashboard-profile-visitor">
+                        <div class="dashboard-profile-visitor-head">
+                            Profile Visitors
+                        </div>
+                        <div class="dashboard-profile-visitor-graph">
+                            <img src="assets/images/collect-reviews-graph.jpg" alt="" />
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            <div class="trassaction-history-table-seciton collect-reviews-table-section" *ngIf="usersService.Reviewmessage=='Listing displayed successfully.'">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>Customer Email</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                                <!-- <th>Send</th>
+                                <th>Type</th>                                 -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let reviewlist of usersService.getReviewListing | paginate : {itemsPerPage: 10, currentPage: cp}">
+                                <td>{{reviewlist.full_name}}</td>
+                                <td>{{reviewlist.email}}</td>
+                                <td>{{reviewlist.status}}</td>
+                                <td>{{reviewlist.created_at}}</td>
+                            </tr>                            
+                                                        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="pagenation-seciton-block" *ngIf="usersService.getReviewListing?.length>10">
+                <pagination-controls (pageChange)="cp=$event"></pagination-controls>
+            </div>
+        </div>
+        <div class="table-responsive" *ngIf="usersService.Reviewmessage =='No data found.'">
+            <div class="no-records-found-section">
+                <div class="no-records-found-txt">No records found</div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+    </div>
+    <!-- back to Top Start Here  -->
+    <a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>       
+

@@ -1,0 +1,77 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '100px' }"></ngx-loading>
+
+<div class="blank-div-section"></div>
+    
+<!-- HEADER -->
+    <app-main-header></app-main-header>
+
+    <div class="login-page">
+        <div class="login-box">
+            <div class="left-side">
+                <div class="left-img-text">
+                    <div class="login-heading">Login</div>
+                    <div class="login-line"></div>
+                    <div class="easy-way-text">Easy Way To Find Lawyers</div>
+                    <div class="hundreds-text">Hundreds of thousands of lawyers, tens of thousands of firms</div>
+                </div>
+            </div>
+            <div class="right-side">
+                <form #loginForm="ngForm" id="loginForm" data-parsley-validate>
+                    <div class="login">Login</div>
+                    <div class="input-box-right">
+                        <!-- <input type="hidden" name="login_as" ngModel="user" required #login_as="ngModel"> -->
+
+                        <div class="input-name">Email/Mobile</div>
+                        <input type="text" name="email" placeholder="alexandraba@gmail.com" ngModel required #email="ngModel" data-parsley-type="email" data-parsley-required="true" data-parsley-required-message="* Please enter your email.">
+                        <span class="bar"></span>
+                    </div>
+
+                    <div class="input-box-right login-pass-main">
+                        <div class="input-name password">Password</div>
+                        <input type="{{passwordInput}}" name="password" placeholder="***************" ngModel required #password="ngModel" data-parsley-required="true" data-parsley-required-message="* Please enter your password.">
+                        <i class="{{passStatus}} sho-pass-icon-section"  aria-hidden="true" (click)="viewPassword()"></i>
+                        <span class="bar"></span>
+                    </div>
+
+                    <div style="color: red">{{message}}</div>
+
+                    <div class="login-btn-box">
+                        <button class="login-btn" type="submit" (click)="onLogin(loginForm)">Login</button>
+                    </div>
+                </form>
+             
+                <div class="remember-forgot">
+                    <div class="check-box">
+                        <p>
+                            <input id="filled-in-box" class="filled-in" type="checkbox" (change)="onChange($event.target.checked)">
+                            <label for="filled-in-box">Remember Me</label>
+                        </p>
+                    </div>
+                    <div class="forgot">
+                        <a routerLink="/lawyer-directory/forgot-password">
+                            Forgot Password?
+                        </a>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="or-block">
+                    <span>&nbsp;</span>
+                    <p>Or Login with social media</p>
+                </div>
+                <div class="facebook-google">
+                    <div (click)="doFacebookLogin()" class="contact-social-icon icon-box"><a ><i class="fab fa-facebook-f"></i></a></div>
+                    <div (click)="doTwitterLogin()" class="contact-social-icon icon-box google"><a href="#"><i class="fab fa-twitter"></i></a></div>
+                    <div (click)="doLinkedinLogin()" class="contact-social-icon icon-box"><a ><i class="fab fa-linkedin"></i></a></div>
+
+                </div>
+                <div class="dont-account">Don't have an Account? <span><a routerLink="/lawyer-directory/signup"><u>Sign Up Now!</u></a></span> </div>
+            </div>
+        </div>
+    </div>
+
+<!-- FOOTER  -->
+    <app-main-footer></app-main-footer>
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

@@ -1,0 +1,35 @@
+<div class="inner-page-header-seciton">
+    <div class="menu-icon-section" (click)="menuopen()"></div>
+    <div class="notification-user-drop-seciton">
+        <ng-container *ngFor="let user of usersService?.lawyerDetailsList">
+            <button class="btn btn-primary mr-4" (click)="onGetOpenSubscrption()"
+                *ngIf="user?.has_membership === 'no' && getData === 'edit'">Subscribe</button>
+        </ng-container>
+        <a routerLink="/lawyer-directory/notification" class="notification-icon-seciton">
+            <span class="noti-icon-menu">
+                {{this.usersService?.getNotificationList ? this.usersService?.getNotificationList?.length : 0}}
+            </span>
+        </a>
+        <div class="user-profile-section" *ngFor="let userDetails of usersService.AdminDetails">
+            <span class="user-profile-name">
+                <span class="user-profile-name-span">{{userDetails.full_name}}</span> <i class="fal fa-angle-down"></i>
+            </span>
+            <span class="user-profile-img">
+                <img *ngIf="userDetails?.profile_image == ''" src="assets/images/user.png" alt="" />
+                <img *ngIf="userDetails?.profile_image != ''" src="{{userDetails.profile_image}}" alt="" />
+            </span>
+            <ul class="user-profile-drop-seciton">
+                <li><a routerLink="/lawyer-directory/dashboard">Dashboard</a></li>
+                <li><a (click)="getUserProfile()">Profile</a></li>
+                <li *ngIf="getData == 'add'"><a (click)="onGetSubscrption()">Add Lawyer</a></li>
+              
+                <li *ngIf="getData == 'edit'"><a routerLink="/lawyer-directory/edit-lawyer">Edit Lawyer</a></li>
+
+                <li><a href="javascript:void(0)">Setting</a></li>
+                <li><a href="javascript:void(0)" (click)="logout()">Logout</a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>

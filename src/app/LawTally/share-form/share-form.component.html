@@ -1,0 +1,74 @@
+<ngb-tabset class="pageTabs" [activeId]="activeIdString">
+    <ngb-tab id="url-tab" title="Url">
+        <ng-template ngbTabContent>
+            <div class="form-group form-group-section mt-3">
+                <!-- Enter Your Description<br> -->
+                <input readonly type="text" [(ngModel)]="currentUrl" required>
+                <button class="hg-profile-button hg-track mt-2" (click)="copyInputMessage(currentUrl)">Copy Url</button>
+            </div>
+        </ng-template>
+    </ngb-tab>
+
+    <ngb-tab id="approved-panel" title="Email">
+        <ng-template ngbTabContent>
+            <form #addEmailForm="ngForm" id="addEmailForm">
+                <div class="form-group form-group-section mt-3">
+                    Your Full Name<br>
+                    <input type="text" name="full_name" #full_name="ngModel" ngModel required>
+                    <div *ngIf="full_name.invalid && addEmailForm?.submitted==true" class="error-msg">
+                        <div *ngIf="full_name?.errors.required">
+                            * Name is required.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-group-section mt-3">
+                    Your Email<br>
+                    <input type="text" name="from_email" #from_email="ngModel" (input)="emailValid($event)" ngModel
+                        required>
+                    <div *ngIf="from_email.invalid && addEmailForm?.submitted==true" class="error-msg">
+                        <div *ngIf="from_email?.errors.required">
+                            * Email is required.
+                        </div>
+                    </div>
+                    <div *ngIf="(from_email.dirty || from_email.touched) && !validEmail" class="error-msg">
+                        * Invalid Email.
+                    </div>
+                </div>
+                <div class="form-group form-group-section mt-3">
+                    Send To<br>
+                    <input placeholder="example@sample.com" name="to_email" (input)="sendToValid($event)"
+                        #to_email="ngModel" ngModel type="text" required>
+                    <div *ngIf="to_email.invalid && addEmailForm?.submitted==true" class="error-msg">
+                        <div *ngIf="to_email?.errors.required">
+                            * Send To is required.
+                        </div>
+                    </div>
+                    <div *ngIf="(to_email.dirty || to_email.touched) && !validSendTo" class="error-msg">
+                        * Invalid Email.
+                    </div>
+                </div>
+                <div class="form-group form-group-section mt-3">
+                    Your Message (Optional)<br>
+                    <textarea maxlength="500" name="message" #message="ngModel" ngModel
+                        placeholder="Hey, I found a great doctor!" rows="4" required></textarea>
+                    <div *ngIf="message.invalid && addEmailForm?.submitted==true" class="error-msg">
+                        <div *ngIf="message?.errors.required">
+                            * Message is required.
+                        </div>
+                    </div>
+                    <button class="hg-profile-button hg-track mt-2" (click)="send(addEmailForm)">Send</button>
+                </div>
+            </form>
+        </ng-template>
+    </ngb-tab>
+
+    <ngb-tab id="non-approved-panel" title="Send to your phone">
+        <ng-template ngbTabContent>
+            <div class="form-group form-group-section mt-3">
+                Mobile Number (U.S. Only)<br>
+                <input type="tel" placeholder="(555) 555-5555" #mob required>
+                <button class="hg-profile-button hg-track mt-2" (click)="sendSms(mob)">Send Sms</button>
+            </div>
+        </ng-template>
+    </ngb-tab>
+</ngb-tabset>

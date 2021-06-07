@@ -1,0 +1,945 @@
+<!-- <div class="blank-div-section"></div>
+
+<app-main-header></app-main-header>
+
+<div class="container-size">
+    <div class="breadcurm-section-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7">
+                    <div class="user-address-section">
+                        Subscription Plan
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5">
+                    <div class="breadcurm-txt-section">
+                        <ul>
+                            <li>
+                                <span><a routerLink="/">Home</a></span>
+                                <span class="breadcurm-arrow-section"><i class="fal fa-angle-right"></i></span>
+                            </li>
+                            <li><span>Subscription Plan</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="middle-sectin-main">
+        <div class="container">
+            <div class="subscriptions-cols-section">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 subscriptions-cols">
+                        <div class="subscriptions-pan-box elite-profile-plan">
+                            <div class="subscriptions-plan-head">
+                                <div class="subscriptions-plan-head-txt" *ngFor="let elite of usersService.ElitePlan">
+                                    {{elite.package_name}}
+                                </div>
+                            </div>
+                            <div class="subscription-plan-points-main">
+                                <div class="subscriptions-plan-price" *ngFor="let elite of usersService.ElitePlan">
+                                    <div class="plan-price">
+                                        <sup>$</sup>{{elite.price}}<span>Per Month</span>
+                                    </div>
+                                </div>
+                                <ul *ngFor="let details of usersService.ElitePackage">
+                                    <li><i class="far fa-check-circle"></i>{{details.data}}</li>
+                                </ul>
+                            </div>
+                            <div class="subscription-plan-subscrib-btn" *ngFor="let elite of usersService.ElitePlan">
+                                <a class="btn-subscription-plan-subscrib" (click)="onAddLawyerPage(elite)">Get
+                                    Started</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 subscriptions-cols">
+                        <div class="subscriptions-pan-box standard-profile-plan">
+                            <div class="subscriptions-plan-head">
+                                <div class="subscriptions-plan-head-txt"
+                                    *ngFor="let standard of usersService.StandardPlan">
+                                    {{standard.package_name}}
+                                </div>
+                            </div>
+                            <div class="subscription-plan-points-main">
+                                <div class="subscriptions-plan-price"
+                                    *ngFor="let standard of usersService.StandardPlan">
+                                    <div class="plan-price">
+                                        <sup>$</sup>{{standard.price}}<span>Per Month</span>
+                                    </div>
+                                </div>
+                                <ul *ngFor="let details of usersService.StandardPackage">
+                                    <li><i class="far fa-check-circle"></i>{{details.data}}</li>
+                                </ul>
+                            </div>
+                            <div class="subscription-plan-subscrib-btn"
+                                *ngFor="let standard of usersService.StandardPlan">
+                                <a class="btn-subscription-plan-subscrib" (click)="onAddLawyerPage(standard)">Get
+                                    Started</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 subscriptions-cols">
+                        <div class="subscriptions-pan-box diamond-profile-plan">
+                            <div class="subscriptions-plan-head">
+                                <div class="subscriptions-plan-head-txt"
+                                    *ngFor="let diamond of usersService.DiamondPlan">
+                                    {{diamond.package_name}}
+                                </div>
+                            </div>
+                            <div class="subscription-plan-points-main">
+                                <div class="subscriptions-plan-price" *ngFor="let diamond of usersService.DiamondPlan">
+                                    <div class="plan-price">
+                                        <sup>$</sup>{{diamond.price}}<span>Per Month</span>
+                                    </div>
+                                </div>
+                                <ul *ngFor="let details of usersService.DiamondPackage">
+                                    <li><i class="far fa-check-circle"></i>{{details.data}}</li>
+                                </ul>
+                            </div>
+                            <div class="subscription-plan-subscrib-btn"
+                                *ngFor="let diamond of usersService.DiamondPlan">
+                                <a class="btn-subscription-plan-subscrib" (click)="onAddLawyerPage(diamond)">Get
+                                    Started</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<app-main-footer></app-main-footer>
+
+
+
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>
+
+
+<shared-modal id="modeSelect" modalTitle="Select payment method">
+    <table>
+        <tr>
+            <td (click)="openCheckout('stripe')">
+                <img class="mode"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/1280px-Stripe_Logo%2C_revised_2016.svg.png"
+                    alt="Stripe_Logo%2C_revised_2016" srcset=""></td>
+            <td style="width: 5em;"></td>
+            <td (click)="openCheckout('paypal')">
+                <img class="mode" src="https://pngimg.com/uploads/paypal/paypal_PNG19.png" alt="Paypal" srcset="">
+            </td>
+        </tr>
+    </table>
+</shared-modal>
+
+<shared-modal id="paypalModal" modalTitle="Paypal">
+    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+</shared-modal> -->
+
+
+
+<app-main-header></app-main-header>
+
+
+
+<div class="sub-plan-banner-section">    
+    <div class="sub-plan-banner-content">
+        <div class="sub-plan-banner-head">
+            Select a Plan to Start your Business
+        </div>
+        <div class="sub-plan-banner-btns">
+            <a class="sub-plan-btns-month active" href="javascript:void(0);">Monthly</a>
+            <a class="sub-plan-btns-annua" href="javascript:void(0);">Annually</a>
+        </div>
+    </div>
+</div>
+
+<div class="sub-plans-section-main">
+    <div class="container">
+        <div class="sub-plans-points-main-seciton">
+            <div class="sub-plans-block">
+                <div class="sub-plan-head-section">
+                    Lawtally Features
+                </div>  
+                <div class="sub-plan-points">
+                    Instant Approval
+                </div>  
+                <div class="sub-plan-points">
+                    Edit Lawyer Profile
+                </div>  
+                <div class="sub-plan-points">
+                    Modern Color
+                </div>  
+                <div class="sub-plan-points">
+                    LT Badges
+                </div>  
+                <div class="sub-plan-points">
+                    LT Awards
+                </div>  
+                <div class="sub-plan-points dropdown-section-main">
+                    <a class="sub-plan-subhead seo-plan" href="javascript:void(0);">
+                        SEO
+                        <i class="fal fa-angle-right"></i>
+                        
+                    </a>
+                    <ul class="sub-plan-dropdown">
+                        <li>Content Optimization</li>
+                        <li>3 Backlinks Placement</li>
+                        <li>Rich Faqs Creation</li>
+                        <li>Rich Snippets</li>
+                        <li>Google Listing</li>
+                        <li>Online Reputation</li>
+                        <li>Create Articles </li>
+                         <li>Post Blogs</li>
+                    </ul>
+                </div>                     
+                <div class="sub-plan-points dropdown-section-main">
+                    <a class="sub-plan-subhead review-plan" href="javascript:void(0);">
+                        Reviews
+                        <i class="fal fa-angle-right"></i>
+                        
+                    </a>
+                    <ul class="sub-plan-dropdown">
+                        <li>Send Invites</li>
+                        <li>Track Invites</li>
+                        <li>Reply To Reviews</li>
+                        <li>Dispute Reviews</li>
+                        <li>Share Reviews</li>
+                        <li>Embed Reviews</li>
+                        <li>Reviews Demographics</li>
+                    </ul>
+                </div>                      
+                <div class="sub-plan-points dropdown-section-main">
+                    <a class="sub-plan-subhead analytics-plan" href="javascript:void(0);">
+                        Analytics
+                        <i class="fal fa-angle-right"></i>
+                        
+                    </a>
+                    <ul class="sub-plan-dropdown">
+                        <li>Dashboard </li>
+                        <li>Receive Inquires</li>
+                        <li>Respond Inquiries</li>
+                        <li>Track Website Clicks</li>
+                        <li>Track Phone Clicks</li>
+                        <li>Participate in Q&A </li>
+                        <li>Edit Profile</li>
+                    </ul>
+                </div>                       
+                <div class="sub-plan-points dropdown-section-main">
+                    <a class="sub-plan-subhead promotions-plan" href="javascript:void(0);">
+                        Promotions
+                        <i class="fal fa-angle-right"></i>
+                        
+                    </a>
+                    <ul class="sub-plan-dropdown">
+                        <li>Ads in Directory</li>
+                        <li>Ads in Q&A </li>
+                        <li>Ads in Lawyer Profile</li>
+                        <li>Interview Invites </li>
+                        <li>Featured on Homepage</li>
+                        
+                    </ul>
+                </div>                       
+                <div class="sub-plan-points dropdown-section-main">
+                    <a class="sub-plan-subhead preferred-lawyer-plan" href="javascript:void(0);">
+                        Preferred Lawyer
+                        <i class="fal fa-angle-right"></i>
+                        
+                    </a>
+                    <ul class="sub-plan-dropdown">
+                        <li>Lawyer Matching</li>
+                        <li>Guaranteed Leads</li>
+                        <li>Increase Customers</li>
+                        <li>Become LT Partners</li>
+                        <li>Increase Revenue</li>
+                  
+                    </ul>
+                </div>
+                <div class="sub-plan-points dropdown-section-main">
+                    <a class="sub-plan-subhead support-plan" href="javascript:void(0);">
+                        Support
+                        <i class="fal fa-angle-right"></i>
+                        
+                    </a>
+                    <ul class="sub-plan-dropdown">
+                        <li>Email</li>
+                        <li>Chat</li>
+                        <li>Phone</li>
+                        <li>24/7</li>
+                     
+                    </ul>
+                </div>                      
+            </div>
+            
+            
+            <!--  basic profile-->                
+            <div class="sub-plans-block sub-plans-block-value basic-plans-value">
+                <div class="sub-plan-head-section">
+                    Basic Profile
+                </div>
+                <div class="permonth-value-block basic-plans-permonth">
+                    <div class="permonth-value-deg">
+                        $10
+                    </div>
+                    <div class="permonth-value-txt">
+                        per month
+                    </div>
+                    <div class="permonth-get-started">
+                        <a class="permonth-get-started-btn"  (click)="onAddLawyerPage(usersService.StandardPlan[0])">Get Started</a>
+                    </div>
+                </div>  
+                <div class="sub-plan-points">
+                    No
+                </div>  
+                <div class="sub-plan-points">
+                    Yes
+                </div>  
+                <div class="sub-plan-points">
+                    No
+                </div>  
+                <div class="sub-plan-points">
+                    No
+                </div>  
+                <div class="sub-plan-points">
+                    No
+                </div>
+                <div class="sub-plan-points">
+                    Yes
+                </div>
+                
+                <!--seo-->
+                <div class="drop-plan-value-main seo-plan-value-section">
+                     <div class="sub-plan-points">
+                        Yes
+                    </div> 
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                </div> 
+                <!--seo-->
+                
+                
+                <!--REVIEWS-->
+                <div class="sub-plan-points">
+                    Yes
+                </div>  
+                <div class="drop-plan-value-main reviews-plan-value-section">
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                </div>
+                <!--REVIEWS-->                    
+                
+                
+                <!--ANALYTICS-->
+                <div class="sub-plan-points">
+                    Yes
+                </div>
+                <div class="drop-plan-value-main analytics-plan-value-section">
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                    Yes
+                    </div>  
+                   
+                </div>  
+                
+                <!--ANALYTICS-->
+                
+                
+                <!--Promotions-->
+                <div class="sub-plan-points">
+                   Yes
+                </div>
+                <div class="drop-plan-value-main promotions-plan-value-section">
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                   
+                </div>  
+                <!--Promotions-->
+                
+                
+                <!--Preferred Lawyer-->
+                <div class="sub-plan-points">
+                    No
+                </div> 
+                <div class="drop-plan-value-main preferred-law-plan-value-section">
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                  
+                   
+                </div>   
+                <!--Preferred Lawyer-->                    
+                
+                
+                <!--Support-->
+                <div class="sub-plan-points">
+                  Yes
+                </div> 
+                <div class="drop-plan-value-main support-plan-value-section">
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                   
+                </div>  
+                <!--Support-->                    
+                
+                
+            </div>
+            <!--  basic profile-->
+            
+            
+            
+            <!--  Elite profile-->                
+            <div class="sub-plans-block sub-plans-block-value elite-plans-value">
+                <div class="sub-plan-head-section">
+                    Elite Profile
+                    <a href="javascript:void(0)">Best Deal</a>
+                </div>
+                <div class="permonth-value-block">
+                    <div class="permonth-value-deg">
+                        $20
+                    </div>
+                    <div class="permonth-value-txt">
+                        per month
+                    </div>
+                    <div class="permonth-get-started">
+                        <a class="permonth-get-started-btn" href="javascript:void(0)" (click)="onAddLawyerPage(usersService.ElitePlan[0])">Get Started</a>
+                    </div>
+                </div>   
+                <div class="sub-plan-points">
+                    Yes
+                </div>  
+                <div class="sub-plan-points">
+                    Yes
+                </div>  
+                <div class="sub-plan-points">
+                    Yes
+                </div>  
+                <div class="sub-plan-points">
+                    Yes
+                </div>  
+                <div class="sub-plan-points">
+                    Yes
+                </div>
+                <div class="sub-plan-points">
+                    Yes
+                </div>
+                <div class="drop-plan-value-main seo-plan-value-section">
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    
+                      <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                </div> 
+                <div class="sub-plan-points">
+                    Yes
+                </div>  
+                <div class="drop-plan-value-main reviews-plan-value-section">
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                </div>
+                <div class="sub-plan-points">
+                    Yes
+                </div>
+                <div class="drop-plan-value-main analytics-plan-value-section">
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div> 
+                     <div class="sub-plan-points">
+                        Yes
+                    </div> 
+                   
+                </div> 
+                
+                
+                <div class="sub-plan-points">
+                    Yes
+                </div>
+                <div class="drop-plan-value-main promotions-plan-value-section">
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                   
+                  
+                </div>  
+                
+                
+                
+                <div class="sub-plan-points">
+                    No
+                </div> 
+                <div class="drop-plan-value-main preferred-law-plan-value-section">
+                    <div class="sub-plan-points">
+                        No
+                    </div>  
+                       <div class="sub-plan-points">
+                        No
+                    </div>  
+                       <div class="sub-plan-points">
+                        No
+                    </div>  
+                       <div class="sub-plan-points">
+                        No
+                    </div>  
+                       <div class="sub-plan-points">
+                        No
+                    </div>  
+             
+                    
+                   
+                   
+                </div>   
+                
+                
+                <div class="sub-plan-points">
+                    Yes
+                </div> 
+                <div class="drop-plan-value-main support-plan-value-section">
+                    <div class="sub-plan-points">
+                      Yes
+                    </div>  
+                       <div class="sub-plan-points">
+                      Yes
+                    </div>
+                    
+                       <div class="sub-plan-points">
+                      No
+                    </div>
+                    
+                       <div class="sub-plan-points">
+                      Yes
+                    </div>
+            
+                </div>   
+            </div>
+               <!--  Elite profile-->
+            
+            
+               <!--  Dimond profile-->
+            <div class="sub-plans-block sub-plans-block-value diamond-plans-value">
+                <div class="sub-plan-head-section">
+                    Diamond Profile
+                </div>
+                <div class="permonth-value-block">
+                    <div class="permonth-value-deg">
+                        $50
+                    </div>
+                    <div class="permonth-value-txt">
+                        per month
+                    </div>
+                    <div class="permonth-get-started">
+                        <a class="permonth-get-started-btn" href="javascript:void(0)" (click)="onAddLawyerPage(usersService.DiamondPlan[0])">Get Started</a>
+                    </div>
+                </div>   
+                <div class="sub-plan-points">
+                   Yes
+                </div>  
+                <div class="sub-plan-points">
+                    Yes
+                </div>  
+                <div class="sub-plan-points">
+                   Yes
+                </div>  
+                <div class="sub-plan-points">
+                   Yes
+                </div>  
+                <div class="sub-plan-points">
+                   Yes
+                </div>
+                
+                
+                <div class="sub-plan-points">
+                   Yes
+                </div>
+                <div class="drop-plan-value-main seo-plan-value-section">
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                </div> 
+                
+                
+                <div class="sub-plan-points">
+                    Yes
+                </div>  
+                <div class="drop-plan-value-main reviews-plan-value-section">
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                </div>
+                
+                
+                <div class="sub-plan-points">
+                   Yes
+                </div>
+                <div class="drop-plan-value-main analytics-plan-value-section">
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                </div>  
+                
+                
+                <div class="sub-plan-points">
+                   Yes
+                </div>
+                <div class="drop-plan-value-main promotions-plan-value-section">
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                   
+                </div>  
+                
+                
+                <div class="sub-plan-points">
+                    Yes
+                </div> 
+                <div class="drop-plan-value-main preferred-law-plan-value-section">
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                  
+                </div>   
+                <div class="sub-plan-points">
+                   Yes
+                </div> 
+                
+                
+                <div class="drop-plan-value-main support-plan-value-section">
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                       Yes
+                    </div>  
+                    <div class="sub-plan-points">
+                        Yes
+                    </div>  
+                   
+                </div>   
+            </div>
+             <!--  Dimond profile-->
+            
+            
+            
+        </div>
+    </div>
+</div>
+
+<div class="sub-plan-faq-section">
+    <div class="container">
+        <div class="sub-plan-faq-head">
+            Faq's
+            <span></span>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <div class="sub-plan-faq-ques">
+                    <div class="sub-plan-faq-ques-head">
+                        100% Money Back Guarantee
+                    </div>
+                    <div class="sub-plan-faq-ques-content">
+                        You have 14 days of test-driving and if you're unhappy with it, for any reason, just drop us an email and we'll take care of you.
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <div class="sub-plan-faq-ques">
+                    <div class="sub-plan-faq-ques-head">
+                        Support Best-In-Business
+                    </div>
+                    <div class="sub-plan-faq-ques-content">
+                        We live by making our clients happy and if you had anything less than a great experience with our website please contact us now.
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <div class="sub-plan-faq-ques">
+                    <div class="sub-plan-faq-ques-head">
+                        Can I cancel my subscription?
+                    </div>
+                    <div class="sub-plan-faq-ques-content">
+                        Yes, you can cancel at any time and perform other actions on your subscriptions via My Account page from the dashboard.
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <div class="sub-plan-faq-ques">
+                    <div class="sub-plan-faq-ques-head">
+                        Which payment methods do you take?
+                    </div>
+                    <div class="sub-plan-faq-ques-content">
+                        We accept all major credit cards(except AMEX) via stripe, we do not store your credit cards information on our server. All the payments will be processed by using 3d secure authentication.
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <div class="sub-plan-faq-ques">
+                    <div class="sub-plan-faq-ques-head">
+                        Any discount for an annual subscription?
+                    </div>
+                    <div class="sub-plan-faq-ques-content">
+                        Yes, we offer a 20% discount if you choose annual subscription for any plan. Please email us if you'd  like to pay for annual subscription.
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                <div class="sub-plan-faq-ques">
+                    <div class="sub-plan-faq-ques-head">
+                        Any other questions we can answer?
+                    </div>
+                    <div class="sub-plan-faq-ques-content">
+                        We are happy to help you. Kindly email us on help@lawtally.com and we will revert you back within 24 hours.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>      
+
+
+<!-- footer menu end Here  -->    
+<app-main-footer></app-main-footer>

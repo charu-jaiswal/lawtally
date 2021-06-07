@@ -1,0 +1,15 @@
+<div class="shared-modal">
+    <div class="card" [ngClass]=" loginflag ? 'enable' : 'disable'">
+        <div class="row">
+            <h4 class="col-8" [ngClass]=" loginflag ? 'black' : 'white'">{{ modalTitle }}</h4>
+            <div class="col-4">
+                <h5><i class="fas fa-times float-right icon-button--hover-reactive"
+                        [ngClass]=" loginflag ? 'black' : 'white'" (click)="close()"></i>
+                </h5>
+            </div>
+        </div>
+        <hr>
+        <ng-content></ng-content>
+    </div>
+</div>
+<div class="shared-modal__background"></div>

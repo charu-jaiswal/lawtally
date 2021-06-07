@@ -1,0 +1,232 @@
+<div class="inner-page-middle-seciton-main">
+    <div class="black-bg-section" (click)="menuclose()"></div>
+    <div class="inner-page-menu-section">
+        <div class="inner-page-logo-section">
+            <a href="index.html">
+                <img src="assets/images/logo-white.png" alt="" />
+            </a>
+        </div>
+        <app-sidebar></app-sidebar>
+        <!-- <div class="inner-page-menus">
+                <ul>
+                    <li><a href="dashboard.html"><span class="dash-menu-icon dash-icon"></span> <span class="dash-menu-icon-text">Dashboard</span></a></li>
+                    <li><a href="javascript:void(0)"><span class="dash-menu-icon profile-icon"></span> <span class="dash-menu-icon-text">Profile</span></a></li>
+                    <li><a href="subscriptions-plan.html"><span class="dash-menu-icon subscrip-icon"></span> <span class="dash-menu-icon-text">Subscriptions</span></a></li>
+                    <li><a href="notification.html"><span class="dash-menu-icon noti-icon"></span> <span class="dash-menu-icon-text">Notification</span></a></li>
+                    <li><a href="review.html"><span class="dash-menu-icon review-icon"></span> <span class="dash-menu-icon-text">Reviews</span></a></li>
+                    <li><a href="inquiries.html"><span class="dash-menu-icon inquiries-icon"></span> <span class="dash-menu-icon-text">Inquiries</span></a></li>
+                    <li><a href="transaction-history.html"><span class="dash-menu-icon transaction-icon"></span> <span class="dash-menu-icon-text">Transaction History</span></a></li>
+                    <li><a href="javascript:void(0)"><span class="dash-menu-icon widget-icon"></span> <span class="dash-menu-icon-text">Widget</span></a></li>
+                    <li><a href="javascript:void(0)"><span class="dash-menu-icon setting-icon"></span> <span class="dash-menu-icon-text">Setting</span></a></li>
+                </ul>
+            </div> -->
+    </div>
+    <div class="inner-page-middle-seciton">
+        <app-dashboard-header></app-dashboard-header>
+        <!-- <div class="inner-page-header-seciton">
+            <div class="menu-icon-section"></div>
+            <div class="notification-user-drop-seciton">
+                <div class="notification-icon-seciton">
+                    <span class="noti-icon-menu">12</span>
+                </div>
+                <div class="user-profile-section">
+                    <span class="user-profile-name"><span class="user-profile-name-span">Ryan More</span> <i class="fal fa-angle-down"></i></span>
+                    <span class="user-profile-img">
+                        <img src="images/unknown-man.jpg" alt="" />
+                    </span>
+                    <ul class="user-profile-drop-seciton">
+                        <li><a href="javascript:void(0)">Dashboard</a></li>
+                        <li><a href="javascript:void(0)">Profile</a></li>
+                        <li><a href="javascript:void(0)">Setting</a></li>
+                        <li><a href="javascript:void(0)">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div> -->
+        <div class="dashboard-page-content-seciton collect-review2-section-main">
+            <div data-responsive-tabs>
+                <nav>
+                    <ul>
+                        <li id="invittab1">
+                            <a href="#one">Add Invites</a>
+                        </li>
+                        <li id="teamptab2" >
+                            <a href="#two">Select Template</a>
+                        </li>
+                        <li id="donetab3">
+                            <a href="#three">Done</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="content">
+                    <section id="one">
+                        <div class="type-in-customer-head">
+                            Type in your customer information
+                        </div>
+                        <div class="type-in-customer-content">
+                            Add your customers one by one. Simply type in the relevant information: names, email
+                            addresses, <!-- and reference numbers --> and when you're all set, hit the 'Continue' button.
+                            <!-- Note that you can enter up to 100 invitations. --> 
+                        </div>
+                        <div class="text-block">
+                            <div class="add-csv-priview-btn">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-6">
+                                        <div class="form-group">                             
+                                            <div class="continue-bnt-section-popup loader-import-exel">
+                                                <!-- <label>Client list Excel Import</label> -->
+                                                <!-- <input type="file" id="file_upload" class="bnt-continue-section-popup" accept=".xls,.xlsx" (change)="csv_import($event)"> -->
+                                                <!-- <a href="javascript:void(0);" class="bnt-continue-section-popup">Add CSV File</a> -->
+                                                <!-- <a href="javascript:void(0);" class="bnt-continue-section-popup bnt-clr-all">Priview
+                                                    demo</a> -->
+
+                                                    <div class="user-box client-excel-import">
+                                                        <div class="control-label">Client list Excel Import</div>
+                                                        <div class="upload-block">
+                                                            <input type="file" id="file_upload" style="visibility:hidden; height: 0;position: absolute;" name="file" accept=".xls,.xlsx" (change)="csv_import($event)">
+                                                            <div class="input-group ">
+                                                                <input type="text" class="form-control file-caption  kv-fileinput-caption" placeholder="Select Downloaded Excel file format to Import." id="subfile" />
+                                                                <div class="btn btn-primary btn-file "><a class="file" onclick="$('#file_upload').click();">Browse...</a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                <div class="clearfix"></div>
+                                                <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '100px' }"></ngx-loading>
+                                            </div>
+                                        </div>
+                                        <div class="note-section-main note-section-block">
+                                            <span>Note :</span> <a href="assets/files/Sample-import-list.xlsx"> Download here</a> the sample Excel file to import (Only downloaded file formate will work for import).
+                                        </div>
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="main-col-block collect-lawyer-client">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="text" name="emailmain" id="emailmain" class="form-control review_array"
+                                                placeholder="Enter Email" (keyup)="chkvalidemail($event,'mainemail');">
+                                            <div id="mainemailerror" class="error">This field is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-6">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" name="namemain" id="namemain" class="form-control"
+                                                placeholder="Enter Name">
+                                                <div id="mainnameerror" class="error"  style="display: none;">This field is required</div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success add-remove-btn" type="button"
+                                (click)="addFieldValue()">
+                                <!-- (click)="education_fields();" -->
+                                    <i class="fas fa-plus-circle"></i>
+                                </button>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div id="education_fields">
+                                
+                            </div>
+                            <div id="showdynamicrecords">
+                                <div class="main-col-block" *ngFor="let field of fieldArray; let i = index">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-6">
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                <input type="text" [(ngModel)]="field.email" name="{{field.email}}" id="emailtxt{{i}}"  class="form-control review_array" placeholder="Enter Email" (keyup)="chkvalidemail($event,i);">
+                                                    <div id="subemailerror{{i}}" class="error">This field is required</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 col-lg-6">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input type="text" [(ngModel)]="field.full_name" name="{{field.full_name}}" id="nametxt{{i}}" class="form-control"
+                                                    placeholder="Enter Name">
+                                                    <div id="subnameerror{{i}}" class="error" style="display: none;">This field is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-success add-remove-btn" type="button"
+                                    (click)="deleteFieldValue(i)">
+                                        <i class="fas fa-minus-circle"></i>
+                                    </button>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- (click)="generate_review_array()" -->
+                        <div class="continue-bnt-section-popup">
+                            <a href="javascript:void(0);" class="bnt-continue-section-popup" (click)="onEditCloseItems()">Continue</a>
+                            <a href="javascript:void(0);" (click)="clear_all()" class="bnt-continue-section-popup bnt-clr-all">Clear all data</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </section>
+                    <section id="two">
+                        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '100px' }"></ngx-loading>
+                        <h3>Email Template</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur deleniti, odio quibusdam
+                            laboriosam cupiditate quo repellendus iure optio ea maiores tempore voluptatibus omnis
+                            temporibus nemo, a natus repudiandae nulla excepturi.</p>
+                        <div>
+                            <div class="radio-btns">
+                                <div class="radio-btn">
+                                    <input type="radio" id="seltemplate" value="Template1" name="selector" checked>
+                                    <label for="seltemplate">Admin Email Template1</label>
+                                    <div class="check"></div>
+                                </div>
+                                <div class="email-template-demo-main">
+                                    <div class="email-template-logo-seciton">
+                                        <img src="assets/images/logo.png" alt="" class="main-logo" />
+                                    </div>
+                                    <div class="email-template-user-name">
+                                        Hello ##USERNAME##, 
+                                    </div>
+                                    <div class="email-template-content">
+                                        Lawyer ##LAWYER_NAME## has requested to review the profile.
+                                    </div>
+                                    <div class="email-please-textarea-section">
+                                        <!-- <label>Please</label> -->
+                                        <textarea id="emailteamplateedittxt" name="email-template" class="form-control" placeholder="Email Body"  [(ngModel)]="templatetextpart2"></textarea>
+                                    </div>
+                                    <div class="verification-url">
+                                        <a href="javascript:void(0);" class="bnt-continue-section-popup">##VERIFICATION_URL##</a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="continue-bnt-section-popup">
+                            <a id="finalsubmit" href="javascript:void(0);" class="bnt-continue-section-popup" (click)="finalSubmitcollist()">Submit</a>
+
+                            <a href="javascript:void(0);" (click)="backme()" class="bnt-continue-section-popup bnt-clr-all">Back</a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="note-section-main note-section-block templateerrormsg" align="right"><span>Note :</span>Your Invites List is incomplete... Go back in order to continue. </div>
+                        <div class="clearfix"></div>
+                    </section>
+                    <section id="three">
+                        <div id="successmsgdesp">
+                            <h3>Success!</h3>
+                            <h5><p>Client list added successfully.</p></h5>
+                        </div>
+                        <div class="continue-bnt-section-popup">
+                            <a href="javascript:void(0);" (click)="backme()" class="bnt-continue-section-popup bnt-clr-all">Back</a>
+                        </div>
+                        <div class="clearfix"></div>   
+                        <div class="note-section-main note-section-block templateerrormsg" align="right"><span>Note :</span>Your Invites List is incomplete... Go back in order to continue. </div>
+                        <div class="clearfix"></div>   
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

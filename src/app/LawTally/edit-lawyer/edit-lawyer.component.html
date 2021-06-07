@@ -1,0 +1,1606 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '100px' }"></ngx-loading>
+
+<div class="blank-div-section"></div>
+
+<!-- HEADER -->
+
+<app-main-header></app-main-header>
+
+<div class="container-size">
+
+    <div class="breadcurm-section-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7">
+                    <div class="user-address-section">
+                        Edit Lawyer
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5">
+                    <div class="breadcurm-txt-section">
+                        <ul>
+                            <li><span>Home</span> <span class="breadcurm-arrow-section"><i
+                                        class="fal fa-angle-right"></i></span></li>
+                            <li><span>listing</span> <span class="breadcurm-arrow-section"><i
+                                        class="fal fa-angle-right"></i></span></li>
+                            <li><span>Probate lawyer</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="middle-sectin-main">
+        <div class="container">
+            <div class="add-lawyer-form-main overview-form-main">
+                <div class="add-lawyer-form-steps">
+                    <ul>
+                        <li class="overview-tab">
+                            <div class="count-section-block">1</div>
+                            <div class="count-name-section-block">Overview</div>
+                        </li>
+                        <li class="valuable-cases-tab">
+                            <div class="count-section-block">2</div>
+                            <div class="count-name-section-block">Notable Cases</div>
+                        </li>
+                        <li class="work-experience-tab">
+                            <div class="count-section-block">3</div>
+                            <div class="count-name-section-block">Work Experience</div>
+                        </li>
+                        <li class="education-tab">
+                            <div class="count-section-block">4</div>
+                            <div class="count-name-section-block">Education</div>
+                        </li>
+                        <li class="law-firms-tab">
+                            <div class="count-section-block">5</div>
+                            <div class="count-name-section-block">Law Firms</div>
+                        </li>
+                        <li class="cost-tab">
+                            <div class="count-section-block">6</div>
+                            <div class="count-name-section-block">Cost</div>
+                        </li>
+                    </ul>
+                </div>
+                <div *ngIf="usersService.isEditData" class="add-lawyer-forms-main">
+
+                    <div class="add-lawyer-form add-lawyer-overview-form">
+                        <form #editOverviewForm="ngForm" id="editOverviewForm">
+
+                            <div class="form-head-section">
+                                Overview
+                                <span></span>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div *ngFor="let overview of usersService.lawyerDetailsList">
+                                <div class="profile-img-block">
+                                    <div class="pro-img" *ngIf="imgURL == null">
+                                        <img *ngIf="overview?.profile_image == ''" src="assets/images/user.png"
+                                            style="width: 130px;height: 155px;" alt="" />
+                                        <img *ngIf="overview?.profile_image != ''" src="{{overview.profile_image}}"
+                                            style="width: 130px;height: 155px;" alt="" />
+                                    </div>
+
+                                    <div class="pro-img" *ngIf="imgURL != null">
+                                        <img [src]="imgURL" class="img-responsive img-preview" alt="" />
+                                    </div>
+
+                                    <input class="attachment_upload" style="height: 100%; width: 100%; z-index: 99;"
+                                        id="logo-id" name="profile_image" type="file" (change)="onFileUpload($event)"
+                                        #profile_image="ngModel" ngModel>
+                                    <a href="javascript:void(0)" class="profile-img-edit-block"><i
+                                            class="fal fa-edit"></i></a>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="form-group form-group-section active">
+                                            <input id="full" type="text" name="full_name" pattern="^[a-zA-Z\s\.]+$"
+                                                maxlength="50" data-parsley-required="true"
+                                                data-parsley-required-message="* Full Name is required."
+                                                data-parsley-pattern="^[a-zA-Z\s\.]+$"
+                                                data-parsley-pattern-message="* Full Name Should be valid."
+                                                #full_name="ngModel" [(ngModel)]="overview.full_name" required>
+                                            <label for="full">Full Name</label>
+                                        </div>
+                                        
+                                    </div>
+                                  <!--charu    Start-->
+                                  <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group form-group-section active">
+                                        <!-- <input id="tw-url" type="text" name="twitter_url" > -->
+                                        <input id="other" type="text" name="also_known_as" pattern="^[a-zA-Z\s\.]+$"
+                                            maxlength="50" 
+                                            data-parsley-required-message="* Other Name is required."
+                                            data-parsley-pattern="^[a-zA-Z\s\.]+$"
+                                            data-parsley-pattern-message="* Other Name Should be valid."
+                                            #also_known_as="ngModel" [(ngModel)]="overview.also_known_as" >
+                                        <label for="other">Also known as Names</label>
+                                    </div>
+                                       </div>
+                                    <!--charu end-->
+                              <!--  charu practiceAreaStart-->
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                 <div class="inner-work-experience">
+                                <div class="form-head-section">
+                                    Practice Area
+                                    <span></span>
+                                </div>
+                                <div class="add-cases-btn-main">
+                                    <a href="javascript:void(0)" (click)="addPracticeArea()"
+                                        class="btn-add-cases add-remove-btn valuable_cases_clone"><i
+                                            class="fal fa-plus"></i> Add PracticeArea</a>
+                                </div>
+                                <div class="clearfix"></div>
+                                
+                                <div ngModelGroup="practiceArea">
+                                    <div *ngFor="let area of usersService.practiceArea; let i=index" [ngModelGroup]="i">
+                                        <div class="text-block">
+                                            <div class="add-cases-btn-main" *ngIf="i > 0">
+                                                <a (click)="removePracticeArea(i)" href="javascript:void(0)"
+                                                    class="btn-add-cases add-remove-btn valuable_cases_clone"><i
+                                                        class="fal fa-minus"></i> Remove Practice Area</a>
+                                            </div>
+                                            <br> <br>
+                                            <div class="main-col-block">
+                                                <div class="row">
+                                                   <div class="col-sm-6 col-md-6 col-lg-6">
+                                                      <div class="form-group form-group-section active">
+                                                           
+                                                        <select name="practice_area_id" id="practice_area_id" class="col-sm-6 form-control" 
+                                                        [(ngModel)]="usersService.practiceArea[i].practice_area_id"  #area="ngModel" >
+                                                            <option value="{{item._id}}" *ngFor="let item of practiceAreaList.response_data">{{item.name}}</option>
+                                                          </select>   
+                                                          
+                                                          <div *ngIf="area.invalid && (area.dirty || area.touched)"
+                                                          class="error-msg">
+                                                          <div *ngIf="area?.errors.required">
+                                                              * Practice area is required.
+                                                          </div>
+                                                      </div>
+                                                          </div>
+                                                             </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                          <div class="form-group form-group-section active">
+                                                                                                                       
+                                                            <input name="practice_area_percentage" id="last" (change)="onPercentageChange()" type="text"
+                                                            #practice_area_percentage="ngModel" [(ngModel)]="usersService.practiceArea[i].practice_area_percentage"
+                                                                 
+                                                                 pattern="^[0-9+-]*$" minlength="1" 
+                                                                data-parsley-required-message="* Percentage   is required."
+                                                                data-parsley-pattern-message="* Percentage  Should be valid."
+                                                                required>
+                                                            <label for="practice_area">Enter Your Practice Area Percentage </label>                                                                                                
+                                                        </div>
+                                                      </div>
+                                                     </div>                                                 
+                                                    </div>
+                                                    <div id="valuable_cases_clone"></div>
+                                                </div>
+                                                </div>
+                                                <div *ngIf="isTotal" class="row col-lg-12 alert alert-danger text-center" role="alert">
+                                                Your Percentage could not be greater than 100.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                  <!-- Practice Area End-->
+
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="form-group form-group-section active">
+                                            <input id="number" type="text" name="mobile_number" #mobile_number="ngModel"
+                                                pattern="^[0-9+-]*$" minlength="7" maxlength="16"
+                                                data-parsley-required="true"
+                                                data-parsley-required-message="* Mobile Number is required."
+                                                data-parsley-pattern="^[0-9+-]*$"
+                                                data-parsley-pattern-message="* Mobile Number Should be valid."
+                                                data-parsley-minlength="10"
+                                                data-parsley-minlength-message="* Minimum 10 digits."
+                                                data-parsley-maxlength="12"
+                                                data-parsley-maxlength-message="* Maximum 12 digits."
+                                                [(ngModel)]="overview.mobile_number" required>
+                                            <label for="number">Enter Your number</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="form-group form-group-section active">
+                                            <input id="email" type="text" name="email"
+                                                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                                data-parsley-required="true"
+                                                data-parsley-required-message="* Email is required."
+                                                data-parsley-pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                                data-parsley-pattern-message="* Should be a valid email address."
+                                                #email="ngModel" [(ngModel)]="overview.email" required>
+                                            <label for="email">Enter Your email</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="form-group form-group-section active">
+                                            <input id="website" type="text" name="website"
+                                            pattern="https?://.+"
+                                                data-parsley-required="true"
+                                                data-parsley-required-message="* Website is required."
+                                              
+                                                data-parsley-pattern-message="* Website Should be valid"
+                                                #website="ngModel" [(ngModel)]="overview.website_url" required>
+                                            <label for="website">Enter Your website</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="form-group form-group-section active">
+                                            <ng-select id="gender" [items]="gender1" name="gender" #gender="ngModel"
+                                                [(ngModel)]="overview.gender" required bindLabel="name" bindValue="id"
+                                                [searchable]="false" [clearable]="false">
+                                            </ng-select>
+                                            <label for="gender">Select Gender</label>
+                                            <span class="select-drop-icon"><i class="fal fa-angle-down"></i></span>
+
+                                            <div *ngIf="gender.invalid && (gender.dirty || gender.touched)"
+                                                class="error-msg">
+                                                <div *ngIf="gender?.errors.required">
+                                                    * Gender is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="form-group form-group-section active">
+                                            <input id="dob" type="text" name="dob" [(ngModel)]="overview.dob"
+                                                data-parsley-required="true"
+                                                data-parsley-required-message="* BirthDate is required." #dob="ngModel"
+                                                required>
+                                            <label for="dob">Select your DOB</label>
+                                            <span class="calendar-icon-section"><i
+                                                    class="fal fa-calendar-alt"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="form-group form-group-section active">
+                                            <select   [(ngModel)]="overview.work_experience" name="work_experience"  >
+                                                <!-- <option  class="optioncolor" value="1">1</option> -->
+                                            <option   value="1">1</option>
+                                            <option value="2" >2</option>
+                                            <option  value="3">3</option>
+                                            <option value="4" >4</option>
+                                            <option  value="5">5</option>
+                                            <option value="6" >6</option>
+                                            <option  value="7">7</option>
+                                            <option value="8" >8</option>
+                                            <option value="9" >9</option>
+                                            <option value="10" >10</option>
+                                            <option value="11" >11</option>
+                                            <option value="12" >12</option>
+                                            <option value="13" >13</option>
+                                            <option value="14" >14</option>
+                                            <option value="15" >15</option>
+                                            <option value="16" >16</option>
+                                            <option value="17" >17</option>
+                                            <option value="18" >18</option>
+                                            <option value="19" >19</option>
+                                            <option value="20" >20</option>
+                                            <option value="21" >21</option>
+                                            <option value="22" >22</option>
+                                            <option value="23" >23</option>
+                                            <option value="24" >24</option>
+                                            <option value="25" >25</option>
+                                            <option value="26" >26</option>
+                                            <option value="27" >27</option>
+                                            <option value="28" >28</option>
+                                            <option value="29" >29</option>
+                                            <option value="30" >30</option>
+                                            <option value="31" >31</option>
+                                            <option value="32" >32</option>
+                                            <option value="33" >33</option>
+                                            <option value="34" >34</option>
+                                            <option value="35" >35</option>
+                                            <option value="36" >36</option>
+                                            <option value="37" >37</option>
+                                            <option value="38" >38</option>
+                                            <option value="39" >39</option>
+                                            <option value="40" >40</option>
+                                            <option value="41" >41</option>
+                                            <option value="42" >42</option>
+                                            <option value="43" >43</option>
+                                            <option value="44" >44</option>
+                                            <option value="45" >45</option>
+                                            <option value="46" >46</option>
+                                            <option value="47" >47</option>
+                                            <option value="48" >48</option>
+                                            <option value="48" >49</option>
+                                            <option value="50" >50</option>
+                                            <option value="51" >51</option>
+                                            <option value="52" >52</option>
+                                            <option value="53" >53</option>
+                                            <option value="54" >54</option>
+                                            <option value="55" >55</option>
+                                              </select> 
+                                              <label for="proficiency">Year of Exprience</label>
+                                        </div>
+                                    </div> 
+                                    <!-- <div class="col-sm-6 col-md-6 col-lg-6">
+                                          
+                                        <div class="form-group form-group-section active">
+                                            <ng-select id="work_experience"  name="gender" #work_experience="ngModel"
+                                            [(ngModel)]="overview.work_experience" required bindLabel="name" bindValue="id"
+                                            [searchable]="false" [clearable]="false">
+                                        </ng-select>
+                                        
+                                              <label for="proficiency">Year of Exprience</label>
+                                             
+                                            <span class="select-drop-icon"><i class="fal fa-angle-down"></i></span>
+                                            </div>
+                                    </div>  -->
+
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group form-group-section active">
+                                           
+                                            <input id="fb-url" type="text" name="fb_url" placeholder="https://www.facebook.com/"
+                                                pattern="https?://.+"
+                                               
+                                                data-parsley-required-message="* Facebook URL is required."
+                                                data-parsley-pattern-message="* Facebook URL Should be valid "
+                                               
+                                                #fb_url="ngModel" [(ngModel)]="usersService.facebookLink" >
+                                            <label for="fb-url">Enter Your facebook url</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group form-group-section active">
+                                            <input id="tw-url" type="text" name="twitter_url" placeholder="https://www.twitter.com/"
+                                            pattern="https?://.+"
+                                              
+                                                data-parsley-required-message="* Twitter URL is required."
+                                               
+                                                data-parsley-pattern-message="* Twitter URL Should be valid"
+                                                #twitter_url="ngModel" [(ngModel)]="usersService.twitterLink" reqired>
+                                            <label for="fb-url">Enter Your twitter url</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        <div class="form-group form-group-section active">
+                                            <input id="li-url" type="text" name="linkedin_url" 
+                                            placeholder="https://www.linkedin.com/" pattern="https?://.+"
+                                               
+                                                data-parsley-required-message="* linkedin URL is required."
+                                                data-parsley-pattern-message="* linkedin URL Should be valid"
+                                                #linkedin_url="ngModel" [(ngModel)]="usersService.linkedinLink"
+                                                >
+                                            <label for="li-url">Enter Your linkedin url</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group form-group-section active">
+                                            <angular-editor name="description" id="address-first" name="description"
+                                                minlength="50" #description="ngModel" data-parsley-required="true"
+                                                data-parsley-required-message="* Description is required."
+                                                [(ngModel)]="overview.description" required [config]="editorConfig"></angular-editor>
+                                            <div *ngIf="description.invalid && (description.dirty || description.touched) || editOverviewForm?.submitted==true"
+                                                class="error-msg">
+                                                <div *ngIf="description?.errors?.required">
+                                                    * Description is required.
+                                                </div>
+                                                <!-- <div *ngIf="descLengthMin && minLengthFlag">
+                                                    * Manimum 50 Characters Required.
+                                                </div> -->
+                                                <div *ngIf="descLength">
+                                                    * Maximum 1000 Characters Required.
+                                                </div>
+                                            </div>
+                                            <!-- <label for="address-first">Enter Your description</label> -->
+                                        </div>
+                                    </div>
+                                   <!--charu Start Checkbox-->
+                                
+                                    <div class="check-box">
+                                        <input id="background_check" class="filled-in" type="checkbox"
+                                                         name="background_check"  [(ngModel)]="overview.background_check" 
+                                        >
+                                        <label for="background_check">I do not have any professional misconduct report with any state bar associations </label>
+                                    </div>
+                               
+
+                                    
+                                   <!---charu End--> 
+                                </div>
+                            </div>
+                            <div *ngIf="ifError" class="row col-lg-12 alert alert-danger text-center" role="alert">
+                                Your Percentage could not be greater than 100.
+                                 </div>
+                            <div class="form-action-btns overview-form-btns">
+                                <!--charu this next is for overview-->
+                                <button type="submit" class="next-form-btn for-valuable-case-form"
+                                    (click)="onAddOverview(editOverviewForm)">Next</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+<!-------------------------------------------------------------------------->
+                    <div class="add-lawyer-form valuable-cases-form">
+                        <form #editCasesForm="ngForm" id="editCasesForm">
+                            <div class="form-head-section">
+                                Notable Cases
+                                <span></span>
+                            </div>
+                            <div class="add-cases-btn-main">
+                                <a href="javascript:void(0)" (click)="addCases()"
+                                    class="btn-add-cases add-remove-btn valuable_cases_clone"><i
+                                        class="fal fa-plus"></i> Add Cases</a>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div *ngFor="let case of usersService.lawyerCase; let i=index">
+                                <div class="text-block">
+                                    <div class="add-cases-btn-main" *ngIf="i > 0">
+                                        <a (click)="removeCases(i)" href="javascript:void(0)"
+                                            class="btn-add-cases add-remove-btn valuable_cases_clone"><i
+                                                class="fal fa-minus"></i> Remove Cases</a>
+                                    </div>
+                                    <br> <br>
+                                    <div class="main-col-block">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group form-group-section active">
+                                                    <input id="casename" type="text" name="title"
+                                                        pattern="^[a-zA-Z\s]+$" maxlength="50"
+                                                        data-parsley-required="true"
+                                                        [ngModelOptions]="{ standalone: true }"
+                                                        data-parsley-required-message="* Case Name is required."
+                                                        data-parsley-pattern="^[a-zA-Z\s]+$"
+                                                        data-parsley-pattern-message="* Case Name Should be valid."
+                                                        #title="ngModel" [(ngModel)]="case.title" required>
+                                                    <label for="casename">Enter Your case name</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="form-group form-group-section active">
+                                                            <ng-select [searchable]="false" bindLabel="name"
+                                                                bindValue="id" [clearable]="false"
+                                                                [ngModelOptions]="{ standalone: true }"
+                                                                (change)="fromYear($event)" name="from_year"
+                                                                id="yearfrom" #from_year="ngModel"
+                                                                [(ngModel)]="case.from_year" required>
+                                                                <ng-option *ngFor="let year of usersService.YearsList"
+                                                                    [value]="year">
+                                                                    {{year}}
+                                                                </ng-option>
+                                                            </ng-select>
+                                                            <label for="yearfrom">Select year from</label>
+                                                            <span class="select-drop-icon"><i
+                                                                    class="fal fa-angle-down"></i></span>
+
+                                                            <div *ngIf="from_year.invalid && (from_year.dirty || from_year.touched)"
+                                                                class="error-msg">
+                                                                <div *ngIf="from_year?.errors.required">
+                                                                    * From Year is required.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="form-group form-group-section active">
+                                                            <ng-select [searchable]="false" bindLabel="name"
+                                                                bindValue="id" [clearable]="false"
+                                                                [ngModelOptions]="{ standalone: true }"
+                                                                (change)="toYear($event)" name="to_year" id="yearto"
+                                                                #to_year="ngModel" [(ngModel)]="case.to_year" required>
+                                                                <ng-option *ngFor="let year of usersService.YearsList"
+                                                                    [value]="year">
+                                                                    {{year}}
+                                                                </ng-option>
+                                                            </ng-select>
+                                                            <label for="yearto">Select year to</label>
+                                                            <span class="select-drop-icon"><i
+                                                                    class="fal fa-angle-down"></i></span>
+                                                            <div *ngIf="to_year.invalid && (to_year.dirty || to_year.touched)"
+                                                                class="error-msg">
+                                                                <div *ngIf="to_year?.errors.required">
+                                                                    * To Year is required.
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="case?.from_year > case?.to_year && case?.from_year && case?.to_year"
+                                                                class="error-msg">
+                                                                * To Year Should Be Greater Than From Year.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <div class="form-group form-group-section active">
+                                                    <textarea name="description" id="address-valuable"
+                                                        data-parsley-required="true"
+                                                        [ngModelOptions]="{ standalone: true }"
+                                                        data-parsley-required-message="* Description is required."
+                                                        name="description" #description="ngModel" maxlength="1000"
+                                                        [(ngModel)]="case.description" required></textarea>
+                                                    <div *ngIf="case?.description.invalid && (case?.description.dirty || case?.description.touched) || editCasesForm?.submitted==true"
+                                                        class="error-msg">
+                                                        <div *ngIf="case?.descLengthMinCase && case?.minLengthFlagCase">
+                                                            * Manimum 50 Characters Required.
+                                                        </div>
+                                                    </div>
+                                                    <label for="address-valuable">Enter Your description</label>
+
+                                                    <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                                                        class="error-msg">
+                                                        <div *ngIf="description?.errors.required">
+                                                            * Description is required.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="valuable_cases_clone"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-action-btns valuable-cases-form-btns">
+                                <button class="back-form-btn back-for-overview" (click)="BackButtonClick(1)" href="javascript:void(0)">Back</button>
+                                <button type="submit" class="next-form-btn for-work-experience-form"
+                                    (click)="onAddValuableCase(editCasesForm)">Next</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="add-lawyer-form work-experience-form">
+                        <form #editExpCertForm="ngForm" id="editExpCertForm">
+                            <div class="inner-work-experience">
+                                <div class="form-head-section">
+                                    Work Experience
+                                    <span></span>
+                                </div>
+                                <div class="add-cases-btn-main">
+                                    <a (click)="addExperiences()" href="javascript:void(0)"
+                                        class="btn-add-cases add-remove-btn work_exp_clone"><i class="fal fa-plus"></i>
+                                        Add Experience</a>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div *ngFor="let expr of usersService.lawyerExperience; let i=index">
+                                    <div class="text-block">
+                                        <div class="add-cases-btn-main" *ngIf="i > 0">
+                                            <a (click)="removeExperiences(i)" href="javascript:void(0)"
+                                                class="btn-add-cases add-remove-btn"><i class="fal fa-minus"></i> Remove
+                                                Experience</a>
+                                        </div>
+                                        <br> <br>
+                                        <div class="main-col-block">
+                                            <div class="row">
+
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="form-group form-group-section active">
+                                                        <input id="exp-address" type="text" name="experience_at"
+                                                            pattern="^[a-zA-Z\s]+$" maxlength="50"
+                                                            data-parsley-required="true"
+                                                            [ngModelOptions]="{ standalone: true }"
+                                                            data-parsley-required-message="* Firm name is required."
+                                                            data-parsley-pattern="^[a-zA-Z\s]+$"
+                                                            data-parsley-pattern-message="* Firm name should be valid."
+                                                            #experience_at="ngModel" [(ngModel)]="expr.experience_at"
+                                                            required>
+                                                        <label for="exp-address">Enter firm name</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="form-group form-group-section active">
+                                                        <input id="title" type="text" name="title"
+                                                            pattern="^[a-zA-Z\s]+$" maxlength="50"
+                                                            data-parsley-required="true"
+                                                            [ngModelOptions]="{ standalone: true }"
+                                                            data-parsley-required-message="* Position is required."
+                                                            data-parsley-pattern="^[a-zA-Z\s]+$"
+                                                            data-parsley-pattern-message="* Position should be valid."
+                                                            #title="ngModel" [(ngModel)]="expr.title" required>
+                                                        <label for="title">Enter position</label>
+                                                    </div>
+                                                </div>
+                                              
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="form-group form-group-section active">
+                                                        <ng-select [searchable]="false" bindLabel="name" bindValue="id"
+                                                            [clearable]="false" (change)="fromYear($event)"
+                                                            name="from_year" [ngModelOptions]="{ standalone: true }"
+                                                            id="exp-yearfrom" #from_year="ngModel"
+                                                            [(ngModel)]="expr.from_year" required>
+                                                            <ng-option *ngFor="let year of usersService.YearsList"
+                                                                [value]="year">
+                                                                {{year}}
+                                                            </ng-option>
+                                                        </ng-select>
+                                                        <label for="exp-yearfrom">Year from</label>
+                                                        <span class="select-drop-icon"><i
+                                                                class="fal fa-angle-down"></i></span>
+
+                                                        <div *ngIf="from_year.invalid && (from_year.dirty || from_year.touched)"
+                                                            class="error-msg">
+                                                            <div *ngIf="from_year?.errors.required">
+                                                                * From Year is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="form-group form-group-section active">
+                                                        <ng-select [searchable]="false" bindLabel="name" bindValue="id"
+                                                            [clearable]="false" [ngModelOptions]="{ standalone: true }"
+                                                            name="to_year" id="exp-yearto" #to_year="ngModel"
+                                                            (change)="toYear($event)" [(ngModel)]="expr.to_year"
+                                                            required>
+                                                            <ng-option *ngFor="let year of usersService.YearsList"
+                                                                [value]="year">
+                                                                {{year}}
+                                                            </ng-option>
+                                                        </ng-select>
+                                                        <label for="exp-yearto">Year to</label>
+                                                        <span class="select-drop-icon"><i
+                                                                class="fal fa-angle-down"></i></span>
+
+                                                        <div *ngIf="to_year.invalid && (to_year.dirty || to_year.touched)"
+                                                            class="error-msg">
+                                                            <div *ngIf="to_year?.errors.required">
+                                                                * To Year is required.
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="expr?.from_year > expr?.to_year && expr?.from_year && expr?.to_year"
+                                                            class="error-msg">
+                                                            * To Year Should Be Greater Than From Year.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="inner-certificate-form">
+                                <div class="form-head-section">
+                                   Honors and Awards
+                                    <span></span>
+                                </div>
+                                <div class="add-cases-btn-main">
+                                    <a href="javascript:void(0)" (click)="addCertificates()"
+                                        class="btn-add-cases add-remove-btn certificate_clone"><i
+                                            class="fal fa-plus"></i> Add Certificate</a>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div *ngFor="let certificate of usersService.lawyerAwards; let i=index">
+                                    <div class="text-block">
+                                        <div class="add-cases-btn-main" *ngIf="i > 0">
+                                            <a (click)="removeCertificates(i)" href="javascript:void(0)"
+                                                class="btn-add-cases add-remove-btn"><i class="fal fa-minus"></i> Remove
+                                                Certificate</a>
+                                        </div>
+                                        <br> <br>
+                                        <div class="main-col-block">
+                                            <div class="row">
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <div class="form-group form-group-section active">
+                                                        <input id="certificate1" type="text" name="award_name"
+                                                            pattern="^[a-zA-Z\s]+$" maxlength="50"
+                                                            data-parsley-required="true"
+                                                            [ngModelOptions]="{ standalone: true }"
+                                                            data-parsley-required-message="* Award Name name is required."
+                                                            data-parsley-pattern="^[a-zA-Z\s]+$"
+                                                            data-parsley-pattern-message="* Award Name name should be valid."
+                                                            #award_name="ngModel" [(ngModel)]="certificate.award_name"
+                                                            required>
+                                                        <label for="certificate1">Enter your Award Name</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <div class="form-group active form-group-section">
+                                                        <input id="grantor" type="text" name="grantor"
+                                                        #grantor="ngModel" [(ngModel)]="certificate.grantor"
+                                                        required
+                                                          >
+                                                        <label for="grantor">Grantor</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <div class="form-group form-group-section active">
+                                                        <ng-select [searchable]="false" bindLabel="name" bindValue="id"
+                                                            [clearable]="false" name="year"
+                                                            [ngModelOptions]="{ standalone: true }" id="award_year"
+                                                            #year="ngModel" [(ngModel)]="certificate.year" required>
+                                                            <ng-option *ngFor="let year of usersService.YearsList"
+                                                                [value]="year">
+                                                                {{year}}
+                                                            </ng-option>
+                                                        </ng-select>
+                                                        <label for="award_year">Enter  year</label>
+                                                        <span class="select-drop-icon"><i
+                                                                class="fal fa-angle-down"></i></span>
+
+                                                        <div *ngIf="year.invalid && (year.dirty || year.touched)"
+                                                            class="error-msg">
+                                                            <div *ngIf="year?.errors.required">
+                                                                * Year is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="certificate_clone"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-action-btns work-experience-form-btns">
+                                <button class="back-form-btn back-for-value-cases"
+                                    href="javascript:void(0)" (click)="BackButtonClick(2)">Back</button>
+                                <button type="submit" class="next-form-btn for-education-form"
+                                    (click)="onAddExpr(editExpCertForm)">Next</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="add-lawyer-form education-form">
+                        <form #editEduLangForm="ngForm" id="editEduLangForm">
+                            <div class="inner-work-experience">
+                                <div class="form-head-section">
+                                    Education
+                                    <span></span>
+                                </div>
+                                <div class="add-cases-btn-main">
+                                    <a (click)="addEducations()" href="javascript:void(0)"
+                                        class="btn-add-cases add-remove-btn education_clone"><i class="fal fa-plus"></i>
+                                        Add Education</a>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div *ngFor="let edu of usersService.lawyerAcademics; let i=index">
+                                    <div class="text-block">
+                                        <div class="add-cases-btn-main" *ngIf="i > 0">
+                                            <a (click)="removeEducations(i)" href="javascript:void(0)"
+                                                class="btn-add-cases add-remove-btn"><i class="fal fa-minus"></i> Remove
+                                                Education</a>
+                                        </div>
+                                        <br> <br>
+                                        <div class="main-col-block">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="form-group form-group-section active">
+                                                        <input id="college-name" type="text" name="university"
+                                                            pattern="^[a-zA-Z\s]+$" maxlength="50"
+                                                            data-parsley-required="true"
+                                                            [ngModelOptions]="{ standalone: true }"
+                                                            data-parsley-required-message="* university name is required."
+                                                            data-parsley-pattern="^[a-zA-Z\s]+$"
+                                                            data-parsley-pattern-message="* university name Should be valid."
+                                                            #university="ngModel" [(ngModel)]="edu.university" required>
+                                                        <label for="college-name">Enter your university name</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="form-group form-group-section active">
+                                                        <input id="degree" type="text" name="degree"
+                                                            pattern="^[a-zA-Z\s]+$" maxlength="50"
+                                                            data-parsley-required="true"
+                                                            [ngModelOptions]="{ standalone: true }"
+                                                            data-parsley-required-message="* Degree is required."
+                                                            data-parsley-pattern="^[a-zA-Z\s]+$"
+                                                            data-parsley-pattern-message="* Degree should be valid."
+                                                            #degree="ngModel" [(ngModel)]="edu.degree" required>
+                                                        <label for="degree">Enter your degree</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="form-group form-group-section active">
+                                                        <ng-select [searchable]="false" bindLabel="name" bindValue="id"
+                                                            [clearable]="false" name="starting_year" id="edu-yearfrom"
+                                                            #starting_year="ngModel" (change)="fromYear($event)"
+                                                            [(ngModel)]="edu.starting_year"
+                                                            [ngModelOptions]="{ standalone: true }" required>
+                                                            <ng-option *ngFor="let year of usersService.YearsList"
+                                                                [value]="year">
+                                                                {{year}}
+                                                            </ng-option>
+                                                        </ng-select>
+                                                        <label for="edu-yearfrom">Year from</label>
+                                                        <span class="select-drop-icon"><i
+                                                                class="fal fa-angle-down"></i></span>
+
+                                                        <div *ngIf="starting_year.invalid && (starting_year.dirty || starting_year.touched)"
+                                                            class="error-msg">
+                                                            <div *ngIf="starting_year?.errors.required">
+                                                                * Starting Year is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="form-group form-group-section active">
+                                                        <ng-select [searchable]="false" bindLabel="name" bindValue="id"
+                                                            [clearable]="false" name="passing_year" id="edu-yearto"
+                                                            #passing_year="ngModel" (change)="toYear($event)"
+                                                            [(ngModel)]="edu.passing_year"
+                                                            [ngModelOptions]="{ standalone: true }" required>
+                                                            <ng-option *ngFor="let year of usersService.YearsList"
+                                                                [value]="year">
+                                                                {{year}}
+                                                            </ng-option>
+                                                        </ng-select>
+                                                        <label for="edu-yearto">Year to</label>
+                                                        <span class="select-drop-icon"><i
+                                                                class="fal fa-angle-down"></i></span>
+
+                                                        <div *ngIf="passing_year.invalid && (passing_year.dirty || passing_year.touched)"
+                                                            class="error-msg">
+                                                            <div *ngIf="passing_year?.errors.required">
+                                                                * Passing Year is required.
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="edu.starting_year > edu.passing_year && edu.starting_year && edu.passing_year"
+                                                            class="error-msg">
+                                                            * To Year Should Be Greater Than From Year.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="education_clone"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="inner-certificate-form">
+                                <div class="form-head-section">
+                                    Language
+                                    <span></span>
+                                </div>
+                                <div class="add-cases-btn-main" *ngIf="usersService?.lawyerLanguages?.length < 3">
+                                    <a (click)="addLanguages()" href="javascript:void(0)"
+                                        class="btn-add-cases add-remove-btn language_clone"><i class="fal fa-plus"></i>
+                                        Add Language</a>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div *ngFor="let lang of usersService.lawyerLanguages; let i=index">
+                                    <div class="text-block">
+                                        <div class="add-cases-btn-main" *ngIf="i > 0">
+                                            <a (click)="removeLanguages(i)" href="javascript:void(0)"
+                                                class="btn-add-cases add-remove-btn"><i class="fal fa-minus"></i> Remove
+                                                Language</a>
+                                        </div>
+                                        <br> <br>
+                                        <div class="main-col-block">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="form-group form-group-section active">
+                                                        <ng-select [searchable]="false" bindLabel="name" bindValue="_id"
+                                                            [clearable]="false" name="language_id" id="languageselect"
+                                                            #language_id="ngModel"
+                                                            [ngModelOptions]="{ standalone: true }"
+                                                            [(ngModel)]="lang.language_id" required>
+                                                            <ng-option
+                                                                *ngFor="let language of usersService.languageList"
+                                                                [value]="language._id">
+                                                                {{language.name}}
+                                                            </ng-option>
+                                                        </ng-select>
+                                                        <label for="languageselect">Select your Language</label>
+                                                        <span class="select-drop-icon"><i
+                                                                class="fal fa-angle-down"></i></span>
+
+                                                        <div *ngIf="language_id.invalid && (language_id.dirty || language_id.touched)"
+                                                            class="error-msg">
+                                                            <div *ngIf="language_id?.errors.required">
+                                                                * Language is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="form-group form-group-section active">
+                                                        <ng-select id="proficiency" [items]="proficiency1"
+                                                            name="proficiency" #proficiency="ngModel"  required
+                                                            [(ngModel)]="lang.proficiency" required bindLabel="name"
+                                                            bindValue="id" [ngModelOptions]="{ standalone: true }"
+                                                            [searchable]="false" [clearable]="false">
+                                                        </ng-select>
+                                                        <label for="proficiency">Select Proficiency</label>
+                                                        <span class="select-drop-icon"><i
+                                                                class="fal fa-angle-down"></i></span>
+
+                                                        <div *ngIf="proficiency.invalid && (proficiency.dirty || proficiency.touched)"
+                                                            class="error-msg">
+                                                            <div *ngIf="proficiency?.errors.required">
+                                                                * Proficiency is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="language_clone"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--*charu new pdf point*-->
+                           <div class="inner-certificate-form" #professionalassociation="ngModelGroup" ngModelGroup="professionalassociation">
+                            <div class="form-head-section">
+                                Professional Associations
+                                <span></span>
+                            </div>
+                            <div class="add-cases-btn-main"  >
+                                <a (click)="addprofessionalassociations()" href="javascript:void(0)"
+                                    class="btn-add-cases add-remove-btn language_clone"><i class="fal fa-plus"></i>
+                                   Add Professional Associations</a>
+                            </div>
+                            <div class="clearfix"></div>
+                           
+                            <div   *ngFor="let association of usersService.lawyerAssociation; let i=index" [ngModelGroup]="i">
+                                <div class="text-block">
+                                    <div class="add-cases-btn-main" *ngIf="i > 0">
+                                        <a (click)="removeprofessionalassociations(i)" href="javascript:void(0)"
+                                            class="btn-add-cases add-remove-btn"><i class="fal fa-minus"></i> Remove Professional Associations</a>
+                                    </div>
+                                </div>
+                                <br> <br>
+                                <div class="main-col-block">
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active" >
+                                             
+                                                <input id="college-name" type="text"
+                                                #association_name="ngModel"    name="association_name"  [(ngModel)]="usersService.lawyerAssociation[i].association_name"
+                                                >
+                                                <label for="languageselect">Association Name</label>
+
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                                <input id="college-name" type="text"
+                                                #title="ngModel"    name="title"  [(ngModel)]="usersService.lawyerAssociation[i].title">
+                                            <label for="proficiency">Title</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                                <input id="college-name" type="text"
+                                                #role="ngModel"    name="role"  [(ngModel)]="usersService.lawyerAssociation[i].role">
+                                            <label for="proficiency"> Role</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           </div>
+                            <!-- honors and awards start-->
+                            <!-- <div class="inner-certificate-form">
+                                <div class="form-head-section">
+                                    Honors And Awards
+                                    <span></span>
+                                </div>
+                                <div class="add-cases-btn-main" >
+                                    <a (click)="addhonorsandawards()" href="javascript:void(0)"
+                                        class="btn-add-cases add-remove-btn language_clone"><i class="fal fa-plus"></i>
+                                       Add HonorsAndAwards</a>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div *ngFor="let lang of honorsandawards; let i=index">
+                                    <div class="text-block">
+                                        <div class="add-cases-btn-main" *ngIf="i > 0">
+                                            <a (click)="removehonorsandawards(i)" href="javascript:void(0)"
+                                                class="btn-add-cases add-remove-btn"><i class="fal fa-minus"></i> Remove HonorsAndAwards</a>
+                                        </div>
+                                    </div>
+                                    <br> <br>
+                                    <div class="main-col-block">
+                                        <div class="row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                <div class="form-group form-group-section active">
+                                                    <input id="college-name" type="text">
+                                                    <label for="languageselect">Award Name</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                <div class="form-group form-group-section active">
+                                                    <input id="college-name" type="text">
+                                                <label for="proficiency"> Grantor</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                <div class="form-group form-group-section active">
+                                                    <input type="date" >
+                                                    <label for="proficiency"> Date</label>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               </div> -->
+                           <!--  Publishdetails Strat -->
+                           <div class="inner-certificate-form"  #publication="ngModelGroup" ngModelGroup="publication">
+                            <div class="form-head-section">
+                                Publication Details 
+                                <span></span>
+                            </div>
+                            <div class="add-cases-btn-main" >
+                                <a (click)="addPublishdetails()" href="javascript:void(0)"
+                                    class="btn-add-cases add-remove-btn language_clone"><i class="fal fa-plus"></i>
+                                    Publication Details </a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div *ngFor="let association of usersService.lawyerpublications; let i=index" [ngModelGroup]="i">
+                                <div class="text-block">
+                                    <div class="add-cases-btn-main" *ngIf="i > 0">
+                                        <a (click)="removePublishdetails(i)" href="javascript:void(0)"
+                                            class="btn-add-cases add-remove-btn"><i class="fal fa-minus"></i> Remove PublishDetails</a>
+                                    </div>
+                                </div>
+                                <br> <br>
+                                <div class="main-col-block">
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                             
+                                                <input id="college-name" type="text"
+                                                #publication_name="ngModel"    name="publication_name"  [(ngModel)]="usersService.lawyerpublications[i].publication_name"
+                                                >
+                                               <label for="languageselect">Publication Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                            <input id="college-name" type="text"   placeholder="Enter the URL with https://" pattern="https?://.+"
+                                                #link="ngModel"    name="link"  [(ngModel)]="usersService.lawyerpublications[i].link"
+                                                >
+                                                
+                                                <label for="link">Enter Publication Reference </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                                <input type="date"
+                                                #retrival_date="ngModel"    name="retrival_date"  [(ngModel)]="usersService.lawyerpublications[i].retrival_date">
+                                                <label for="proficiency"> Retrival Date</label>
+                                                
+                                           
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           </div>
+                           <!-- conferencedetail Strat -->
+                           
+                           <div class="inner-certificate-form" #conferencedetails="ngModelGroup"  ngModelGroup="conferencedetails">
+                            <div class="form-head-section">
+                                Conference detail
+                                <span></span>
+                            </div>
+                            <div class="add-cases-btn-main" >
+                                <a (click)="addconferencedetail()" href="javascript:void(0)"
+                                    class="btn-add-cases add-remove-btn language_clone"><i class="fal fa-plus"></i>
+                                   Add ConferenceDetail</a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div *ngFor="let association of usersService.lawyerConference; let i=index" [ngModelGroup]="i">
+                                <div class="text-block">
+                                    <div class="add-cases-btn-main" *ngIf="i > 0">
+                                        <a (click)="removeconferencedetail(i)" href="javascript:void(0)"
+                                            class="btn-add-cases add-remove-btn"><i class="fal fa-minus"></i> Remove ConferenceDetail</a>
+                                    </div>
+                                </div>
+                                <br> <br>
+                                <div class="main-col-block">
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                              
+                                                <input id="college-name" type="text"
+                                                #conference_name="ngModel"    name="conference_name"  [(ngModel)]="usersService.lawyerConference[i].conference_name"
+                                                >
+                                                <label for="languageselect">Conference Name</label>
+                                                </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                                <input id="college-name" type="text"
+                                                #agenda="ngModel"    name="agenda"  [(ngModel)]="usersService.lawyerConference[i].agenda"
+                                                >
+                                            <label for="proficiency">Agenda</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                                <input type="date" 
+                                                #date="ngModel"    name="date"  [(ngModel)]="usersService.lawyerConference[i].date"
+                                                >
+                                                <label for="proficiency">Date Held</label>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           </div>
+                           <!--BarAdmission Start-->
+                            <div class="inner-certificate-form"  #baradmission="ngModelGroup" ngModelGroup="baradmission">
+                            <div class="form-head-section">
+                                Bar Admission
+                                <span></span>
+                            </div>
+                            <div class="add-cases-btn-main" >
+                                <a (click)="addbaradmission()" href="javascript:void(0)"
+                                    class="btn-add-cases add-remove-btn language_clone"><i class="fal fa-plus"></i>
+                                   Add BarAdmission</a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div *ngFor="let association of usersService.lawyerBarAdmission; let i=index" [ngModelGroup]="i">
+                                <div class="text-block">
+                                    <div class="add-cases-btn-main" *ngIf="i > 0">
+                                        <a (click)="removebaradmission(i)" href="javascript:void(0)"
+                                            class="btn-add-cases add-remove-btn"><i class="fal fa-minus"></i> Remove BarAdmission</a>
+                                    </div>
+                                </div>
+                                <br> <br>
+                                <div class="main-col-block">
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                                <input id="state_name"  type="text" name="state_name" 
+                                                #state_name="ngModel"    name="state_name"  [(ngModel)]="usersService.lawyerBarAdmission[i].state_name" 
+                                                >
+                                                  <label for="proficiency">Select State</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                                <input id="college-name" type="text"
+                                                #status="ngModel"    name="status"  [(ngModel)]="usersService.lawyerBarAdmission[i].status"
+                                                >
+                                            
+                                            <label for="proficiency">Status</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                                <input type="date"
+                                                #granted_date="ngModel"    name="granted_date"  [(ngModel)]="usersService.lawyerBarAdmission[i].granted_date"
+                                                >
+                                                <label for="proficiency"> Granted Date </label>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           </div> 
+                           <!--DropDown Start-->
+                            <div class="inner-certificate-form">
+                                                     
+                            <div class="clearfix"></div>
+                            <div >
+                                                              
+                                <div class="main-col-block">
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                                <!-- [(ngModel)]="usersService.editformdata.pro_bona_services" -->
+                                                <select  name="pro_bona_services"  [(ngModel)]="usersService.editformdata.pro_bona_services">
+                                                    <option value="">select</option>
+                                                    <option  value="yes" >YES</option>
+                                                    <option value="no">NO</option>
+                                                  </select> 
+                                                  <label for="proficiency">Are you Pro Bono services?</label>
+                                            </div>  
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                                <select name="virtual_conversation" [(ngModel)]="usersService.editformdata.virtual_conversation"  >
+                                                    <option value="">select</option>
+                                                    <option  value="yes" >YES</option>
+                                                    <option value="no">NO</option>
+                                                  </select> 
+                                                  <label for="proficiency">Are you providing Virtual Consultation?</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 col-md-4 col-lg-4">
+                                            <div class="form-group form-group-section active">
+                                                <select name="open_for_business" [(ngModel)]="usersService.editformdata.open_for_business"  >
+                                                    <option value="">select</option>
+                                                    <option  value="yes" >YES</option>
+                                                    <option value="no">NO</option>
+                                                  </select> 
+                                                  <label for="proficiency">Are you Open for  Business?</label> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           </div>
+                            <!--* end*-->
+                            <div class="form-action-btns education-form-btns">
+                                <button class="back-form-btn back-for-work-exp" (click)="BackButtonClick(3)" href="javascript:void(0)">Back</button>
+                                <button type="submit" class="next-form-btn for-law-firms-form"
+                                    (click)="onaddEducation(editEduLangForm)">Next</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="add-lawyer-form law-firms-form">
+                        <form #editFirmsForm="ngForm" id="editFirmsForm">
+                            <div class="form-head-section">
+                                Law Firms
+                                <span></span>
+                            </div>
+                            <!--Charu HideAddFirms -->
+                            <!-- <div class="add-cases-btn-main">
+                                <a (click)="addFirms()" href="javascript:void(0)"
+                                    class="btn-add-cases add-remove-btn law_firms_clone"><i class="fal fa-plus"></i> Add
+                                    Firms</a>
+                            </div> -->
+                            <div class="clearfix"></div>
+
+                            <div *ngFor="let firm of usersService.lawyerFirm; let i=index">
+                                <div class="text-block">
+                                    <div class="add-cases-btn-main" *ngIf="i > 0">
+                                        <a (click)="removeFirms(i)" href="javascript:void(0)"
+                                            class="btn-add-cases add-remove-btn"><i class="fal fa-minus"></i> Remove
+                                            Firm</a>
+                                    </div>
+                                    <br> <br>
+                                    <div class="main-col-block">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group form-group-section active">
+                                                    <input id="firmname" type="text" name="firm_name"
+                                                        pattern="^[a-zA-Z\s]+$" maxlength="50"
+                                                        data-parsley-required="true"
+                                                        [ngModelOptions]="{ standalone: true }"
+                                                        data-parsley-required-message="* Firm Name is required."
+                                                        data-parsley-pattern="^[a-zA-Z\s]+$"
+                                                        data-parsley-pattern-message="* Firm Name Should be valid."
+                                                        #firm_name="ngModel" [(ngModel)]="firm.firm_name" required>
+                                                    <label for="firmname">Enter your firm name</label>
+                                                </div>
+                                            </div>
+                                            <!--  charu law Start-->
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group form-group-section active">
+                                                    <input id="about_law_firm" type="text" name="about_law_firm" 
+                                                      #about_law_firm="ngModel" [(ngModel)]="firm.about_law_firm">
+                                                   
+                                                    <label for="firmname">About Law Firm</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group form-group-section active">
+                                                    <input id="firm_tagline" type="text" name="firm_tagline" 
+                                                      #firm_tagline="ngModel" [(ngModel)]="firm.firm_tagline">
+                                                   
+                                                    <label for="firmname">Law Firm Tagline </label>
+                                                </div>
+                                            </div>
+                                            <!--Law end-->
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group active form-group-section">
+                                                    <input id="your_position" type="text" name="your_position"
+                                                    #your_position="ngModel" [(ngModel)]="firm.your_position"
+                                                        maxlength="50" placeholder="position">
+                                                    <label for="firmname">Position</label>
+                                                </div>
+                                            </div>
+                                         
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group form-group-section active">
+                                                    <input ngx-google-places-autocomplete id="firm-address" type="text"
+                                                        name="firm_address" #firm_address="ngModel" maxlength="100"
+                                                        [(ngModel)]="firm.firm_address" (input)="setLatLongNull(i)"
+                                                        [ngModelOptions]="{ standalone: true }"
+                                                        [ngModelOptions]="{ standalone: true }" required
+                                                        (onAddressChange)="handleAddressChange($event,i)" />
+
+                                                    <input type="hidden" name="latitude" #latitude1="ngModel"
+                                                        [(ngModel)]="firm.latitude"
+                                                        [ngModelOptions]="{ standalone: true }" />
+                                                    <input type="hidden" name="longitude" #longitude1="ngModel"
+                                                        [(ngModel)]="firm.longitude"
+                                                        [ngModelOptions]="{ standalone: true }" />
+                                                    <div *ngIf="!isValid && firm_address.valid" class="error-msg">
+                                                        Invalid Address
+                                                    </div>
+
+                                                   
+                                                    <label for="firm-address">Enter your firm address</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group active form-group-section">
+                                                    <input id="firmcity" type="text" name="city" pattern="^[a-zA-Z\s]+$" disabled
+                                                        maxlength="50" data-parsley-required="true"
+                                                        data-parsley-required-message="* Firm City is required."
+                                                        data-parsley-pattern="^[a-zA-Z\s]+$"
+                                                        placeholder="Enter your firm city"
+                                                        (focus)="onChangeAddress(i,firm.latitude, firm.longitude)"
+                                                        [ngModelOptions]="{ standalone: true }"
+                                                        data-parsley-pattern-message="* Firm City Should be valid."
+                                                        #city="ngModel" [(ngModel)]="firm.city" required>
+                                                    <label for="city">Enter your firm city</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group active form-group-section">
+                                                    <input disabled [ngModelOptions]="{ standalone: true }" type="text" id="firmcountry" #country="ngModel" [(ngModel)]="firm.country" required>
+                                                    <!-- <ng-select  [items]="countryList" name="country"
+                                                        
+                                                        bindLabel="name" bindValue="id" [searchable]="true"
+                                                        [clearable]="false" >
+                                                    </ng-select> -->
+                                                    <label for="firmcountry">Select your firm country</label>
+                                                    <!-- <span class="select-drop-icon"><i
+                                                            class="fal fa-angle-down"></i></span> -->
+
+                                                    <div *ngIf="country.invalid && (country.dirty || country.touched) || editFirmsForm?.submitted==true"
+                                                        class="error-msg">
+                                                        <div *ngIf="country?.errors?.required">
+                                                            * Firm Country is required.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group form-group-section active">
+                                                    <input id="firm-phone" type="text" name="mobile_number"
+                                                        pattern="^[0-9+-]*$" minlength="7" maxlength="16"
+                                                        data-parsley-minlength="10" data-parsley-maxlength="12"
+                                                        data-parsley-pattern="^[0-9+-]*$"
+                                                        [ngModelOptions]="{ standalone: true }"
+                                                        data-parsley-minlength-message="* Minimum 10 digits"
+                                                        data-parsley-maxlength-message="* Maximum 12 digits"
+                                                        data-parsley-length-message=""
+                                                        data-parsley-required-message="* Mobile number is required."
+                                                        data-parsley-pattern-message="* Mobile number should be valid"
+                                                        #mobile_number="ngModel" [(ngModel)]="firm.mobile_number"
+                                                        required>
+                                                    <label for="firm-phone">Enter your phone number</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group form-group-section active">
+                                                    <input id="firm-fax" type="text" name="fax"
+                                                        pattern="^\+?[0-9]{6,15}$" data-parsley-required="true"
+                                                        data-parsley-required-message="* Fax number is required."
+                                                        data-parsley-pattern="^\+?[0-9]{6,15}$"
+                                                        [ngModelOptions]="{ standalone: true }"
+                                                        data-parsley-pattern-message="* Fax number Should be valid."
+                                                        #fax="ngModel" [(ngModel)]="firm.fax" required>
+                                                    <label for="firm-fax">Enter your fax number</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group form-group-section active">
+                                                    <input id="firm-fax" type="text" pattern="https?://.+"
+                                                     #firm_website="ngModel"  required  name="firm_website"  [(ngModel)]="firm.firm_website"
+                                                      >
+                                                    <label for="firm-fax">Enter website</label>
+                                                </div>
+                                            </div>
+                                          
+                                            <!----charu socical start---->
+
+                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                <div class="form-group form-group-section active">
+                                                    <input id="tw-url" type="text"  placeholder="https://www.facebook.com/" pattern="https?://.+"
+                                                    #firm_linkedin="ngModel"    name="firm_linkedin"  [(ngModel)]="firm.firm_linkedin"
+                                                    >
+                                                 
+                                                    <label for="fb-url">Enter Your facebook url</label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                <div class="form-group form-group-section active">
+                                                    <input id="tw-url" type="text" placeholder="https://www.twitter.com/" pattern="https?://.+"
+                                                     #firm_facebook="ngModel"    name="firm_facebook"  [(ngModel)]="firm.firm_facebook">
+                                                   
+                                                    <label for="fb-url">Enter Your twitter url</label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                <div class="form-group form-group-section active">
+                                                    <input id="tw-url" type="text"  placeholder="https://www.linkedin.com/" pattern="https?://.+"
+                                                     #firm_twitter="ngModel"    name="firm_twitter"  [(ngModel)]="firm.firm_twitter">
+                                                  
+                                                    <label for="li-url">Enter Your linkedin url</label>
+                                                </div>
+                                            </div>
+                                            <!-- socical end-->
+                                        </div>
+                                    </div>
+                                    <div id="law_firms_clone"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-action-btns law-firms-form-btns">
+                                <button class="back-form-btn back-for-education" (click)="BackButtonClick(5)" href="javascript:void(0)">Back</button>
+                                <button type="submit" class="next-form-btn for-cost-form"
+                                    (click)="onAddLawFirms(editFirmsForm)">Next</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="add-lawyer-form cost-form">
+                        <form #editCostForm="ngForm" id="editCostForm">
+                            <div class="form-head-section">
+                                Cost
+                                <span></span>
+                            </div>
+                            <!-- <div class="add-cases-btn-main">
+                                        <a href="javascript:void(0)" class="btn-add-cases add-remove-btn cost_clone"><i class="fal fa-plus"></i> Add Cost</a>
+                                    </div> -->
+                            <div class="clearfix"></div>
+
+                            <div *ngFor="let cost of usersService.lawyerDetailsList">
+                                <div class="text-block">
+                                    <div class="main-col-block">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group form-group-section active">
+                                                    <span class="input-symbol-euro">
+                                                        <input id="hourlyrates" type="text" name="hourly_rates"
+                                                            pattern="^[0-9]{1,4}$"
+                                                            data-parsley-required-message="* Hourly rates is required."
+                                                            data-parsley-pattern="^[0-9]{1,4}$"
+                                                            data-parsley-pattern-message="* Hourly rates should be maximum 4 digits."
+                                                            #hourly_rates="ngModel" [(ngModel)]="cost.lawyer_cost"
+                                                            >
+                                                    </span>
+                                                    <label for="hourlyrates">Enter Hourly Rates</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group form-group-section active">
+                                                    <ng-select id="consultation" [items]="consultation1"
+                                                        name="consultation_time" #consultation_time="ngModel"
+                                                        [(ngModel)]="cost.lawyer_consultation_time" required
+                                                        bindLabel="name" bindValue="id" [searchable]="false"
+                                                        [clearable]="false">
+                                                    </ng-select>
+                                                    <label for="consultation">Enter your free consultation time</label>
+                                                    <span class="select-drop-icon"><i
+                                                            class="fal fa-angle-down"></i></span>
+<!-- 
+                                                    <div *ngIf="consultation_time.invalid && (consultation_time.dirty || consultation_time.touched)"
+                                                        class="error-msg">
+                                                        <div *ngIf="consultation_time?.errors.required">
+                                                            * Consultation time required
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group form-group-section active">
+                                                    <input id="consultationfees" type="text" name="consultation_fees"
+                                                        pattern="(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)"
+                                                      
+                                                        data-parsley-required-message="* Consultation fee is required."
+                                                        data-parsley-pattern="(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)"
+                                                        data-parsley-pattern-message="* Consultation fee should be valid."
+                                                        #consultation_fees="ngModel"
+                                                        [(ngModel)]="cost.lawyer_consultation_fees" >
+                                                    <label for="consultation">Enter Your Contingency Fees </label>
+                                                    <span class="select-drop-icon"><i style="font-size: 17px"
+                                                            class="fal fa-percent"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group form-group-section active">
+                                                 
+                                                    <ng-multiselect-dropdown name="payment_methods" id="paymentmethods"
+                                                        #payment_methods="ngModel"
+                                                        [(ngModel)]="usersService.paymentMethod" 
+                                                        [placeholder]="'Select your payment methods'"
+                                                        [data]="paymentmethods" [settings]="dropdownSettings1">
+                                                    </ng-multiselect-dropdown>
+                                                    <label for="paymentmethods">Select your payment methods</label>
+                                                    <span class="select-drop-icon"><i
+                                                            class="fal fa-angle-down"></i></span>
+
+                                                    <!-- <div *ngIf="payment_methods.invalid && (payment_methods.dirty || payment_methods.touched)"
+                                                        class="error-msg">
+                                                        <div *ngIf="payment_methods?.errors.required">
+                                                            * Payment method required
+                                                        </div>
+                                                    </div> -->
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="cost_clone"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-action-btns cost-form-btns">
+                                <button class="back-form-btn back-for-law-firms" (click)="BackButtonClick(4)" href="javascript:void(0)">Back</button>
+                                <!--Final Submit-->
+                                <button type="submit" class="next-form-btn"
+                                    (click)="onSubmitLawyer(editCostForm)">Submit</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+
+<app-main-footer></app-main-footer>
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>
+
+
+<div class="modal fade" id="cropmodal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Crop Image</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="row">
+            <div class="form-group form-group-section col-md-6">
+                <image-cropper
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="4/5"
+                format="png"
+                (imageCropped)="imageCropped($event)"
+            ></image-cropper>
+            </div>
+            
+            
+            <div class="form-group form-group-section col-md-6 p-2">
+            
+                <div class="imagePreview" *ngIf="imgURL !== ''">
+                    <img [src]="imgURL" >
+                  </div>
+            </div> 
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary m-2" data-dismiss="modal">Submit</button>
+          </div>
+  
+      </div>
+    </div>
+  </div>

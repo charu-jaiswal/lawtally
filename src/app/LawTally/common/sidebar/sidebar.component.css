@@ -1,0 +1,14 @@
+.submenu-main-blog a{margin-bottom: 15px;display: block;}
+.submenu-main-blog ul{padding-left: 37px;display: none;position: relative;}
+.submenu-main-blog li{margin-bottom: 10px;position: relative;}
+.submenu-main-blog a span.drop-arrow-span{float: right;font-size: 24px;line-height: 0;margin-top: 16px;}
+.submenu-main-blog ul:before{content: "";height: 83%;width: 1px;border-left: 1px dashed #ffffff;position: absolute;left: 9px;top: 0;}
+.submenu-main-blog ul li:before{content: "";height: 1px;width: 17px;border-top: 1px dashed #ffffff;position: absolute;left: -26px;top: 13px;}
+
+.submenu-main-setting a{margin-bottom: 15px;display: block;}
+.submenu-main-setting ul{padding-left: 37px;display: none;position: relative;}
+.submenu-main-setting li{margin-bottom: 10px;position: relative;}
+.submenu-main-setting a span.drop-arrow-span{float: right;font-size: 24px;line-height: 0;margin-top: 16px;}
+.submenu-main-setting ul:before{content: "";height: 83%;width: 1px;border-left: 1px dashed #ffffff;position: absolute;left: 9px;top: 0;}
+.submenu-main-setting ul li:before{content: "";height: 1px;width: 17px;border-top: 1px dashed #ffffff;position: absolute;left: -26px;top: 13px;}
+

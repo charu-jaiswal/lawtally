@@ -1,0 +1,108 @@
+<div class="blank-div-section"></div>
+
+<!-- HEADER -->
+<app-main-header></app-main-header>
+
+<div class="blog-tab-section how-it-works-banner-section">
+    <div class="main-blog-bx">
+        <div class="main-blog-img">
+            <img src="images/how-it-works-banner-img.jpg" alt="img" />
+        </div>
+        <div class="how-it-works-banner-content">
+            <div class="how-it-works-banner-head">
+                <h1>Submit your Review</h1>
+            </div>
+            <div class="how-it-works-meni-head">
+                <h2>Every 5 seconds someone gets free legal advice from LawTally</h2>
+                <div class="bottom-underline-white"></div>
+            </div>
+            <div class="breadcurm-section-main">
+                <ul>
+                    <li><a href="javascript:void(0);">Home</a> <span class="breadcurm-arrow-section"><i
+                                class="fal fa-angle-right"></i></span></li>
+                    <li>Submit Review</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="how-it-works-contnet-section-main user-addreview-main-block">
+    <div class="container">
+        <div class="question-form-main-section user-add-review-form-main">
+        <div class="question-form-head-section"> Submit your Review </div>
+        <form [formGroup]="reviewForm" name="reviewForm" id="useraddreviewForm">
+            <div class="form-group">
+                Select a rating for your lawyer <span class="redtxtdata">*</span><br>
+                <ngb-rating formControlName="rating" [(rate)]="currentRate" max="5" (rateChange)="rate($event)">
+                    <ng-template let-fill="fill" let-index="index">
+                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                    </ng-template>
+                </ngb-rating>
+                <div class="clearfix"></div>
+                <div id="ratingerror" class="errorTitle">Rating is Required. Please provide your rating to continue.</div>
+                <div class="clearfix"></div>
+            </div>
+            
+            <div class="form-group">
+                <label>Full Name <span class="redtxtdata">*</span></label>
+                <input type="text" formControlName="userfullname" id="userfullname" class="form-control" />
+                <div class="clearfix"></div>
+                <div id="fullnametxterror" class="errorTitle">Full name Field is Required. Please enter your full name to continue.</div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="form-group">
+                    <label>Email <span class="redtxtdata">*</span></label>
+                    <input type="text"  formControlName="useremailtxtval" id="useremailtxtval" class="form-control" />
+                    <div class="clearfix"></div>
+                    <div id="emailtxterror" class="errorTitle">Email Field is Required. Please enter valid Email to continue.</div>
+                    <div class="clearfix"></div>
+                </div>
+        
+            <div class="form-group form-group-section mt-4">
+                Enter Your Description <span class="redtxtdata">*</span><br>
+                <textarea formControlName="review" maxlength="1000" required></textarea>
+                <div class="clearfix"></div>
+                <div id="reviewtxterror" class="errorTitle">Review description is Required.</div>
+                <div class="clearfix"></div>
+                <br />
+            </div>
+        
+            <div class="form-group form-group-section">
+                Was this just a consultation or did you hire this attorney? <span class="redtxtdata">*</span><br>
+                <div class="was-this-just-drop">
+                <ng-select [clearable]="false" [items]="consultation" bindLabel="name" bindValue="_id" formControlName="review_type">
+                </ng-select>
+                <span><i class="fal fa-angle-down"></i></span>
+                </div>
+                <div class="clearfix"></div>
+                <div id="reviewtypeerror" class="errorTitle">This Field is Required. Please select one of the value from dropdown.</div>
+                <div class="clearfix"></div>
+                <br />
+            </div>
+        
+            <div class="form-group form-group-section">
+                Would you recommend this lawyer? <span class="redtxtdata">*</span><br>
+                <div class="was-this-just-drop">
+                <ng-select [clearable]="false" [items]="recommend" bindLabel="name" bindValue="_id" formControlName="recommended" required>
+                </ng-select>
+                <span><i class="fal fa-angle-down"></i></span>
+                </div>
+                <div class="clearfix"></div>
+                <div id="recommendederror" class="errorTitle">This Field is Required. Please select your Lawyer recommendation.</div>
+                <div class="clearfix"></div>
+            </div>       
+            <div class="question-form-submit">
+                <button class="add-doctor-menu" (click)="formsumbitfunc(reviewForm.value);">Submit</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- FOOTER -->
+<app-main-footer></app-main-footer>
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

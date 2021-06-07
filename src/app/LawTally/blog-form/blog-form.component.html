@@ -1,0 +1,74 @@
+<form [formGroup]="blogForm" name="blogForm">
+    <div class="row">
+        <div class="form-group form-group-section col-md-6">
+            Image Alter Text<br>
+            <input type="text" placeholder="Enter Image Alter Text" formControlName="blogs_image" required>
+            <div *ngIf="blogForm.get('blogs_image').status==='INVALID' && submitted==true" class="error-msg">
+                * Image Alter Text is required.
+            </div>
+        </div>
+        <div class="form-group form-group-section col-md-6">
+            Blog Title<br>
+            <input type="text" placeholder="Enter Blog Title" formControlName="title" required>
+            <div *ngIf="blogForm.get('title').status==='INVALID' && submitted==true" class="error-msg">
+                * Blog Title is required.
+            </div>
+        </div>
+        <div class="form-group form-group-section col-md-6">
+            Blog Category<br>
+            <ng-select [clearable]="false" [items]="usersService.BlogCategory" bindLabel="title" bindValue="id"
+                formControlName="category_id" required>
+            </ng-select>
+            <div *ngIf="blogForm.get('category_id').status==='INVALID' && submitted==true" class="error-msg">
+                * Blog Catgory is required.
+            </div>
+        </div>
+        <div class="form-group form-group-section col-md-6">
+            Blog Slug<br>
+            <input type="text" placeholder="Enter Blog Slug" formControlName="category_slug" required>
+            <div *ngIf="blogForm.get('category_slug').status==='INVALID' && submitted==true" class="error-msg">
+                * Blog slug is required.
+            </div>
+        </div>
+        <div class="form-group form-group-section col-md-6">
+            Meta Title<br>
+            <input type="text" placeholder="Enter Meta Title" formControlName="meta_title" required>
+            <div *ngIf="blogForm.get('meta_title').status==='INVALID' && submitted==true" class="error-msg">
+                * Meta Title is required.
+            </div>
+        </div>
+        <div class="form-group form-group-section col-md-6">
+            Meta Keyword<br>
+            <input type="text" placeholder="Enter Meta Keyword" formControlName="meta_keyword" required>
+            <div *ngIf="blogForm.get('meta_keyword').status==='INVALID' && submitted==true" class="error-msg">
+                * Meta Keyword is required.
+            </div>
+        </div>
+        <div class="form-group form-group-section col-md-6">
+            Meta Description<br>
+            <input type="text" placeholder="Enter Meta Description" formControlName="meta_description" required>
+            <div *ngIf="blogForm.get('meta_description').status==='INVALID' && submitted==true" class="error-msg">
+                * Meta Description is required.
+            </div>
+        </div>
+        <div class="form-group form-group-section col-md-6">
+            Short Description<br>
+            <input type="text" placeholder="Enter Short Description" formControlName="short_description" required>
+            <div *ngIf="blogForm.get('short_description').status==='INVALID' && submitted==true" class="error-msg">
+                * Short Description is required.
+            </div>
+        </div>
+        <div class="form-group form-group-section col-md-6">
+            Blog Content<br>
+            <textarea type="text" placeholder="Enter Blog Content" formControlName="description" required></textarea>
+            <div *ngIf="blogForm.get('description').status==='INVALID' && submitted==true" class="error-msg">
+                * Blog Content is required.
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary" (click)="onSubmit(blogForm)">Save</button>
+    <button type="button" class="btn btn-outline-danger" (click)="onDiscard()">Discard</button>
+</div>

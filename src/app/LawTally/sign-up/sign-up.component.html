@@ -1,0 +1,127 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '100px' }"></ngx-loading>
+
+<div class="blank-div-section"></div>
+
+<!-- HEADER -->
+<app-main-header></app-main-header>
+
+<div class="login-page">
+    <div class="login-box">
+        <div class="left-side">
+            <div class="left-img-text">
+                <div class="login-heading">Sign up</div>
+                <div class="login-line"></div>
+                <div class="easy-way-text">Easy Way To Find Lawyers</div>
+                <div class="hundreds-text">Hundreds of thousands of students, tens of thousands of industry experts
+                </div>
+            </div>
+        </div>
+
+        <div class="right-side">
+            <form #signupForm="ngForm" id="signupForm" data-parsley-validate>
+                <div class="login sign">Sign Up</div>
+                <!-- <div class="success-msg">Field added successfully!</div> -->
+                <div class="input-box-right sign-up">
+                    <div class="input-name">Full Name</div>
+                    <input type="text" name="full_name" pattern="^[a-zA-Z\s\.]+$" maxlength="20"
+                        data-parsley-required="true" data-parsley-required-message="* Full Name is required."
+                        data-parsley-pattern="^[a-zA-Z\s\.]+$" placeholder="Enter Full Name"
+                        data-parsley-pattern-message="* Full Name Should be valid." ngModel required
+                        #full_name="ngModel" />
+                    <span class="bar"></span>
+                </div>
+
+                <!-- <div class="input-box-right sign-up">
+                        <div class="input-name">Last Name</div>
+                        <input type="text" name="last_name" placeholder="Last Name" ngModel required #last_name="ngModel" data-parsley-required="true" data-parsley-required-message="* Please enter your last name."/>
+                        <span class="bar"></span>
+                    </div> -->
+
+                <div class="input-box-right sign-up">
+                    <div class="input-name">Mobile Number</div>
+                    <input type="text" name="mobile_number" placeholder="Mobile Number" ngModel required
+                        #mobile_number="ngModel" pattern="^[0-9+-]*$" minlength="7" maxlength="16"
+                        data-parsley-required="true" data-parsley-required-message="* Please enter your mobile number."
+                        data-parsley-pattern="^[0-9+-]*$"
+                        data-parsley-pattern-message="* Should be a valid contact number" data-parsley-minlength="7"
+                        data-parsley-minlength-message="Minimum 7 characters" data-parsley-maxlength="16"
+                        data-parsley-maxlength-message="Maximum 16 characters" />
+                    <span class="bar"></span>
+                </div>
+
+                <div class="input-box-right sign-up">
+                    <div class="input-name">Email</div>
+                    <input type="text" name="email" placeholder="Email Address" ngModel required #email="ngModel"
+                        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" data-parsley-required="true"
+                        placeholder="Enter Your email" data-parsley-required-message="* Email is required."
+                        data-parsley-pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                        data-parsley-pattern-message="* Should be a valid email address." />
+                    <span class="bar"></span>
+                </div>
+
+                <div class="input-box-right sign-up">
+                    <div class="input-name">Password</div>
+                    <input type="password" name="password" placeholder="Password" id="currentPassword" ngModel required
+                        #password="ngModel" minlength="8" maxlength="16"
+                        pattern="^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$" data-parsley-required="true"
+                        data-parsley-required-message="* Please enter your password."
+                        data-parsley-pattern="^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,}$"
+                        data-parsley-pattern-message="Should contain alphanumeric characters, numbers and special characters"
+                        data-parsley-minlength="8" data-parsley-minlength-message="Minimum 8 characters"
+                        data-parsley-maxlength="16" data-parsley-maxlength-message="Maximum 16 characters" />
+                    <span class="bar"></span>
+                </div>
+                <div class="input-box-right sign-up">
+                    <div class="input-name">Confirm Password</div>
+                    <input type="password" name="confirm_password" placeholder="Confirm Password" ngModel required
+                        #confirm_password="ngModel" data-parsley-required="true"
+                        data-parsley-required-message="* Please enter your confirm password."
+                        data-parsley-equalto="#currentPassword"
+                        data-parsley-equalto-message="Password and Confirm Password should be same." />
+                    <span class="bar"></span>
+                </div>
+                <div class="remember-forgot">
+                    <div class="check-box">
+                        <p style="margin: 0px;">
+                            <input id="filled-in-box1" class="filled-in" type="checkbox" (change)="onChangelawyer($event.target.checked)">
+                            <label for="filled-in-box1">I am a Lawyer</label>
+                        </p>
+                    </div>
+                  
+                </div>
+                <div class="you-are-agree-main">
+                    <div class="check-box">
+                        <input id="filled-in-box" class="filled-in" type="checkbox"
+                            (change)="onChange($event.target.checked)">
+                        <label for="filled-in-box">Please confirm that you are agree our <a
+                                href="javascript:void(0)"  routerLink="/lawyer-directory/terms-and-conditions">Terms and conditions</a></label>
+                    </div>
+                </div>
+
+                <div style="color: red">{{message}}</div>
+
+                <div class="login-btn-box sign-up-box">
+                    <button class="login-btn" (click)="onsignUp(signupForm)">Sign Up</button>
+                </div>
+            </form>
+
+            <div class="clearfix"></div>
+            <div class="or-block">
+                <span>&nbsp;</span>
+                <p>Or Login with social media</p>
+            </div>
+            <div class="facebook-google">
+                <div class="contact-social-icon icon-box"><a href="#"><i class="fab fa-facebook-f"></i></a></div>
+                <div class="contact-social-icon icon-box google"><a href="#"><i class="fab fa-twitter"></i></a></div>
+            </div>
+            <div class="dont-account">Have an Account? <span><a routerLink="/lawyer-directory/login">Login</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<app-main-footer></app-main-footer>
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

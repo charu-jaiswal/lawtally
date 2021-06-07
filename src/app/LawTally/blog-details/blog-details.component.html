@@ -1,0 +1,119 @@
+<div class="blank-div-section"></div>
+
+<!-- HEADER -->
+<app-main-header></app-main-header>
+
+<div class="blog-tab-section blog-details-section-main">
+    <div class="main-blog-bx">
+        <div class="main-blog-img" *ngIf="usersService.blogDetailsData.blogs_image">
+            <img src="{{ usersService.blogDetailsData.blogs_image }}" alt="img" />
+        </div>
+        <div class="main-blog-img" *ngIf="!usersService.blogDetailsData.blogs_image">
+            <img src="assets/images/main-blog.jpg" alt="img" />
+        </div>
+        <div class="container">
+            <div class="main-bx-txt">
+                <h4>{{ usersService.blogDetailsData.category_title }}</h4>
+                <h2>{{ usersService.blogDetailsData.short_description }}</h2>
+                <div class="blog-details-date-time">
+                    <ul>
+                        <li>{{ usersService.blogDetailsData.created_at }}<span>|</span></li>
+                        <li>{{ usersService.blogDetailsData.category_title }}<span>|</span></li>
+                        <li *ngIf="!usersService.blogDetailsComments">0 Comments</li>
+                        <li *ngIf="usersService.blogDetailsComments">{{ usersService.blogDetailsComments.length }}
+                            Comments</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                <div class="social-list-blog-details">
+                    <ul>
+                        <li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="javascript:void(0)"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <div class="blog-details-content-main">
+                    <div class="blog-details-content" [innerHTML]="usersService.blogDetailsData.description">
+                    </div>
+
+                    <div class="blog-details-review-section">
+                        <div class="blog-details-review-head">
+                            Comments
+                            <div class="head-bottom-underline"></div>
+                        </div>
+                        <div class="check-records" *ngIf="usersService.blogDetailsComments">
+                            <div class="message-section-main" *ngFor="let comments of usersService.blogDetailsComments">
+                                <div class="message-text-content-section-main">
+                                    <div class="message-sender-img-section">
+                                        <img src="{{ comments?.profile_image }}" alt="">
+                                        <!-- <img src="assets/images/unknown-man.jpg" alt="" *ngIf="{{comments.profile_image==''}}">                       -->
+                                    </div>
+                                    <div class="message-text-content-section">
+                                        <div class="message-text-head-section">
+                                            {{ comments.user_full_name }}
+                                        </div>
+                                        <div class="review-date-section">
+                                            {{ comments.created_at }}
+                                        </div>
+                                        <div class="message-text-content">
+                                            {{ comments.comments}}
+                                        </div>
+                                        <div class="reply-btn-seciton">
+                                            <a href="javascript:void(0)">Reply</a>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="check-records" *ngIf="!usersService.blogDetailsComments">
+                            <div class="message-section-main">
+                                <div class="no-records-found-section">
+                                    <div class="no-records-found-txt">No Comments found</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message-section-main" *ngIf="getToken">
+                            <form #storeComments="ngForm" id="storeComments" data-parsley-validate>
+                                <div class="message-text-content-section-main">
+                                    <div class="message-sender-img-section">
+                                        <img src="assets/images/unknown-man.jpg" alt="">
+                                    </div>
+                                    <div class="message-text-content-section">
+                                        <textarea name="message" placeholder="Write your comments" class="form-control"
+                                            data-parsley-required="true"
+                                            data-parsley-required-message="* This field is required." ngModel
+                                            required></textarea>
+                                        <div class="submit-review-btn-section">
+                                            <button type="submit" class="btn-submit-review-section"
+                                                (click)="onstoreComments(storeComments, usersService.blogDetailsData.id)">Submit</button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<app-main-footer></app-main-footer>
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

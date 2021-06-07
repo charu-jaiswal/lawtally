@@ -1,0 +1,912 @@
+<div class="blank-div-section list-details-main-blank"></div>
+
+<!-- HEADER -->
+<app-main-header class="list-details-main-section-block" ></app-main-header>
+
+<div class="listing-details-banner-section-main" [ngStyle]="{'background-color':packagebackground}">
+    <div id="overview" class="lawyer-info-section-main page-section"
+        *ngFor="let details of usersService.lawyerDetailsList">
+        <div class="container">
+            <div class="breadcurm-section-main">
+                <div class="breadcurm-txt-section">
+                    <ul >
+                        <!-- <li routerLink="/"><span>Home</span> <span class="breadcurm-arrow-section"><i
+                                    class="fal fa-angle-right"></i></span></li> -->
+                        <li style="cursor: pointer;" (click)="findalawyer()"><span [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }">Find a Lawyer</span> <span
+                                class="breadcurm-arrow-section"><i class="fal fa-angle-right"></i></span></li>
+                        <li style="cursor: pointer;" (click)="setstate(usersService.lawyerFirm[0]?.state)"><span [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }">{{usersService.lawyerFirm[0]?.state}}</span><span class="breadcurm-arrow-section"><i
+                                    class="fal fa-angle-right"></i></span></li>
+                        <li style="cursor: pointer;" (click)="setcity(usersService.lawyerFirm[0]?.city)"><span [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }">{{usersService.lawyerFirm[0]?.city}}</span><span class="breadcurm-arrow-section"><i
+                                    class="fal fa-angle-right"></i></span></li>
+                        <li style="cursor: pointer;" (click)="setpractic(usersService.practiceArea[0]?.practice_area_name)"><span [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }">{{usersService.practiceArea[0]?.practice_area_name}}</span>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="lawyer-info-section">
+                <div class="lawyer-img-section">
+                    <div class="lawyer-img-block" style="height: 150px;width: 130px;background: #0D264C;">
+                        <img src="{{details?.profile_image}}" alt="" />
+                        <img *ngIf="package == 'Diamond Package'" class="labeltagimg" src="assets/images/listing-diamond.svg" alt="" />
+                        <img *ngIf="package == 'Elite Package'" class="labeltagimg" src="assets/images/listing-elite.svg" alt="" />
+                        <!-- <span *ngIf="package == 'Standard Package'" ></span> -->
+
+                        
+                        
+                    </div>
+                    <div class="lawyer-social-links-section">
+                        <ul>
+                            <li><a (click)="facebook(usersService.facebookLink)"><i class="fab fa-facebook-f" [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"></i></a></li>
+                            <li><a (click)="twitter(usersService.twitterLink)"><i class="fab fa-twitter" [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"></i></a></li>
+                            <li><a (click)="linkedin(usersService.linkedinLink)"><i class="fab fa-linkedin" [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- <div class="img-lable-tag-section" [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }">
+                        {{this.package}}
+                    </div> -->
+                </div>
+                <div class="lawyer-info-text-section">
+                    <div class="lawyer-info-name" [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }">
+                        <h1>{{details.full_name}}</h1>
+                        <span class="listing-verify-icon"  *ngIf="package == 'Diamond Package'"><img src="assets/images/Verified_Diamond.svg" alt="" /></span>
+                        <span class="listing-verify-icon"  *ngIf="package == 'Elite Package'"><img src="assets/images/Verified_Elite.svg" alt="" /></span>
+                        
+                    </div>
+                    <div class="lawyer-info-cate-age">
+                        <ul>
+                            <!-- <li><span [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }">{{usersService.practiceArea[0]?.practice_area_name}}</span></li> -->
+                            <li *ngIf="details.lawyer_firm"><span [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"><i class="fas fa-university"></i> {{details.lawyer_firm[0]?.firm_name}}</span></li>
+                            <!-- <li><span class="circle-section"></span><span [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }">{{details.gender}}</span></li> -->
+                            <li *ngIf="details.lawyer_experience">
+                              
+                                <span [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"><i class="fa fa-suitcase"></i> Exp-{{details.lawyer_experience[0].to_year - details.lawyer_experience[0].from_year}}yrs</span></li>
+                        </ul>
+                    </div>
+                    <div class="lawyer-info-rating-section">
+                        <i *ngFor="let n of avgStars"  >
+                            <span style="margin-right: 1px;font-size: 20px;font-style: normal !important"  [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"class="star star-active-section">★ </span>
+                        </i>
+                        <i *ngFor="let n of nonStars" >
+                            <span style="margin-right: 1px;font-size: 20px;font-style: normal !important" [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"   class="star star-active-section">★ </span>
+                        </i>
+                        <span [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }">{{details?.total_review_count}} Review</span>
+                       
+                        <!-- <span class="ml-2">{{details.average_review}}</span> -->
+                    </div>
+                    <div class="lawyer-info-address-section" style="position: relative;" [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }">
+                        <i class="fas fa-map-marker-alt"> </i>Address  : {{details.address}}
+                    </div>
+                    <div class="lawyer-info-email-website-section">
+                        <ul>
+                           
+                            <li [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }" style="cursor: pointer;" (click)="openemail(details.email)"><i class="fas fa-envelope"></i> <a href="{{details.email}}" target="_blank" [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"> Email </a></li>
+                            <li [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }" style="cursor: pointer;" (click)="openurl(details.website_url,'WS')"><i class="fas fa-globe-asia"></i> <a  href="{{details.website_url}}" target="_blank" [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }">Website </a> </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="details-tabbing-section-main" [ngStyle]="{'background-color':packagebackground}">
+        <div class="container">
+            <div class="details-tabbing-section"   >
+                <!-- <div class="sectoin-menu-head-block">
+                    Section Menu <span class="menu-icon"><i class="fal fa-angle-down"></i></span>
+                </div> -->
+                 <!-- *ngIf="lawyerid && lawyerid != userId"   *ngIf="isStandard"-->
+                <ul>
+                   
+                    <li><a class="slide-to active overview-menu" href="#overview" [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"><h3>Overview</h3></a></li>
+                    <li><a class="slide-to" href="#about-me" [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"><h3>About Me</h3></a></li>
+                    <li><a class="slide-to"  [hidden]="isStandard" href="#law-firms " [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"><h3>Law Firms</h3></a></li>
+                    <li><a class="slide-to" [hidden]="!isStandard"  href="#elite-lawyers " [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"><h3>Similar Lawyers</h3></a></li>
+                    <li><a class="slide-to" href="#review" [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"><h3>Review</h3></a></li>
+                    <li><a class="slide-to" href="#cost" [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }"><h3>Cost</h3></a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8 col-xl-9">
+            <div class="details-tab-content-section" *ngFor="let lawyerdetails of usersService.lawyerDetailsList">
+                <!-- *ngIf="lawyerid && lawyerid != userId" #tooltipTemplate -->
+                <div id="about-me" class="details-about-section page-section">
+                    <div class="details-head-section-main"  >
+                        About Me
+                        <span class="head-bottom-underline"></span>
+                    </div>
+                    <div class="details-about-content-text">
+                        <p [innerHTML]="lawyerdetails.description"></p>
+                    </div>
+                    <div class="background-check-seciton-main">
+                        <div class="background-check-seciton-head">
+                            Background Check
+                        </div>
+                        <div class="background-check-seciton-content">
+                            <ul>
+                                <li><i class="fal fa-angle-double-right"></i> We have not found any instances of professional misconduct for this lawyer.
+                                </li>
+                                <!-- <li><i class="fal fa-angle-double-right"></i> No disciplinary actions found for the
+                                    years we collect data</li>
+                                <li><i class="fal fa-angle-double-right"></i> No board actions found for the years we
+                                    collect data</li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="valuable-cases-seciton-main">
+                        <div class="background-check-seciton-head">
+                            Notable Cases
+                            <span class="head-bottom-underline"></span>
+                        </div>
+                        <div class="valuable-cases-content-seciton" *ngFor="let cases of usersService.lawyerCase">
+                            <div class="valuable-cases-year-section" *ngIf="cases?.from_year && cases?.to_year">
+                                <div class="year-one-section-block">
+                                    {{cases.from_year}}-{{cases.to_year}}
+                                    <span class="circle-year-seciton"></span>
+                                </div>
+                            </div>
+                            <div class="valuable-cases-yearly-content-seciton"
+                                *ngIf="cases?.title && cases?.description">
+                                <div class="year-one-section-block show-for-responsive">
+                                    {{cases.from_year}}-{{cases.to_year}}
+                                </div>
+                                <div class="valuable-cases-yearly-content-one">
+                                    <div class="valuable-cases-yearly-content-head">
+                                        {{cases.title}}
+                                    </div>
+                                    <div class="valuable-cases-yearly-content-text">
+                                        {{cases.description}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="practice-areas-seciton-main">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="background-check-seciton-head practice-areas-head-seciton">
+                                    Practice Areas
+                                </div>
+
+                                <!-- <div>
+                                    {{usersService.lawyerDetailsList[0].practice_area.practice_area_name}}
+                                </div> -->
+                                <div id="chart-container" >
+                                    <canvas baseChart 
+                                          [chartType]="chartType"
+                                          [data]="chartvalue"
+                                          [labels]="chartLabels"
+                                          [options]="chartOptions">
+                                  </canvas>
+                                </div>
+                                <!-- <div class="background-check-seciton-content practice-areas-content-seciton">
+                                    <ul>
+                                        <li><i class="fal fa-angle-double-right"></i>
+                                            <ng-container
+                                                *ngFor="let practice_areas of usersService.practiceArea; let t = index">
+                                                {{practice_areas?.practice_area_name}} <span
+                                                    *ngIf="usersService.practiceArea.length > 1 && t< (usersService.practiceArea.length - 1)">,</span>
+                                            </ng-container>
+                                        </li>
+                                    </ul>
+                                </div> -->
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="background-check-seciton-head practice-areas-head-seciton">
+                                    Award
+                                </div>
+                                <div class="background-check-seciton-content practice-areas-content-seciton">
+                                    <ul *ngFor="let awards of usersService.lawyerAwards">
+                                        <li *ngIf="awards?.award_name"><i class="fal fa-angle-double-right"></i>
+                                            {{awards.award_name}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="practice-areas-seciton-main work-exp-section-main">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="background-check-seciton-head practice-areas-head-seciton">
+                                    Work Experience
+                                </div>
+                                <ng-container
+                                    *ngIf="!usersService.lawyerExperience || usersService.lawyerExperience?.length==0">
+                                    <p class="mt-3 pb-2" style="border-bottom: 1px solid #ddd;">No experience history
+                                        found.
+                                    </p>
+                                </ng-container>
+                                <div class="work-exp-content-main" *ngFor="let expr of usersService.lawyerExperience">
+                                    <div class="work-exp-content-head" *ngIf="expr?.title">
+                                        {{expr.title}}
+                                    </div>
+                                    <div class="work-exp-content-txt" *ngIf="expr?.experience_at">
+                                        {{expr.experience_at}}
+                                        <div class="work-exp-content-year">
+                                            {{expr.from_year}}-{{expr.to_year}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="background-check-seciton-head practice-areas-head-seciton languages-head-main">
+                                    Languages
+                                </div>
+                                <div class="languages-content-main" *ngFor="let lang of usersService.lawyerLanguages">
+                                    <div class="work-exp-content-head" *ngIf="lang?.language_name">
+                                        {{lang.language_name}}
+                                    </div>
+                                    <div class="work-exp-content-txt languages-seciton-circles">
+                                        <!-- <div *ngIf="lang?.proficiency"
+                                        class="work-exp-content-txt languages-seciton-circles">-->
+                                        <span *ngIf="lang.proficiency === 'high'">
+                                            <!-- Proficiency - {{lang.proficiency}} -->
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span>Proficiency - {{lang.proficiency}}</span>
+
+                                        </span>
+                                        <span *ngIf="lang.proficiency === 'medium'">
+                                            <!-- Proficiency - {{lang.proficiency}} -->
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton"></span>
+                                            <span class="circle-round-seciton"></span>
+                                            <span class="circle-round-seciton"></span>
+                                            <span class="circle-round-seciton"></span>
+                                            <span class="circle-round-seciton"></span>
+                                            <span>Proficiency - {{lang.proficiency}}</span>
+
+                                        </span>
+                                        <span *ngIf="lang.proficiency === 'low'">
+                                            <!-- Proficiency - {{lang.proficiency}} -->
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton"></span>
+                                            <span class="circle-round-seciton"></span>
+                                            <span class="circle-round-seciton"></span>
+                                            <span class="circle-round-seciton"></span>
+                                            <span class="circle-round-seciton"></span>
+                                            <span class="circle-round-seciton"></span>
+                                            <span class="circle-round-seciton"></span>
+                                            <span>Proficiency - {{lang.proficiency}}</span>
+
+                                        </span>
+                                    </div>
+                                    <!-- <div class="work-exp-content-txt languages-seciton-circles">
+                                        <span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span class="circle-round-seciton dart-circle"></span>
+                                            <span>Proficiency - {{lang.proficiency}}</span>
+                                        </span>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="education-section-main-block">
+                    <div class="background-check-seciton-head">
+                        Education
+                    </div>
+                    <ng-container *ngIf="!usersService.lawyerAcademics || usersService.lawyerAcademics?.length==0">
+                        <p class="mt-3 pb-2" style="border-bottom: 1px solid #ddd;">No education history found.
+                        </p>
+                    </ng-container>
+                    <div class="education-content-section-block">
+                        <div class="education-content-section" *ngFor="let edu of usersService.lawyerAcademics">
+                            <div class="education-content-section-head work-exp-content-head">
+                                {{edu.university}}
+                            </div>
+                            <div class="education-content-section-desig work-exp-content-txt">
+                                {{edu.degree}}
+                            </div>
+                            <div class="education-content-section-year work-exp-content-txt work-exp-content-year">
+                                {{edu.starting_year}} - {{edu.passing_year}}
+                            </div>
+                            <div class="circle-year-seciton"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--Question charu -->
+                <div class="clearfix"></div>
+                <!-- <div class="faq-new-section" *ngIf=" usersService.lawyerDetailsList[0].asked_questions.length > 0">
+                    <div class="faq-title">Questions answered by {{usersService.lawyerDetailsList[0].full_name}}</div>
+                         <div id='faq_acc'>
+                            
+                            <div id="accordion"   class="accordion" *ngFor="let question of usersService.lawyerDetailsList[0].asked_questions; let i =index">
+                                <div class="card mb-0">
+                                    <div (click)="Collaps(i)"  class="card-header collapsed"  id="btn{{i}}" data-toggle="collapse" href="#collapseOne">
+                                        <a  class="card-title">{{question.question}}</a>
+                                       <div *ngIf="i !== expandedIndex" class="pull-right"><img src="/dev/assets/images/arrow-plus.png"></div>
+                                       <div *ngIf="i === expandedIndex" class="pull-right"><img src="/dev/assets/images/arrow-minus.png"></div>
+                                    </div>
+                                    <div *ngIf="i === expandedIndex" id="collapseOne" class="card-body collapse" data-parent="#accordion" >
+                                        <p>{{question.description}}
+                                        </p>
+                                    </div>
+                                 
+                                </div>
+                            </div>
+                      
+                    </div>
+                    </div> -->
+
+
+                    <!-- href="javascript:void(0)" -->
+
+                    <div class="faq-new-section">
+                        <div class="faq-title">Frequently Asked Questions</div>
+                             <div id='faq_acc'>
+                <ul>
+                    <li class='has-sub'>
+                        <a href="javascript:void(0)"><span>Parsnip lotus root celery?</span>
+                                                   </a>
+                        <ul>
+                            <li>
+                                <div class="row">
+                                    <div class="faq-text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moonofficia aute, non cupidatat skateboard dolor brunch.</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class='has-sub active'>
+                        <a href='#'><span>Anim pariatur cliche reprehenderit?</span></a>
+                        <ul style="display:block;">
+                            <li>
+                                <div class="row">
+                                    <div class="faq-text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moonofficia aute, non cupidatat skateboard dolor brunch.  </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class='has-sub'>
+                        <a href='#'><span>Beet greens peanut salad?</span></a>
+                        <ul>
+                            <li>
+                                <div class="row">
+                                    <div class="faq-text">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moonofficia aute, non cupidatat skateboard dolor brunch.</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                   
+                </ul>
+            </div>
+                        </div>
+
+
+
+                        
+                    <div class="clerifix" ><br/><br/></div>
+                    <div class="q-and-a-section" *ngIf=" usersService.lawyerDetailsList[0].asked_questions.length > 0">
+                        <div class="faq-title">Questions answered by   &nbsp;  {{usersService.lawyerDetailsList[0].full_name}} </div>
+                        <div class="question-new-title"*ngFor="let question of usersService.lawyerDetailsList[0].asked_questions; let i =index" >
+                            <i class="fas fa-angle-double-right"></i> {{usersService.lawyerDetailsList[0].full_name}}
+                             &nbsp;   
+                            
+                             <a (click)=getQuestionListing(question.id) ><span> {{question.question}}</span>
+                             </a>
+                             </div>
+                        
+                    </div>
+                <!--Question End-->
+                    <!----SimilarLawyers charu--->
+                    <div id="elite-lawyers" class="location-section-main-block page-section" [hidden]="!isStandard">
+                        <div class="details-head-section-main" *ngIf="usersService.lawyerDetailsList[0].similar_lawyers.length > 0">
+                        Elite Lawyers
+                    <span class="head-bottom-underline"></span>
+                        </div>
+                        <div class="elite-lawyers-seciton-block">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4"
+                                    *ngFor="let simLawyer of usersService.lawyerDetailsList[0].similar_lawyers">
+                                    <div class="featured-doctor-section">
+                                        <div class="featured-doctor-img-section">
+                                            <div class="featured-doctor-img">
+                                                <img *ngIf="simLawyer?.profile_image == ''" src="assets/images/user.png"
+                                                    alt="" />
+                                                <img *ngIf="simLawyer?.profile_image != ''"
+                                                    src="{{simLawyer?.profile_image}}" alt="" />
+                                                <!-- <img src="{{simLawyer.profile_image}}" alt="" /> -->
+                                            </div>
+                                            <div class="featured-doctor-content-section">
+                                                <div class="featured-doctor-head-section">
+                                                    {{simLawyer.full_name}}
+                                                </div>
+                                                <div class="featured-doctor-address-section">
+                                                    <i class="fas fa-map-marker-alt"></i> {{simLawyer.address}}
+                                                </div>
+
+                                                <ngb-rating readonly="false" *ngIf="simLawyer"
+                                                    [(rate)]="simLawyer.average_ratings" max="5">
+                                                    <ng-template let-fill="fill" let-index="index">
+                                                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                                    </ng-template>
+                                                </ngb-rating>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="featured-doctor-content">
+                                            {{simLawyer.description}}
+                                        </div>
+
+                                        <div class="call-now-btn-section" *ngFor="let prac of simLawyer.practice_area">
+                                            {{prac.practice_area_name}}<br>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <!---Similar_lawyers End--->
+                <div id="law-firms" class="location-section-main-block page-section" [hidden]="isStandard">
+                    <div class="details-head-section-main">
+                        Law Firms
+                        <span class="head-bottom-underline"></span>
+                    </div>
+                    <div class="location-seciton-map-block">
+                            <div id="map_wrapper">
+                            <div id="map_canvas" class="mapping"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-section-main-block law-firms-section-main-block page-section">
+                 
+                    <ng-container *ngIf="!usersService.lawyerFirm || usersService.lawyerFirm?.length==0">
+                        <p class="mt-3" style="border-bottom: 1px solid #ddd;">No firms found.</p>
+                    </ng-container>
+                    <div class="addressess-section-main" *ngFor="let firm of usersService.lawyerFirm">
+                        <div class="law-firms-address-section">
+                            <div class="addressess-head-section">
+                                {{firm.firm_name}}
+                            </div>
+                            <div class="name-designation-section">
+                                <b>Director Of Webwing</b>
+                            </div>
+                            <div class="address-section-common-block">
+                                <div class="address-line-one">
+                                    Lorem Ipsum is simply dummy text <br>{{firm.firm_address}}
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="call-fax-btns">
+                                    <a href="tel:{{firm.mobile_number}}">Call </a><span>|</span>
+                                    <a href="fax:{{firm.fax}}">Fax </a><span>|</span>
+                                    <a (click)="getDirection(firm?.latitude, firm?.longitude)">Directions</a>
+                                </div>
+                                <div class="law-firm-social-section">
+                                    <ul *ngIf="isStandard">
+                                        <li ><a (click)="addUseActivity('FB')" [href]="usersService.lawyerDetailsList[0].lawyer_firm[0].firm_facebook" target="_blank" class="law-firm-social-face"><i class="fab fa-facebook-f"></i></a></li>
+                                       </ul>
+                                    <ul *ngIf="!isStandard">
+                                        
+                                    
+                                     <li ><a (click)="addUseActivity('FB')" [href]="usersService.lawyerDetailsList[0].lawyer_firm[0].firm_facebook" target="_blank" class="law-firm-social-face"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li ><a (click)="addUseActivity('TW')" href="{{usersService.lawyerDetailsList[0].lawyer_firm[0].firm_twitter}}" target="_blank"class="law-firm-social-twit"><i class="fab fa-twitter"></i></a></li>
+                                        <li ><a (click)="addUseActivity('LD')" href="{{usersService.lawyerDetailsList[0].lawyer_firm[0].firm_linkedin}}" target="_blank" class="law-firm-social-linkd"><i class="fab fa-linkedin-in"></i></a></li>
+                                    
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="listing-doctor-action-seciton">
+                            <div class="align-center-section">
+                                <a class="listing-doctor-action-btn">
+                                    <i class="fas fa-envelope"></i> Message
+                                </a>                                
+                                <a  (click)="addUseActivity('WS')" class="listing-doctor-action-btn" target="_blank" href="http://www.webwingtechnologies.com">
+                                    <i class="fas fa-link"></i> Website
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="peer-endorsment-seciton-main">
+                    <div class="peer-endorsment-seciton-head">
+                        <div class="details-head-section-main">
+                            Peer Endorsment
+                            <span class="head-bottom-underline"></span>
+                        </div>
+                        <div class="endorsment-question-seciton">
+                            <a (click)="endorse()" *ngIf="lawyerid && userId!=lawyerid && isUserLawyer">
+                                Are you lawyer? Endorse this lawyer</a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <ng-container
+                            *ngIf="!usersService.lawyerEndorsement || usersService.lawyerEndorsement?.length==0">
+                            <p class="mt-3 pb-2" style="border-bottom: 1px solid #ddd;">No endorsments yet, be the
+                                first.</p>
+                        </ng-container>
+                    </div>
+                    <div class="endorsment-relation-content" *ngFor="let endorsment of usersService.lawyerEndorsement">
+                        <div class="endorsment-relation-pic-section">
+                            <img src="{{endorsment?.profile_image}}" alt="" />
+                        </div>
+                        <div class="endorsment-relation-content-section">
+                            <div class="endorsment-relation-name">
+                                {{endorsment.full_name}}, <span> on {{endorsment.created_at}}</span>
+                            </div>
+                            <div class="endorsment-relationship-section">
+                                <span>Relationship :</span> {{endorsment.relation}}
+                            </div>
+                            <div class="endorsment-relationship-message">
+                                {{endorsment.description}}
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                
+                <div id="review" class="location-section-main-block page-section review-section-main-block"
+                    *ngFor="let reviews of usersService.lawyerDetailsList">
+                    <div class="details-head-section-main">
+                        Reviews
+                        <span class="head-bottom-underline"></span>
+                    </div>
+                    <div class="rating-count-seciton-main">
+                        <div class="rating-count-seciton">
+                            {{reviews.average_review}}
+                        </div>
+                        <div class="star-rating-seciton">
+                            <span  _ngcontent-toi="" class="star star-active" *ngFor="let i of counter(5) | slice:0:reviews.average_review">★</span>
+                            <span  _ngcontent-toi="" class="star" *ngFor="let i of counter(5) | slice:reviews.average_review:5">★</span>
+                        </div>
+                        <div class="average-rating-text-seciton">
+                            Average Rating
+                        </div>
+                        <div class="write-review-btn-seciton">
+                   <a class="btn-list-ur-account" (click)="openReviewModal()" >Write a Review</a>
+                        </div>
+                    </div>
+                    <div class="reviews-bar-seciton">
+                        <div class="five-star-bar-seciton">
+                            <span>5 Star</span>
+                            <span class="gray-bar-section">
+                                <span class="yellow-bar-seciton"
+                                    [ngStyle]="{'width': (lawyerdetails?.five_stars) + '%'}">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="five-star-bar-seciton">
+                            <span>4 Star</span>
+                            <span class="gray-bar-section">
+                                <span class="yellow-bar-seciton"
+                                    [ngStyle]="{'width': (lawyerdetails?.four_stars) + '%'}">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="five-star-bar-seciton">
+                            <span>3 Star</span>
+                            <span class="gray-bar-section">
+                                <span class="yellow-bar-seciton"
+                                    [ngStyle]="{'width': (lawyerdetails?.three_stars) + '%'}">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="five-star-bar-seciton">
+                            <span>2 Star</span>
+                            <span class="gray-bar-section">
+                                <span class="yellow-bar-seciton"
+                                    [ngStyle]="{'width': (lawyerdetails?.two_stars) + '%'}">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="five-star-bar-seciton">
+                            <span>1 Star</span>
+                            <span class="gray-bar-section">
+                                <span class="yellow-bar-seciton" [ngStyle]="{'width': (lawyerdetails?.one_star) + '%'}">
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                   <!---------Charu-Start------------------>
+                   <div class="comment-tab-section" >
+                    <ul>
+                        <li><a    [class.active] = "isActive==0" (click)="getLawyerDetails(0)">Recent</a></li>
+                        <li><a  [class.active]="isActive==1"   (click)="getLawyerDetails(1)">Highest</a></li>
+                        <li><a  [class.active]="isActive==2"  (click)="getLawyerDetails(2)">Lowest</a></li>
+                        <li><a   [class.active]="isActive==3"  (click)="getLawyerDetails(3)">Most Helpful</a></li>
+                    </ul>
+                </div>
+                   <!----------Charu-End----------------------->
+                    <div class="reviews-section-main-block-main">
+                        <div class="reviews-section-main-block" *ngFor="let rev of reviews.reviews">
+                            <div class="endorsment-relation-content">
+                                <div class="endorsment-relation-pic-section">
+                                    <img src="{{rev?.profile_image}}" alt="" />
+                                </div>
+                                <div class="endorsment-relation-content-section">
+                                    <div class="endorsment-relation-name">
+                                        <div class="endorsment-relation-name-head">
+                                            {{rev.review_from}}
+                                        </div>
+                                       
+                                        <!--charu Start-->
+                                        <div class="star-rating-seciton">
+                                          
+                                            <span _ngcontent-toi="" class="star star-active " *ngFor="let i of counter(5) | slice:0:rev.ratings">★</span>
+                                            <span _ngcontent-toi="" class="star" *ngFor="let i of counter(5) | slice:rev.ratings:5">★</span>
+                                          
+                                        </div>
+                                         <!--charu End-->
+                                    </div>
+                                    <div class="review-date-seciton">
+                                        {{rev.created_at}}
+                                    </div>
+                                    <div style="word-wrap:break-word;">
+                                        <ng-container *ngIf="rev.readMore">
+                                            {{ rev.review | slice:0:160 }}<span *ngIf="rev.review.length > 160"
+                                                (click)="readmore(rev.review_from)" class="txt-read-more">
+                                                ...Read
+                                                more </span>
+                                        </ng-container>
+                                      <div>
+                                     
+                                        <span  *ngIf="rev.review_type == 'HIRED'" data-toggle="tooltip" data-placement="top"  rel="tooltip" class="tt_large"
+                                         title=" This review is from a person who hired this attorney.">
+                                         Hired attorney
+                                         <img  class="infoimg" src="https://img.icons8.com/color/48/000000/info--v1.png"/>
+                                        </span>     
+                                    </div>
+                                        <ng-container *ngIf="!rev.readMore">
+                                            {{ rev.review | slice:0:rev.review.length }}<span
+                                                (click)="hidemore(rev.review_from)" class="txt-read-more">
+                                                Read
+                                                less </span>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="cost" class="location-section-main-block page-section cost-section-main-block">
+                    <div class="details-head-section-main">
+                        Cost
+                        <span class="head-bottom-underline"></span>
+                    </div>
+                    <div class="cost-content-section">
+                        <div class="cost-section-content-block">
+                            <div class="cost-head-section">
+                                Hourly Rate
+                            </div>
+                            <div class="cost-amt-section">
+                                ${{usersService.lawyerDetailsList[0].lawyer_cost}}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="cost-section-content-block">
+                            <div class="cost-head-section">
+                                Free Consultation Time
+                            </div>
+                            <div class="cost-amt-section">
+                                {{usersService.lawyerDetailsList[0].lawyer_consultation_time}}hr
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="cost-section-content-block">
+                            <div class="cost-head-section">
+                                Consultation fees
+                            </div>
+                            <div class="cost-amt-section">
+                                ${{usersService.lawyerDetailsList[0].lawyer_consultation_fees}}
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="payment-accepte-main-section" *ngFor="let payment of usersService.lawyerDetailsList">
+                        <div class="payment-accepte-head-section">
+                            Payment accepte
+                        </div>
+                        <div class="payment-accepte-option">
+                            <ul>
+                             <li *ngFor="let item of payment.lawyer_payment_methods">{{item.method_name}}</li> 
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>    
+        <div class="col-sm-12 col-md-12 col-lg-4 col-xl-3">
+            <div class="send-enquiry-section-main" *ngFor="let details of usersService.lawyerDetailsList">
+                <div class="send-enquiry-share-btns share-top-section">
+                    <a href="javascript:void(0)" (click)="openShareModal()"><i class="fas fa-share-alt"></i> Share</a>
+                    <a href="javascript:void(0)" (click)="fav(details.is_favourite)">
+                        <i *ngIf="details.is_favourite == 'no'" class="fal fa-heart"></i>
+                        <i *ngIf="details.is_favourite != 'no'" class="fas fa-heart" style="color: red;"></i>
+                        Favorite
+                    </a>
+                </div>
+                <div class="send-enquiry-white-box-section">
+                    <div class="send-inq-user-info">
+                        <div class="send-inq-user-img">
+                            <img src="{{details?.profile_image}}" alt="" />
+                        </div>
+                        <div class="send-inq-user-name">
+                            {{details.full_name}}
+                        </div>
+                        <div class="send-inq-user-practice">
+                            Business
+                        </div>
+                        <div class="send-inq-user-ratings">
+                            <div class="lawyer-info-rating-section">
+                                  <span  _ngcontent-toi="" class="star star-active-section " *ngFor="let i of counter(5) | slice:0:details.average_review">★</span>
+                                <span  _ngcontent-toi="" class="star star-active-section" *ngFor="let i of counter(5) | slice:details.average_review:5">★</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accepting-new-client-seciton-block">
+                        <div class="accepting-new-client-text">
+                            <img src="assets/images/check-icon-img.png" alt="" /> Accepting new client
+                        </div>
+                        <div class="contact-numner-new-client">
+                            <a class="listing-doctor-action-btn" href="tel:{{details.mobile_number}}"><i
+                                    class="fas fa-phone"></i>{{details.mobile_number}}</a>
+                        </div>
+                        <div class="associates-name-seciton"
+                            *ngFor="let firm of usersService.lawyerFirm | slice:0:1 ; let i = index">
+                            {{firm.firm_name}}
+                        </div>
+                        <div class="associates-address-section"
+                            *ngFor="let firm of usersService.lawyerFirm | slice:0:1 ; let i = index">
+                            {{firm.firm_address}}
+                        </div>
+                    </div>
+                    <div class="associates-address-map-section">
+                        <!-- <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.30591790535!2d-74.25986424431692!3d40.697149422319455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1578056444472!5m2!1sen!2sin"
+                                allowfullscreen=""></iframe> -->
+                        <div id="map_wrapper2">
+                            <div id="map_canvas2" class="mapping2"></div>
+                        </div>
+                    </div>
+                    <div class="send-enquiry-btn-seciton">
+                        <a class="btn-list-ur-account" *ngIf="userId!=usersService.lawyerDetailsList[0]['_id']"
+                            (click)="sendEnquiryModal()"><i class="fal fa-envelope"></i> 
+                            Send Message</a>
+                    </div>
+                </div>
+                <div class="send-enquiry-share-btns share-bottom-section"
+                    *ngFor="let details of usersService.lawyerDetailsList">
+                    <a href="javascript:void(0)" (click)="openShareModal()"><i class="fas fa-share-alt"></i> Share</a>
+                    <a href="javascript:void(0)" (click)="fav(details.is_favourite)">
+                        <i *ngIf="details.is_favourite == 'no'" class="fal fa-heart"></i>
+                        <i *ngIf="details.is_favourite != 'no'" class="fas fa-heart" style="color: red;"></i>
+                        Favorite
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Review your lawyer</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form #reviewForm="ngForm" id="reviewForm" data-parsley-validate>
+                    <div class="rating-label-section" >
+                        Select a rating for your lawyer
+                    </div>
+                    <div class="stars" (change)="hoveringOver($event)">
+                        
+                        <label class="fas fa-star star star-5" for="star-5"></label>
+                        <input class="star star-4" type="radio" name="rating" id="star-4" value="4">
+                        <label class="fas fa-star star star-4" for="star-4"></label>
+                        <input class="star star-3" type="radio" name="rating" id="star-3" value="3">
+                        <label class="fas fa-star star star-3" for="star-3"></label>
+                        <input class="star star-2" type="radio" name="rating" id="star-2" value="2">
+                        <label class="fas fa-star star star-2" for="star-2"></label>
+                        <input class="star star-1" type="radio" name="rating" id="star-1" value="1">
+                        <label class="fas fa-star star star-1" for="star-1"></label>
+                    </div>
+                
+                    <div class="form-group form-group-section active" >
+                        <textarea name="description" placeholder="Enter Your description" ngModel required
+                            #description="ngModel" data-parsley-required="true"
+                            data-parsley-required-message="* Please enter description."></textarea>
+                       
+                    </div>
+                    <div class="section-radio-main">
+                        <div class="section-radio-head" >
+                            Was this just a consultation or did you hire this attorney?
+                        </div>
+                        <div class="radio-btns" (change)="onChangeconsultation($event)">
+                            <div class="radio-btn">
+                                <input type="radio" id="consulted" value="CONSULT_ONLY" name="selector">
+                                <label for="consulted">Consulted</label>
+                                <div class="check"></div>
+                            </div>
+                            <div class="radio-btn">
+                                <input type="radio" id="hired" value="HIRED" name="selector">
+                                <label for="hired">Hired</label>
+                                <div class="check"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="section-radio-main">
+                        <div class="section-radio-head">
+                            Would you recommend this lawyer?
+                        </div>
+                        <div class="radio-btns" (change)="onChangerecommend($event)">
+                            <div class="radio-btn">
+                                <input type="radio" id="recommend-yes" value="yes" name="selector">
+                                <label for="recommend-yes">Yes</label>
+                                <div class="check"></div>
+                            </div>
+                            <div class="radio-btn">
+                                <input type="radio" id="recommend-no" value="no" name="selector">
+                                <label for="recommend-no">No</label>
+                                <div class="check"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                  
+                    <div class="form-action-btns overview-form-btns">
+                        <button type="submit" class="for-valuable-case-form" (click)="onSubmit(reviewForm)"
+                            href="javascript:void(0)">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <!-- Modal footer -->
+         
+        </div>
+    </div>
+</div>
+<!-- FOOTER -->
+<app-main-footer></app-main-footer>
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>
+
+<shared-modal id="sendEnquiryForm" modalTitle="Send Enquiry" class="send-reviwe-modal-main">
+    <app-enquiry-form (formSubmitted)="sendEnquiry($event)"></app-enquiry-form>
+</shared-modal>
+
+<shared-modal id="sendReviewForm" modalTitle="Send Review" class="send-reviwe-modal-main">
+    <app-review-form (reviewSubmitted)="sendReview($event)"></app-review-form>
+</shared-modal>
+
+<shared-modal id="shareForm" modalTitle="Share Profile">
+    <app-share-form></app-share-form>
+</shared-modal>

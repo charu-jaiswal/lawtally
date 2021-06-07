@@ -1,0 +1,856 @@
+<!-- HEADER -->
+<app-main-header></app-main-header>
+<div class="listing-details-banner-section-main listing-details-normal-profile">
+
+    <div class="blank-div-section"></div>
+
+    <div class="container" *ngIf="!lawyerid">
+        <div class="google-adds-section-block">
+            <img src="assets/images/google-ad-img.jpg" alt="" width="100%" height="100%" />
+        </div>
+    </div>
+
+    <!-- <span *ngIf="getData != 'edit'">
+        <div id="overview" class="lawyer-info-section-main page-section">
+            <div class="container" *ngFor="let user of usersService.AdminDetails">
+                <div class="breadcurm-section-main">
+                    <div class="breadcurm-txt-section">
+                        <ul>
+                            <li routerLink="/"><span>Home</span> <span class="breadcurm-arrow-section"><i
+                                        class="fal fa-angle-right"></i></span></li>
+                            <li><span>Find a Lawyer</span> <span class="breadcurm-arrow-section"><i
+                                        class="fal fa-angle-right"></i></span></li>
+                            <li><span>Criminal Defense</span> <span class="breadcurm-arrow-section"><i
+                                        class="fal fa-angle-right"></i></span></li>
+                            <li><span>Christopher Sorenson</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="lawyer-info-section">
+                    <div class="lawyer-img-section">
+                        <img *ngIf="user?.profile_image == ''" src="assets/images/user.png"
+                            style="width: 140px;height: 180px;" alt="" />
+                        <img *ngIf="user?.profile_image != ''" src="{{user?.profile_image}}"
+                            style="width: 140px;height: 180px;" alt="" />
+
+                        <div class="lawyer-social-links-section">
+                            <ul>
+                                <li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="javascript:void(0)"><i class="fab fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="img-lable-tag-section">
+                            Elite
+                        </div>
+                    </div>
+                    <div class="lawyer-info-text-section">
+                        <div class="lawyer-info-name">
+                            {{user?.full_name}} <img src="assets/images/verify-icon-img.png" alt="" />
+                        </div>
+                        <div class="lawyer-info-rating-section">
+                            <i class="fas fa-star star-active-section"></i>
+                            <i class="fas fa-star star-active-section"></i>
+                            <i class="fas fa-star star-active-section"></i>
+                            <i class="fas fa-star star-active-section"></i>
+                            <i class="fas fa-star star-active-section"></i>
+                            <span>2 Review</span>
+                        </div>
+                        <div class="lawyer-info-address-section">
+                            <i class="fas fa-map-marker-alt"></i>{{user?.address}}
+                        </div>
+                        <div class="lawyer-info-email-website-section">
+                            <ul>
+                                <li><i class="fas fa-envelope"></i>{{user?.email}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="normal-profile-send-enquiry">
+                    <div class="send-enquiry-share-btns share-top-section"
+                        *ngFor="let details of usersService.lawyerDetailsList">
+                        <a href="javascript:void(0)"><i class="fas fa-share-alt"></i> Share</a>
+                        <a href="javascript:void(0)" (click)="fav(details.is_favourite)" *ngIf="isLoggedIn">
+                            <i *ngIf="details.is_favourite == 'no'" class="fal fa-heart"></i>
+                            <i *ngIf="details.is_favourite != 'no'" class="fas fa-heart" style="color: red;"></i>
+                            Favorite
+                        </a>
+                    </div>
+                    <div class="contact-numner-new-client">
+                        <a class="listing-doctor-action-btn" *ngIf="isLoggedIn && user?.mobile_number"
+                            href="javascript:void(0)"><i class="fas fa-phone"></i>{{user?.mobile_number}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </span> -->
+
+    <div class="clearfix"></div>
+
+    <span>
+        <div id="overview" class="lawyer-info-section-main page-section">
+            <div class="container" *ngFor="let userDetails of usersService.lawyerDetailsList">
+                <div class="breadcurm-section-main">
+                    <div class="breadcurm-txt-section">
+                        <ul>
+                            <li style="cursor: pointer;" (click)="findalawyer()"><span>Find a Lawyer</span> <span
+                                    class="breadcurm-arrow-section"><i class="fal fa-angle-right"></i></span></li>
+                            <li style="cursor: pointer;" (click)="setstate(usersService.lawyerFirm[0]?.state)"><span>{{usersService.lawyerFirm[0]?.state}}</span><span
+                                    class="breadcurm-arrow-section"><i class="fal fa-angle-right"></i></span></li>
+                            <li style="cursor: pointer;" (click)="setcity(usersService.lawyerFirm[0]?.city)"><span>{{usersService.lawyerFirm[0]?.city}}</span><span
+                                    class="breadcurm-arrow-section"><i class="fal fa-angle-right"></i></span></li>
+                            <li style="cursor: pointer;" (click)="setpractic(usersService.practiceArea[0]?.practice_area_name)"><span>{{usersService.practiceArea[0]?.practice_area_name}}</span>
+                        </ul>
+                    </div>
+                </div>
+                <div class="lawyer-info-section">
+                    <div class="lawyer-img-section">
+                        <img *ngIf="userDetails?.profile_image == ''" src="assets/images/user.png"
+                            style="width: 140px;height: 150px;" alt="" />
+                        <img *ngIf="userDetails?.profile_image != ''" src="{{userDetails?.profile_image}}"
+                            style="width: 140px;height: 150px;" alt="" />
+
+                        <div class="lawyer-social-links-section">
+                            <ul>
+                                <li><a (click)="facebook(usersService.facebookLink)"><i
+                                            class="fab fa-facebook-f"></i></a></li>
+                                <li><a (click)="twitter(usersService.twitterLink)"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li><a (click)="linkedin(usersService.linkedinLink)"><i
+                                            class="fab fa-instagram"></i></a></li>
+                            </ul>
+
+                        </div>
+                        <!-- <div class="img-lable-tag-section">
+                            {{userDetails?.package_name? userDetails?.package_name?.package_name: '-'}}
+                        </div> -->
+                    </div>
+                    <div class="lawyer-info-text-section">
+                        <div class="lawyer-info-name">
+                            {{userDetails.full_name}}
+                            <!-- <span class="listing-verify-icon"><img src="assets/images/listing-verified.svg" alt="" /></span> -->
+                        </div>
+                        <div class="lawyer-info-cate-age">
+                            <ul>
+                                <!-- <li><span [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }">{{usersService.practiceArea[0]?.practice_area_name}}</span></li> -->
+                                <li *ngIf="userDetails.lawyer_firm"><span ><i class="fas fa-university"></i> {{userDetails.lawyer_firm[0]?.firm_name}}</span></li>
+                                <!-- <li><span class="circle-section"></span><span [ngStyle]="{'color':packagebackground === '#f7f7f7' ? 'black' : 'white' }">{{details.gender}}</span></li> -->
+                                <li *ngIf="userDetails.lawyer_experience">
+                                    <!-- <span class="circle-section"></span> -->
+                                    <span ><i class="fa fa-suitcase"></i> Exp-{{userDetails.lawyer_experience[0].to_year - userDetails.lawyer_experience[0].from_year}}yrs</span></li>
+                            </ul>
+                        </div>
+                        <div class="lawyer-info-rating-section">
+                            <i *ngFor="let n of avgStars" class="fas fa-star star-active-section"></i>
+                            <i *ngFor="let n of nonStars" class="fas fa-star" style="margin-right: 6px;"></i>
+                            <span>{{userDetails.total_review_count}} Review</span>
+                        </div>
+                        <div class="lawyer-info-address-section">
+                            <i class="fas fa-map-marker-alt"></i>{{userDetails.address}}
+                        </div>
+                        <div class="lawyer-info-email-website-section">
+                            <ul>
+                                <!-- {{userDetails.email}} -->
+                                <li style="cursor: pointer;" (click)="openemail(userDetails.email)" ><i class="fas fa-envelope"></i>Email</li>
+                                <!-- {{userDetails.website_url}} -->
+                                <li style="cursor: pointer;" (click)="openurl(userDetails.website_url)"><i class="fas fa-globe-asia" ></i>Website</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="normal-profile-send-enquiry" *ngFor="let details of usersService.lawyerDetailsList">
+                    <div class="send-enquiry-share-btns share-top-section">
+                        <a (click)="openShareModal()"><i class="fas fa-share-alt"></i> Share</a>
+                        <a href="javascript:void(0)" (click)="fav(details.is_favourite)" *ngIf="details?._id != userId">
+                            <i *ngIf="details.is_favourite == 'no'" class="fal fa-heart"></i>
+                            <i *ngIf="details.is_favourite != 'no'" class="fas fa-heart" style="color: red;"></i>
+                            Favorite
+                        </a>
+                    </div>
+                    <div class="contact-numner-new-client ">
+                        <a class="listing-doctor-action-btn" href="javascript:void(0)" style="
+                        padding-left: 20px;
+                        padding-right: 20px;
+                    "><i class="fas fa-phone"></i>{{userDetails.mobile_number}}</a>
+                    </div>
+                    <div class="associates-address-map-section">
+                        <!-- <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.30591790535!2d-74.25986424431692!3d40.697149422319455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1578056444472!5m2!1sen!2sin"
+                            allowfullscreen=""></iframe> -->
+                        <!-- <div id="map_wrapper2">
+                            <div id="map_canvas2" class="mapping"></div>
+                        </div> -->
+                        <div class="contact-numner-new-client ">
+                            <a (click)="openClaimProfile(userDetails)" class="listing-doctor-action-btn" href="javascript:void(0)" style="padding-left: 20px;padding-right: 20px;background-color: #ff3b4b;color: #ffffff;">
+                               Claim Profile
+                            </a>
+                        </div>
+                    </div>
+                    <!-- <div class="send-enquiry-btn-seciton">
+                        <a class="btn-list-ur-account" *ngIf="details?._id != userId" (click)="sendEnquiryModal()"><i
+                                class="fal fa-envelope"></i> Send Enquiry</a>
+                    </div> -->
+                </div>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="details-tabbing-section-main">
+            <div class="container">
+                <div class="details-tabbing-section">
+                    <ul>
+                        <li><a class="slide-to active overview-menu" (click)="scroll('overview')">Overview</a></li>
+                        <li><a class="slide-to" *ngIf="lawyerid && lawyerid != userId"
+                                (click)="scroll('about-me')">About Me</a>
+                        </li>
+                        <!-- <li><a class="slide-to" href="#location">Location</a></li> -->
+                        <li><a class="slide-to" (click)="scroll('law-firms')">Law Firms</a></li>
+                        <li><a class="slide-to" (click)="scroll('review')">Review</a></li>
+                        <li><a class="slide-to" *ngIf="usersService?.similarLawyers?.length > 0"
+                                (click)="scroll('elite-lawyers')">Elite Lawyers</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </span>
+</div>
+
+
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9">
+                <div class="details-tab-content-section">
+                    <div id="about-me" class="details-about-section page-section"
+                        *ngIf="lawyerid && lawyerid != userId">
+                        <div class="details-head-section-main">
+                            About Me
+                            <span class="head-bottom-underline"></span>
+                        </div>
+                        <div class="details-about-content-text"
+                            *ngFor="let userDetails of usersService.lawyerDetailsList">
+                            <p [innerHTML]="userDetails.description"></p>
+                        </div>
+
+                        <div class="background-check-seciton-main">
+                            <div class="background-check-seciton-head">
+                                Background Check
+                            </div>
+                            <div class="background-check-seciton-content">
+                                <ul>
+                                    <li><i class="fal fa-angle-double-right"></i> No malpractice claims </li>
+                                    <li><i class="fal fa-angle-double-right"></i> No disciplinary actions found for the
+                                        years we collect data</li>
+                                    <li><i class="fal fa-angle-double-right"></i> No board actions found for the years
+                                        we collect data</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="valuable-cases-seciton-main">
+                            <div class="background-check-seciton-head">
+                                Valuable Cases
+                                <span class="head-bottom-underline"></span>
+                            </div>
+                            <div class="valuable-cases-content-seciton" *ngFor="let cases of usersService.lawyerCase">
+                                <div class="valuable-cases-year-section" *ngIf="cases.from_year && cases.to_year">
+                                    <div class="year-one-section-block">
+                                        {{cases.from_year}}-{{cases.to_year}}
+                                        <span class="circle-year-seciton"></span>
+                                    </div>
+                                </div>
+                                <div class="valuable-cases-yearly-content-seciton"
+                                    *ngIf="cases.title && cases.description">
+                                    <div class="valuable-cases-yearly-content-one">
+                                        <div class="valuable-cases-yearly-content-head">
+                                            {{cases.title}}
+                                        </div>
+                                        <div class="valuable-cases-yearly-content-text">
+                                            {{cases.description}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+                        <div class="practice-areas-seciton-main">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="background-check-seciton-head practice-areas-head-seciton">
+                                        Practice Areas
+                                    </div>
+                                    <div class="background-check-seciton-content practice-areas-content-seciton">
+                                        <ul>
+                                            <li><i class="fal fa-angle-double-right"></i>
+                                                <ng-container
+                                                    *ngFor="let practice_areas of usersService.practiceArea; let t = index">
+                                                    {{practice_areas?.practice_area_name}} <span
+                                                        *ngIf="usersService.practiceArea.length > 1 && t< (usersService.practiceArea.length - 1)">,</span>
+                                                </ng-container>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="background-check-seciton-head practice-areas-head-seciton">
+                                        Certifications
+                                    </div>
+                                    <div class="background-check-seciton-content practice-areas-content-seciton">
+                                        <ul *ngFor="let certificate of usersService.lawyerAwards">
+                                            <li><i class="fal fa-angle-double-right"></i>{{certificate.award_name}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="practice-areas-seciton-main work-exp-section-main">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="background-check-seciton-head practice-areas-head-seciton">
+                                        Work Experience
+                                    </div>
+                                    <ng-container
+                                        *ngIf="!usersService.lawyerExperience || usersService.lawyerExperience?.length==0">
+                                        <p class="mt-3 pb-2" style="border-bottom: 1px solid #ddd;">No experience
+                                            history found.
+                                        </p>
+                                    </ng-container>
+                                    <div class="work-exp-content-main"
+                                        *ngFor="let expr of usersService.lawyerExperience">
+                                        <div class="work-exp-content-head" *ngIf="expr.title">
+                                            {{expr.title}}
+                                        </div>
+                                        <div class="work-exp-content-txt" *ngIf="expr.experience_at">
+                                            {{expr.experience_at}}
+                                            <div class="work-exp-content-year">
+                                                {{expr.from_year}} - {{expr.to_year}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="background-check-seciton-head practice-areas-head-seciton">
+                                        Languages
+                                    </div>
+                                    <div class="languages-content-main"
+                                        *ngFor="let lang of usersService.lawyerLanguages">
+                                        <div class="work-exp-content-head">
+                                            {{lang.language_name}}
+                                        </div>
+                                        <div class="work-exp-content-txt languages-seciton-circles">
+                                            <span *ngIf="lang.proficiency === 'high'">
+                                                <!-- Proficiency - {{lang.proficiency}} -->
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span>Native</span>
+                                            </span>
+                                            <span *ngIf="lang.proficiency === 'medium'">
+                                                <!-- Proficiency - {{lang.proficiency}} -->
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton"></span>
+                                                <span class="circle-round-seciton"></span>
+                                                <span class="circle-round-seciton"></span>
+                                                <span class="circle-round-seciton"></span>
+                                                <span class="circle-round-seciton"></span>
+                                                <span>Native</span>
+                                            </span>
+                                            <span *ngIf="lang.proficiency === 'low'">
+                                                <!-- Proficiency - {{lang.proficiency}} -->
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton dart-circle"></span>
+                                                <span class="circle-round-seciton"></span>
+                                                <span class="circle-round-seciton"></span>
+                                                <span class="circle-round-seciton"></span>
+                                                <span class="circle-round-seciton"></span>
+                                                <span class="circle-round-seciton"></span>
+                                                <span class="circle-round-seciton"></span>
+                                                <span class="circle-round-seciton"></span>
+                                                <span>Native</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="education-section-main-block">
+                            <div class="background-check-seciton-head">
+                                Education
+                            </div>
+                            <ng-container
+                                *ngIf="!usersService.lawyerAcademics || usersService.lawyerAcademics?.length==0">
+                                <p class="mt-3 pb-2" style="border-bottom: 1px solid #ddd;">No education history found.
+                                </p>
+                            </ng-container>
+                            <div class="education-content-section-block">
+                                <div class="education-content-section">
+                                    <div *ngFor="let edu of usersService.lawyerAcademics">
+                                        <div class="education-content-section-head work-exp-content-head">
+                                            {{edu.university}}
+                                        </div>
+                                        <div class="education-content-section-desig work-exp-content-txt">
+                                            {{edu.degree}}
+                                        </div>
+                                        <div
+                                            class="education-content-section-year work-exp-content-txt work-exp-content-year">
+                                            {{edu.starting_year}} - {{edu.passing_year}}
+                                        </div>
+                                        <div class="circle-year-seciton"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="law-firms" class="location-section-main-block law-firms-section-main-block page-section">
+                        <div class="details-head-section-main">
+                            Law Firms
+                            <span class="head-bottom-underline"></span>
+                        </div>
+                        <ng-container *ngIf="!usersService.lawyerFirm || usersService.lawyerFirm?.length==0">
+                            <p class="mt-3" style="border-bottom: 1px solid #ddd;">No firms found.</p>
+                        </ng-container>
+                        <div class="location-seciton-map-block">
+                            <!-- <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.30591790535!2d-74.25986424431692!3d40.697149422319455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1578056444472!5m2!1sen!2sin"
+                                allowfullscreen=""></iframe> -->
+                            <div id="map_wrapper" class="mas">
+                                <div id="map_canvas" class="mapping"></div>
+                            </div>
+                            <!-- <iframe allowfullscreen="" immediate='false' [src]="directionData | safe"></iframe> -->
+                        </div>
+                        <div class="addressess-section-main" *ngFor="let firm of usersService.lawyerFirm">
+                            <!-- {{firm | json}} -->
+                            <div class="law-firms-address-section" *ngIf="firm.firm_name && firm.firm_address">
+                                <div class="addressess-head-section">
+                                    {{firm.firm_name}}
+                                </div>
+                                <div class="address-section-common-block">
+                                    <div class="address-line-one">
+                                        {{firm.firm_address}}
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="call-fax-btns">
+                                        <a href="javascript:void(0)">{{firm.mobile_number}} </a><span>|</span>
+                                        <a href="javascript:void(0)">{{firm.fax}} </a><span>|</span>
+                                        <a (click)="getDirection(firm?.latitude, firm?.longitude)">Directions</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="peer-endorsment-seciton-main">
+                        <div class="peer-endorsment-seciton-head">
+                            <div class="details-head-section-main">
+                                Peer Endorsment
+                                <span class="head-bottom-underline"></span>
+                            </div>
+                            <!-- *ngIf="usersService?.lawyerEndorsement?.length === 0" -->
+                            <div class="endorsment-question-seciton">
+                                <a (click)="endorse()" *ngIf="lawyerid && userId!=lawyerid && isUserLawyer">
+                                    Are you an attorney? Endorse this lawyer
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <ng-container
+                                *ngIf="!usersService.lawyerEndorsement || usersService.lawyerEndorsement?.length==0">
+                                <p class="mt-3 pb-2" style="border-bottom: 1px solid #ddd;">No endorsments yet, be the
+                                    first.</p>
+                            </ng-container>
+                        </div>
+                        <div class="endorsment-relation-content"
+                            *ngFor="let endorsment of usersService.lawyerEndorsement">
+                            <div class="endorsment-relation-pic-section">
+                                <img src="{{endorsment?.profile_image}}" alt="" />
+                            </div>
+                            <div class="endorsment-relation-content-section">
+                                <div class="endorsment-relation-name">
+                                    {{endorsment.full_name}}, <span> on {{endorsment.created_at}}</span>
+                                </div>
+                                <div class="endorsment-relationship-section">
+                                    <span>Relationship :</span> {{endorsment.relation}}
+                                </div>
+                                <div class="endorsment-relationship-message">
+                                    {{endorsment.description}}
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                    <div id="review" class="location-section-main-block page-section review-section-main-block"
+                        *ngFor="let reviews of usersService.lawyerDetailsList">
+                        <div class="details-head-section-main">
+                            Reviews
+                            <span class="head-bottom-underline"></span>
+                        </div>
+                        <div class="rating-count-seciton-main">
+                            <div class="rating-count-seciton">
+                                {{reviews.average_review}}
+                            </div>
+                            <div class="star-rating-seciton">
+                                <span *ngFor="let i of counter(5) | slice:0:reviews.average_review">
+                                    <i class="fas fa-star star-active-section"></i>
+                                </span>
+                                <span *ngFor="let i of counter(5) | slice:reviews.average_review:5">
+                                    <i class="fas fa-star"></i>
+                                </span>
+                            </div>
+                            <div class="average-rating-text-seciton">
+                                Average Rating
+                            </div>
+                            <div class="write-review-btn-seciton" *ngIf="lawyerid && lawyerid != userId && reviewFlag">
+                                <a class="btn-list-ur-account" (click)="openReviewModal()" data-toggle="modal"
+                                    data-target="#myModal">Write a Review</a>
+                            </div>
+                        </div>
+                        <div class="reviews-bar-seciton">
+                            <div class="five-star-bar-seciton">
+                                <span>5 Star</span>
+                                <span class="gray-bar-section">
+                                    <span class="yellow-bar-seciton" [ngStyle]="{'width': (reviews?.five_stars) + '%'}">
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="five-star-bar-seciton">
+                                <span>4 Star</span>
+                                <span class="gray-bar-section">
+                                    <span class="yellow-bar-seciton" [ngStyle]="{'width': (reviews?.four_stars) + '%'}">
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="five-star-bar-seciton">
+                                <span>3 Star</span>
+                                <span class="gray-bar-section">
+                                    <span class="yellow-bar-seciton"
+                                        [ngStyle]="{'width': (reviews?.three_stars) + '%'}">
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="five-star-bar-seciton">
+                                <span>2 Star</span>
+                                <span class="gray-bar-section">
+                                    <span class="yellow-bar-seciton" [ngStyle]="{'width': (reviews?.two_stars) + '%'}">
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="five-star-bar-seciton">
+                                <span>1 Star</span>
+                                <span class="gray-bar-section">
+                                    <span class="yellow-bar-seciton" [ngStyle]="{'width': (reviews?.one_star) + '%'}">
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div *ngFor="let rev of reviews.reviews">
+                            <div class="endorsment-relation-content" class="reviews-section-main-block"
+                                *ngIf="rev?.review_from">
+                                <div class="endorsment-relation-pic-section" *ngIf="rev?.profile_image">
+                                    <img src="{{rev?.profile_image}}" alt="" />
+                                </div>
+                                <div class="endorsment-relation-content-section" *ngIf="rev?.review_from">
+                                    <div class="endorsment-relation-name">
+                                        <div class="endorsment-relation-name-head">
+                                            {{rev.review_from}}
+                                        </div>
+                                        <div class="star-rating-seciton">
+                                            <span *ngFor="let i of counter(5) | slice:0:rev.ratings">
+                                                <i class="fas fa-star star-active-section"></i>
+                                            </span>
+                                            <span *ngFor="let i of counter(5) | slice:rev.ratings:5">
+                                                <i class="fas fa-star"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="review-date-seciton">
+                                        {{rev.created_at}}
+                                    </div>
+                                    <div style="width: 600px; word-wrap:break-word;">
+                                        <ng-container *ngIf="rev.readMore">
+                                            {{ rev.review | slice:0:160 }}<span *ngIf="rev.review.length > 160"
+                                                (click)="readmore(rev.review_from)" class="txt-read-more">
+                                                ...Read
+                                                more </span>
+                                        </ng-container>
+                                        <ng-container *ngIf="!rev.readMore">
+                                            {{ rev.review | slice:0:rev.review.length }}<span
+                                                (click)="hidemore(rev.review_from)" class="txt-read-more">
+                                                Read
+                                                less </span>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+             <!---- charu similarLawyers Block--------->
+                    <div id="elite-lawyers" class=" location-section-main-block valuable-cases-seciton-main-block page-section">
+                        <div class="details-head-section-main" *ngIf="usersService.similarLawyers.length > 0">
+                            Elite Lawyers
+                            <span class="head-bottom-underline"></span>
+                        </div>
+                        <div class="elite-lawyers-seciton-block">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4"
+                                    *ngFor="let simLawyer of usersService.similarLawyers">
+                                    <div class="featured-doctor-section">
+                                        <div class="featured-doctor-img-section">
+                                            <div class="featured-doctor-img">
+                                                <img *ngIf="simLawyer?.profile_image == ''" src="assets/images/user.png"
+                                                    alt="" />
+                                                <img *ngIf="simLawyer?.profile_image != ''"
+                                                    src="{{simLawyer?.profile_image}}" alt="" />
+                                                <!-- <img src="{{simLawyer.profile_image}}" alt="" /> -->
+                                            </div>
+                                            <div class="featured-doctor-content-section">
+                                                <div class="featured-doctor-head-section">
+                                                    {{simLawyer.full_name}}
+                                                </div>
+                                                <div class="featured-doctor-address-section">
+                                                    <i class="fas fa-map-marker-alt"></i> {{simLawyer.address}}
+                                                </div>
+
+                                                <ngb-rating readonly="false" *ngIf="simLawyer"
+                                                    [(rate)]="simLawyer.average_ratings" max="5">
+                                                    <ng-template let-fill="fill" let-index="index">
+                                                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                                    </ng-template>
+                                                </ngb-rating>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="featured-doctor-content">
+                                            {{simLawyer.description}}
+                                        </div>
+
+                                        <div class="call-now-btn-section" *ngFor="let prac of simLawyer.practice_area">
+                                            {{prac.practice_area_name}}<br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                    <div class="featured-doctor-section">
+                                        <div class="featured-doctor-img-section">
+                                            <div class="featured-doctor-img">
+                                                <img src="assets/images/doctor-img-2.jpg" alt="" />
+                                            </div>
+                                            <div class="featured-doctor-content-section">
+                                                <div class="featured-doctor-head-section">
+                                                    Lance Fryrear
+                                                </div>
+                                                <div class="featured-doctor-address-section">
+                                                    <i class="fas fa-map-marker-alt"></i> 7480 Ziegler Rd Chattanooga...
+                                                </div>
+
+                                                <div class="featured-doctor-rating">
+                                                    <i class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i>
+                                                    <span>(4.2) Ratings</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="featured-doctor-content">
+                                            when an unknown printer took a galley of type and scrambled
+                                        </div>
+
+                                        <div class="call-now-btn-section">
+                                            Education Lawyer
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                    <div class="featured-doctor-section">
+                                        <div class="featured-doctor-img-section">
+                                            <div class="featured-doctor-img">
+                                                <img src="assets/images/doctor-img-3.jpg" alt="" />
+                                            </div>
+                                            <div class="featured-doctor-content-section">
+                                                <div class="featured-doctor-head-section">
+                                                    Christopher Davis
+                                                </div>
+                                                <div class="featured-doctor-address-section">
+                                                    <i class="fas fa-map-marker-alt"></i> 7480 Ziegler Rd Chattanooga...
+                                                </div>
+
+                                                <div class="featured-doctor-rating">
+                                                    <i class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i>
+                                                    <span>(4.2) Ratings</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="featured-doctor-content">
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                        </div>
+
+                                        <div class="call-now-btn-section">
+                                            Education Lawyer
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                    <div class="featured-doctor-section">
+                                        <div class="featured-doctor-img-section">
+                                            <div class="featured-doctor-img">
+                                                <img src="assets/images/doctor-img.jpg" alt="" />
+                                            </div>
+                                            <div class="featured-doctor-content-section">
+                                                <div class="featured-doctor-head-section">
+                                                    Jason Newcombe
+                                                </div>
+                                                <div class="featured-doctor-address-section">
+                                                    <i class="fas fa-map-marker-alt"></i> 7480 Ziegler Rd Chattanooga...
+                                                </div>
+
+                                                <div class="featured-doctor-rating">
+                                                    <i class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i>
+                                                    <span>(4.2) Ratings</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="featured-doctor-content">
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                                        </div>
+
+                                        <div class="call-now-btn-section">
+                                            Education Lawyer
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                    <div class="featured-doctor-section">
+                                        <div class="featured-doctor-img-section">
+                                            <div class="featured-doctor-img">
+                                                <img src="assets/images/doctor-img-4.jpg" alt="" />
+                                            </div>
+                                            <div class="featured-doctor-content-section">
+                                                <div class="featured-doctor-head-section">
+                                                    Michael Jacobs
+                                                </div>
+                                                <div class="featured-doctor-address-section">
+                                                    <i class="fas fa-map-marker-alt"></i> 7480 Ziegler Rd Chattanooga...
+                                                </div>
+
+                                                <div class="featured-doctor-rating">
+                                                    <i class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i>
+                                                    <span>(4.2) Ratings</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="featured-doctor-content">
+                                            There are many variations of passa ges of Lorem Ipsum available
+                                        </div>
+
+                                        <div class="call-now-btn-section">
+                                            Education Lawyer
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                    <div class="featured-doctor-section">
+                                        <div class="featured-doctor-img-section">
+                                            <div class="featured-doctor-img">
+                                                <img src="assets/images/doctor-img-2.jpg" alt="" />
+                                            </div>
+                                            <div class="featured-doctor-content-section">
+                                                <div class="featured-doctor-head-section">
+                                                    Lance Fryrear
+                                                </div>
+                                                <div class="featured-doctor-address-section">
+                                                    <i class="fas fa-map-marker-alt"></i> 7480 Ziegler Rd Chattanooga...
+                                                </div>
+
+                                                <div class="featured-doctor-rating">
+                                                    <i class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i> <i
+                                                        class="fas fa-star star-active"></i>
+                                                    <span>(4.2) Ratings</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="featured-doctor-content">
+                                            when an unknown printer took a galley of type and scrambled
+                                        </div>
+
+                                        <div class="call-now-btn-section">
+                                            Education Lawyer
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                     <!---- charu similarLawyers Block--------->
+                </div>
+            </div>
+
+            <!-- <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                <div class="details-tab-content-section normal-profile-adds-main">
+                    <div class="normal-profile-ads-section">
+                        <img src="assets/images/normal-profile-ads-img.jpg" alt="" />
+                    </div>
+                    <div class="normal-profile-ads-section">
+                        <img src="assets/images/normal-profile-ads-img1.jpg" alt="" />
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<app-main-footer></app-main-footer>
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>
+
+<shared-modal id="sendReviewForm" class="sendReviewForm" modalTitle="Send Review">
+    <app-review-form (reviewSubmitted)="sendReview($event)"></app-review-form>
+</shared-modal>
+
+<shared-modal id="sendEnquiryForm" modalTitle="Send Enquiry">
+    <app-enquiry-form (formSubmitted)="sendEnquiry($event)"></app-enquiry-form>
+</shared-modal>
+
+<shared-modal id="shareForm" modalTitle="Share Profile">
+    <app-share-form></app-share-form>
+</shared-modal>

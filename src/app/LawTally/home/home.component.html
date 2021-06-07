@@ -1,0 +1,668 @@
+<div class="blank-div-section"></div>
+
+<!-- HEADER -->
+<div id="main"></div>
+<div class="header header-home" id="header">
+    <div class="logo-section">
+        <a routerLink="/">
+            <img src="assets/images/logo.png" alt="" class="main-logo" />
+            <!-- <img src="assets/images/responsive-logo.jpg" alt="" class="responsive-logo" /> -->
+        </a>
+    </div>
+    <div class="menu-section">
+        <ul id="mySidenav">
+            <li class="responsive-show-section" routerLink="/">
+                <img src="assets/images/logo.png" alt="" />
+            </li>
+            <li>
+                <a class="responsive-menu-work" routerLink="/lawyer-directory/listing">Find a Lawyer</a>
+            </li>
+            <li>
+                <a class="responsive-menu-work" href="javascript:void(0)" [routerLink]="['/lawyer-directory/menu-listing-search']" routerLinkActive="router-link-active" >Directory</a>
+            </li>
+            <li class="free-q-a-li-section">
+                <a class="free-q-a-li-a" href="javascript:void(0)">Free Q&A <i
+                        style="margin-left: 7px;font-size: 20px;line-height: 0;" class="fal fa-angle-down"></i></a>
+                <ul class="sub-menu-section-block">
+                    <li>
+                        <div class="row">
+                            <div class="col sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="menu-title-section">Browse questions from others</div>
+                                <div class="row">
+                                    <div class="col sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <ul
+                                            *ngFor="let practice_area of usersService.practiceAreaList | slice:0:usersService.practiceAreaList?.length/2  ">
+                                            <li><a href="javascript:void(0)"
+                                                    (click)=getQuestionListing(practice_area._id)>{{ practice_area.name }}
+                                                    questions</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <ul
+                                            *ngFor="let practice_area of usersService.practiceAreaList | slice:usersService.practiceAreaList?.length/2:usersService.practiceAreaList?.length  ">
+                                            <li><a href="javascript:void(0)"
+                                                    (click)=getQuestionListing(practice_area._id)>{{ practice_area.name }}
+                                                    questions</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="menu-title-section">Read expert articles by lawyers</div>
+                                <div class="row">
+                                    <div class="col sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <ul>
+                                            <li><a href="questions-on-business.html">Business articles</a></li>
+                                            <li><a href="questions-on-business.html">Child custody articles</a></li>
+                                            <li><a href="questions-on-business.html">Criminal defense articles</a></li>
+                                            <li><a href="questions-on-business.html">DUI articles</a></li>
+                                            <li><a href="questions-on-business.html">Divorce articles</a></li>
+                                            <li><a href="questions-on-business.html">Employment articles</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <ul>
+                                            <li><a href="questions-on-business.html">Immigration articles</a></li>
+                                            <li><a href="questions-on-business.html">Landlord or tenant articles</a>
+                                            </li>
+                                            <li><a href="questions-on-business.html">Personal injury articles</a></li>
+                                            <li><a href="questions-on-business.html">Prenuptial agreement articles</a>
+                                            </li>
+                                            <li><a href="questions-on-business.html">Traffic tickets articles</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col sm-4 col-md-4 col-lg-4 col-xl-4">
+                                <div class="menu-title-section">Ask a free question</div>
+                                <div class="row">
+                                    <div class="col sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <ul>
+                                            <li><a routerLink="/lawyer-directory/ask-free-question"
+                                                    href="javascript:void(0)">Ask a free question</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li *ngIf="getToken == null">
+                <a class="responsive-menu-work" routerLink="/lawyer-directory/login">Login</a>
+            </li>
+            <!-- <li *ngIf="getToken != null">
+                <a href="javascript:void(0)" (click)="logout()">Logout</a>
+            </li>
+            <li *ngIf="getToken != null">
+                <a routerLink="/lawyer-directory/dashboard">Dashboard</a>
+            </li> -->
+            <li *ngIf="getData == 'add' && getToken == null">
+                <a class="responsive-menu-work" class="add-doctor-menu" (click)="onGetSubscrption()">Add Lawyer</a>
+            </li>
+            <!-- <li *ngIf="getData == 'edit'">
+                <a class="add-doctor-menu" routerLink="/lawyer-directory/edit-lawyer">Edit Lawyer</a>
+            </li> -->
+            <li *ngIf="getToken != null" class="front-after-login-user">
+                <div class="user-profile-section">
+                    <!-- <ng-container *ngFor="let user of usersService?.lawyerDetailsList"> 
+                    {{user|json}} -->
+                    <span class="user-profile-name">
+                        <span class="user-profile-name-span">{{usersService?.AdminDetails[0]?.full_name}}</span> <i
+                            class="fal fa-angle-down"></i>
+                    </span>
+                    <span class="user-profile-img">
+                        <img *ngIf="!usersService?.AdminDetails[0]?.profile_image || usersService?.AdminDetails[0]?.profile_image == ''"
+                            src="assets/images/user.png" alt="" />
+                        <img *ngIf="usersService?.AdminDetails[0]?.profile_image != ''"
+                            src="{{usersService?.AdminDetails[0]?.profile_image}}" alt="" />
+                    </span>
+                    <!-- </ng-container> -->
+                    <ul class="user-profile-drop-seciton">
+                        <li><a routerLink="/lawyer-directory/dashboard">Dashboard</a></li>
+                        <li><a (click)="getUserProfile()">Profile</a></li>
+                        <li *ngIf="getData == 'add'"><a (click)="onGetSubscrption()">Add Lawyer</a></li>
+                        <li *ngIf="getData == 'edit'"><a routerLink="/lawyer-directory/edit-lawyer">Edit Lawyer</a></li>
+                        <li><a href="javascript:void(0)">Setting</a></li>
+                        <li><a href="javascript:void(0)" (click)="logout()">Logout</a></li>
+                    </ul>
+                </div>
+            </li>
+            <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+        </ul>
+        <span class="menu-icon" (click)="openNav()">&#9776;</span>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<div class="banner-section">
+    <div class="banner-content-section">
+        <div class="container">
+            <div class="banner-content-head">
+                Find the right lawyers <br> are ready to help.
+            </div>
+            <div class="find-doctor-search-section">
+                <div class="find-doctor-label-seciton">
+                    Find A Lawyers
+                </div>
+                <div class="find-doctor-drop-seciton">
+                    <div class="select-location-drop-section form-group-section">
+                        <input ngx-google-places-autocomplete id="firm-address" class="inputAddress" type="text"
+                            name="firm_address" #firm_address="ngModel" maxlength="100" [(ngModel)]="googleAddress"
+                            required (onAddressChange)="handleAddressChange($event)" />
+                        <input type="hidden" name="latitude" #latitude1="ngModel" [(ngModel)]="latitude" />
+                        <input type="hidden" name="longitude" #longitude1="ngModel" [(ngModel)]="longitude" />
+                    </div>
+                    <div class="search-speciality-section">
+                        <input type="text" placeholder="Search Lawyers" [(ngModel)]="searchlawyers" />
+                    </div>
+                    <div class="search-now-btn-section">
+                        <a (click)="SearchButton()" href="javascript:void(0)" class="btn-search-now">
+                            Search Now </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="banner-links-section">
+                <ul>
+                    <ng-container *ngFor="let practice of usersService.practiceAreaList; let i=index">
+                        <li *ngIf="i < 6">
+                            <a (click)="gotoListing(practice._id)">
+                                <span *ngIf="i === 0" class="banner-links-icon dentist-icon-img "></span>
+                                <span *ngIf="i === 1" class="banner-links-icon ent-specialist-icon-img"></span>
+                                <span *ngIf="i === 2" class="banner-links-icon nephrologist-icon-img"></span>
+                                <span *ngIf="i === 3" class="banner-links-icon neurologist-icon-img"></span>
+                                <span *ngIf="i === 4" class="banner-links-icon orthopedic-icon-img"></span>
+                                <span *ngIf="i === 5" class="banner-links-icon surgeon-icon-img"></span>
+                                <span>
+                                    {{(practice.name.length>12)? (practice.name | slice:0:12)+'..':(practice.name) }}</span>
+                            </a>
+                        </li>
+                    </ng-container>
+
+                    <!-- <li>
+                        <a href="javascript:void(0)" routerLink="/lawyer-directory/listing">
+                            <span class="banner-links-icon dentist-icon-img"></span>
+                            <span>Civil Rights</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" routerLink="/lawyer-directory/listing">
+                            <span class="banner-links-icon nephrologist-icon-img"></span>
+                            <span>Bankruptcy</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" routerLink="/lawyer-directory/listing">
+                            <span class="banner-links-icon neurologist-icon-img"></span>
+                            <span>Corporate</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" routerLink="/lawyer-directory/listing">
+                            <span class="banner-links-icon orthopedic-icon-img"></span>
+                            <span>Criminal</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" routerLink="/lawyer-directory/listing">
+                            <span class="banner-links-icon surgeon-icon-img"></span>
+                            <span>Education </span>
+                        </a>
+                    </li>
+                     -->
+                    <li>
+                        <a href="javascript:void(0)" routerLink="/lawyer-directory/listing">
+                            <span class="banner-links-icon view-all-icon-img"></span>
+                            <span>View All</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="are-u-five-star-main">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-7 col-xl-7">
+                <div class="are-you-five-star-head">
+                    Are you a five-star<br> lawyer?
+                </div>
+                <div class="are-you-five-star-semihead">
+                    Register Now And Reach Thousands Of Clients
+                </div>
+                <div class="are-you-five-star-content">
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                    laoreet dolore magna aliquam erat volutpat wisi enim ad minim veniam quis nostrud.
+                    <ul>
+
+
+                        <li> <i class="far fa-check-circle"></i> Attract and engage new lawyer</li>
+
+                        <li><i class="far fa-check-circle"></i> Build and strengthen your online reputation</li>
+
+                        <li><i class="far fa-check-circle"></i> Deliver a premium experience Clients love</li>
+                    </ul>
+                </div>
+                <div class="list-ur-account-btn">
+                    <a class="btn-list-ur-account" href="javascript:void(0)">List your Account on LawTally</a>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6 col-md-6 col-lg-5 col-xl-5">
+                <div class="are-u-five-star-img-section">
+                    <img src="assets/images/are-u-five-star-doctor-img.png" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="featured-doctor-main-seciton">
+    <div class="container">
+        <div class="featured-doctor-head-section-main">
+            Lawyers Near You
+            <a class="featured-doctor-view-all" href="javascript:void(0)" routerLink="/lawyer-directory/listing">View
+                All</a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3" *ngFor="let lawyer of LawyersNearMe">
+                <div class="featured-doctor-section" (click)="showMeLawyer(lawyer)">
+                    <div class="featured-doctor-img-section">
+                        <div class="featured-doctor-img">
+                            <img [src]="lawyer?.profile_image" alt="" />
+                        </div>
+                        <div class="featured-doctor-content-section">
+                            <div class="featured-doctor-head-section">
+                                {{lawyer.full_name}}
+                            </div>
+                            <div class="featured-doctor-address-section">
+                                <i class="fas fa-map-marker-alt"></i> {{lawyer.firm_address}}
+                            </div>
+                            <div class="listing-doctor-rating" *ngIf="lawyer">
+                                <div class="featured-doctor-rating" style="float: none;">
+                                    <span *ngFor="let i of counter(5) | slice:0:lawyer.average_ratings">
+                                        <i class="fas fa-star active-star"></i>
+                                    </span>
+                                    <span *ngFor="let i of counter(5) | slice:lawyer.average_ratings:5">
+                                        <i class="fas fa-star"></i>
+                                    </span>
+                                    <span>({{lawyer.average_ratings}}) Ratings</span>
+                                </div>
+                            </div>
+                            <!-- <div class="featured-doctor-rating">
+                                <ngb-rating readonly="false" *ngIf="lawyer" [(rate)]="lawyer.average_ratings" max="5">
+                                    <ng-template let-fill="fill" let-index="index">
+                                        <span class="star" [class.filled]="fill === 100">&#9733;</span>
+                                    </ng-template>
+                                </ngb-rating>
+                                <span>({{lawyer.average_ratings}}) Ratings</span>
+                            </div> -->
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="featured-doctor-content" [innerHTML]='lawyer.description'>
+                    </div>
+
+                    <div class="call-now-btn-section">
+                        Education Lawyer
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="find-doctor-by-location-main">
+    <div class="container">
+        <div class="find-doctor-by-head-one">
+            Find Lawyer by
+        </div>
+        <div class="find-doctor-by-head-two">
+            Browse by Location
+        </div>
+        <div data-responsive-tabs>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#one">By City</a>
+                    </li>
+                    <li>
+                        <a href="#two">By State</a>
+                    </li>
+                    <li>
+                        <a href="#three">By Practice Areas</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="content">
+                <section id="one">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2" *ngFor="let get of cityList">
+                            <div class="city-name-section" (click)="selectCity(get)">
+                                {{get.city_name}}
+                            </div>
+                           
+                        </div>
+                     
+                    </div>
+                </section>
+                <section id="two">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2" *ngFor="let get of stateList">
+                            <div class="city-name-section" (click)="selectState(get)">
+                                {{get.state_name}}
+                            </div>
+                           
+                        </div>
+                   
+                    </div>
+                </section>
+                <section id="three">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 col-lg-2" *ngFor="let get of practiceAreaList">
+                            <div class="city-name-section" (click)="selectPracticArea(get)">
+                                {{get.name}}
+                            </div>
+                   
+                         
+                        </div>
+                    
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="how-it-work-section-main">
+    <div class="find-doctor-by-head-two">
+        How It Work
+    </div>
+    <div class="choose-what-you-want-main">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 p-r-0">
+                <div class="choose-what-you-want-points">
+                    <div class="points-what-you-want point-choose-what-to-do active">
+                        <div class="points-what-you-want-txt">
+                            <div class="points-what-img what-to-do-img"></div>
+                            <div class="points-what-contnet">
+                                Choose What <br>To Do
+                            </div>
+                        </div>
+                    </div>
+                    <div class="points-what-you-want point-find-what-you">
+                        <div class="points-what-you-want-txt">
+                            <div class="points-what-img find-what-you-img"></div>
+                            <div class="points-what-contnet">
+                                Find What You <br>Want
+                            </div>
+                        </div>
+                    </div>
+                    <div class="points-what-you-want point-stay-with">
+                        <div class="points-what-you-want-txt">
+                            <div class="points-what-img stay-with-img"></div>
+                            <div class="points-what-contnet">
+                                Stay With The <br>Lawyer
+                            </div>
+                        </div>
+                    </div>
+                    <div class="points-what-you-want point-happy-customer">
+                        <div class="points-what-you-want-txt">
+                            <div class="points-what-img happy-customer-img"></div>
+                            <div class="points-what-contnet">
+                                Happy Customer
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 p-l-0">
+                <div class="how-it-work-content">
+                    <div class="choose-what-to-do-content point-choose-what-content active">
+                        <div class="choose-what-to-head">Choose What You Want <span
+                                class="bottom-border-section"></span></div>
+                        <div class="choose-what-to-txt">Looking to adopt a child, seeking finance for your business,
+                            wanting to appeal against a trial courts order, or stuck in a drunk driving case?</div>
+                    </div>
+                    <div class="choose-what-to-do-content point-find-what-you-content">
+                        <div class="choose-what-to-head">Find What You Want <span class="bottom-border-section"></span>
+                        </div>
+                        <div class="choose-what-to-txt">Looking to adopt a child, seeking finance for your business,
+                            wanting to appeal against a trial courts order, or stuck in a drunk driving case?</div>
+                    </div>
+                    <div class="choose-what-to-do-content point-stay-with-content">
+                        <div class="choose-what-to-head">Stay With The Lawyer <span
+                                class="bottom-border-section"></span></div>
+                        <div class="choose-what-to-txt">Looking to adopt a child, seeking finance for your business,
+                            wanting to appeal against a trial courts order, or stuck in a drunk driving case?</div>
+                    </div>
+                    <div class="choose-what-to-do-content point-happy-customer-content">
+                        <div class="choose-what-to-head">Happy Customer <span class="bottom-border-section"></span>
+                        </div>
+                        <div class="choose-what-to-txt">Looking to adopt a child, seeking finance for your business,
+                            wanting to appeal against a trial courts order, or stuck in a drunk driving case?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="are-u-doctor-main-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="are-u-doctor-content-main">
+                    <div class="are-u-doctor-head">
+                        Are you a Lawyer?
+                    </div>
+                    <div class="are-u-doctor-content">
+                        It is a long established fact that a reader will be distracted by the readable content of a page
+                        when looking at its layout.
+                    </div>
+                    <div class="list-ur-account-btn">
+                        <a class="btn-list-ur-account" (click)="openClaimProfile()">Claim your free profile</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="are-u-doctor-img">
+                    <img src="assets/images/are-u-doctor-img.jpg" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-main-seciton">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                    <div class="footer-menus-main">
+                        <div class="footer-manu-head">
+                            <h4>For Consumer</h4> <span><i class="fal fa-angle-down"></i></span>
+                        </div>
+                        <div class="footer-manu-links">
+                            <ul>
+                                
+                                <li><a routerLink="/lawyer-directory/work-consumer">How it work</a></li>
+                                <li><a routerLink="/lawyer-directory/lawyer-enquiry">Lawyer enquiry</a></li>
+                                <li><a href="javascript:void(0)">Legal matching </a></li>
+                                <li><a href="javascript:void(0)">Hire top lawyer </a></li>
+                                <li><a href="javascript:void(0)">Urgent legal help</a></li> 
+                                <li><a routerLink="/lawyer-directory/ask-free-question">Ask free question</a></li>
+                                <li><a href="javascript:void(0)">Browse legal guide</a></li>
+                                <li><a href="javascript:void(0)">Review your lawyer</a></li>
+                                <li><a href="javascript:void(0)">Calculators</a></li>
+
+                                <!-- <li><a routerLink="/lawyer-directory/signup">Sign Up</a></li>
+                                
+                                <li><a href="javascript:void(0)">Law Firms</a></li>
+                                <li><a href="javascript:void(0)">Affiliated Law Firms </a></li>
+                                <li><a href="javascript:void(0)">Affiliated Lawyers</a></li>
+                                <li><a href="javascript:void(0)">Reputed Lawyers</a></li>
+                                <li><a href="javascript:void(0)">Urgent Concierge</a></li>
+                              
+                                
+                                <li><a routerLink="/lawyer-directory/see-all-questions">Browse Questions from others</a>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                    <div class="footer-menus-main">
+                        <div class="footer-manu-head">
+                            <h4>For lawyer</h4> <span><i class="fal fa-angle-down"></i></span>
+                        </div>
+                        <div class="footer-manu-links">
+                            <ul>
+                                <li><a routerLink="/lawyer-directory/work-lawyer">How it work</a></li>
+                                <li><a href="javascript:void(0)">Claim your profile</a></li>
+                                <li><a href="javascript:void(0)">Grow your practice</a></li>
+                                <li><a href="javascript:void(0)">Answer questions </a></li>
+                                <li><a href="javascript:void(0)">Write legal guide</a></li>
+                                <li><a href="javascript:void(0)">Affiliated lawyer</a></li>
+                                <li><a href="javascript:void(0)">Lawyer marketing</a></li>
+                                <li><a href="javascript:void(0)">Create website</a></li>
+                                <!-- <li><a routerLink="/lawyer-directory/login">Log In to Your Account</a></li> -->
+                               
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                    <div class="footer-menus-main">
+                        <div class="footer-manu-head">
+                        <h4>About Us</h4> <span><i class="fal fa-angle-down"></i></span>
+                        </div>
+                        <div class="footer-manu-links">
+                            <ul>
+                                <li><a href="javascript:void(0)">Our company</a></li>
+                                <li><a routerLink="/lawyer-directory/blog">Blog</a></li>
+                                <li><a href="javascript:void(0)">Press</a></li>
+                                <li><a href="javascript:void(0)">Brand kit</a></li>
+                                <li><a href="javascript:void(0)">Support</a></li>
+                                <li><a href="javascript:void(0)">Career</a></li>
+                                <li><a href="javascript:void(0)">Partner with us</a></li>
+                                <!-- <li><a href="javascript:void(0)">Contact Us</a></li>
+                                <li><a href="javascript:void(0)">User Agreement</a></li>
+                                <li><a href="javascript:void(0)">Our Company</a></li>
+                                <li><a href="javascript:void(0)">Press Room</a></li>
+                                <li><a href="javascript:void(0)">Careers</a></li>
+                                <li><a href="javascript:void(0)">FAQs</a></li>
+                                <li><a href="javascript:void(0)">Site Map</a></li>
+                                <li><a href="javascript:void(0)">Advertising Policy</a></li>
+                                <li><a routerLink="/lawyer-directory/blog">Blog</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                    <div class="footer-menus-main">
+                        <div class="footer-manu-head">
+                            <h4>Weird Stuff</h4> <span><i class="fal fa-angle-down"></i></span>
+                        </div>
+                        <div class="footer-manu-links">
+                            <ul>
+                                <li><a href="javascript:void(0)">Comenity guideline</a></li>
+                                <li><a href="javascript:void(0)">Terms & condition</a></li>
+                                <li><a href="javascript:void(0)">Privacy policy</a></li>
+                                <li><a href="javascript:void(0)">Do not sell my data</a></li>
+                                <li><a href="javascript:void(0)">Gdpr</a></li>
+                                <li><a href="javascript:void(0)">Sitemap</a></li>
+                            
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-newsletter-section">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-5 col-xl-5">
+                        <div class="footer-newsletter">
+                            <div class="footer-newsletter-head">
+                                Newsletter 
+                            </div>
+                            <div class="footer-newsletter-form">                                
+                                <form #newsletterform="ngForm" id="newsletterform" data-parsley-validate>
+                                    <div class="newsletter-input-section">
+                                        <input type="email" name="email" id="email" #email="ngModel" ngModel
+                                            placeholder="Your Email" data-parsley-validate="true"
+                                            data-parsley-required-message="* This field is required." required />
+
+                                        <button type="submit" (click)="onsubmitNewsletter(newsletterform)"><i
+                                                class="fas fa-caret-right"></i></button>
+                                    </div>
+                                </form>
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                        <div class="footer-newsletter choose-region-main">
+                            <div class="footer-newsletter-head">
+                                Choose Region 
+                            </div>
+                            <div class="footer-newsletter-form"> 
+                                <div class="region-select-drop-main">
+                                    <ng-select id="searchbycountry" [items]="getcountryList" name="searchbycountry" #searchbycountry="ngModel" ngModel [(ngModel)]="selcountry" [ngModelOptions]="{ standalone: true }" bindLabel="name" bindValue="id" [searchable]="true" [clearable]="false" (change)="setcountryvalfunc($event.id);">
+                                    </ng-select>
+                                    <!-- <select class="region-select-drop">
+                                        <option>United States</option>
+                                        <option>United States</option>
+                                        <option>United States</option>
+                                    </select> -->
+                                    <button class="choose-region-btn" type="button" (click)="searchbycountryfunc();"><i class="fas fa-caret-right"></i></button>
+                                    <!-- <span class="select-arrow-down"><i class="fas fa-caret-down"></i></span> -->
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
+                        <div class="newsletter-section-main social-media-section-block">
+                            <ul>
+                                <li><a class="facebook-social-icon" href="javascript:void(0)"><i
+                                            class="fab fa-facebook-f"></i></a></li>
+                                <li><a class="twitter-social-icon" href="javascript:void(0)"><i
+                                            class="fab fa-twitter"></i></a></li>
+                                <li><a class="youtube-social-icon" href="javascript:void(0)"><i
+                                            class="fab fa-youtube"></i></a></li>
+                                <li><a class="instagram-social-icon" href="javascript:void(0)"><i
+                                            class="fab fa-instagram"></i></a></li>
+                                <li><a class="google-plus-social-icon" href="javascript:void(0)"><i
+                                            class="fab fa-google-plus-g"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-section-block">
+            <div class="container">
+                <ul>
+                    <li>&copy; Copyright 2020. All Rights reserved by LawTally</li>
+                    <li>|</li>
+                    <li><a routerLink="/lawyer-directory/privacy-and-policy">Privacy policy</a></li>
+                    <li>|</li>
+                    <li><a routerLink="/lawyer-directory/terms-and-conditions">Terms &amp; conditions</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>
+
+<shared-modal id="whereareu" modalTitle="Where are you?">
+    <input class="form-control" placeholder="Search a place..." ngx-google-places-autocomplete id="whereareu-address"
+        type="text" name="whereareu_address" #whereareu_address="ngModel" maxlength="100" [(ngModel)]="location"
+        required (onAddressChange)="handleAddressChange2($event)" />
+</shared-modal>

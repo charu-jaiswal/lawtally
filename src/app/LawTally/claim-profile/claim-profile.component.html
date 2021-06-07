@@ -1,0 +1,108 @@
+<div class="blank-div-section"></div>
+
+<!-- HEADER -->
+<app-main-header></app-main-header>
+
+<div class="container"> 
+    <div class="cliam-profile-details">
+        <h2 class="lawyers-name-list-head">Claim your free Lawtally profile</h2>                
+        <div class="cliam-profile-list-breadcurmb">
+            <ul>
+                <li><a routerLink="/">Home</a><span><i class="fal fa-angle-right"></i></span></li>
+                <!-- <li><a href="javascript:void(0)">Browse Questions from others</a><span><i class="fal fa-angle-right"></i></span></li> -->
+                <li><a routerLink="/lawyer-directory/cliam-profile">Claim-Profile</a><span><i class="fal fa-angle-right"></i></span></li>
+                <li>Claim your free</li>
+            </ul>
+        </div>  
+        <div class="clearfix"></div>      
+    </div>
+    <div class="row">        
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
+            <div class="business-details-section-block claim-profile-details-main" *ngIf="lawyerProfile">
+                <!-- <div class="doctor-listing-section-main"> -->
+                <div class="claim-img-section">
+                    <img [src]="lawyerProfile?.profile_image" alt="" />
+                </div>
+                <div class="doctor-information-section">
+                    <div class="listing-doctor-name">
+                        <span style="cursor: pointer">{{lawyerProfile.full_name}}</span>
+                    </div>
+                    <div class="listing-doctor-speficality-section" *ngIf="lawyerProfile.practice_area.length">
+                        <i class="fas fa-university"></i>
+                        <ng-container *ngFor="let prac of lawyerProfile.practice_area;let idx=index">
+                            {{prac.practice_area_name}}
+                            <ng-container *ngIf="idx != lawyerProfile.practice_area.length-1">
+                                {{', '}}
+                            </ng-container>
+                        </ng-container>
+                    </div><br>
+                    <div class="listing-doctor-speficality-section">
+                        <i class="fas fa-map-marker-alt"></i> {{lawyerProfile.address}}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <!-- </div> -->
+                <div class="check-box">
+                    <p>
+                        <input id="filled-in-box" [(ngModel)]="chked" class="filled-in" type="checkbox">
+                        <label for="filled-in-box">I confirm that and I accept LawTally’s <a
+                                href="javascript:void(0)">Terms of Use</a> and <a href="javascript:void(0)">Privacy
+                                Policy</a></label>
+                    </p>
+                </div>
+                <div class="list-ur-account-btn">
+                    <a class="btn-claim-profile-seciton" (click)="openClaimMethod()">Continue</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-4">
+            <h6><b>Add or Claim Your Listing, to Enhance Business Opportunities With Us</b></h6>
+            <h6>Sign up with LawTally, add relevant information, write about your work giving as much information as
+                possible, add your photos and/or videos, choose your practice area, you could add links of your own
+                website and social media accounts to enhance your profile.
+            </h6>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-4">
+            <h6><b>Get Discovered By Visitors & Generate Leads</b></h6>
+            <h6>Upon confirmation, your listing will appear on the website and will be available for search to visitors.
+                Visitors can now search you using criteria such as lawyer category or city or state. A badge will be
+                added to your listing to mark it as official.
+            </h6>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mt-4">
+            <h6><b>Grow Your Business with Us & Feel the difference...</b></h6>
+            <h6>Customer's will discover you on LawTally and contact you with their issues. It is your job from here to
+                give them satisfactory results and earn positive reviews from them. More positive reviews mean more
+                visibility and more business.
+            </h6>
+        </div><br>
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
+            <h4><b>How it Works</b></h4>
+            <!-- <h6>Customer's will discover you on LawTally and contact you with their issues. It is your job from here to
+                give them satisfactory results and earn positive reviews from them. More positive reviews mean more
+                visibility and more business.
+            </h6> -->
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
+            <h5><b>1 Add or Claim Your Listing, to Enhance Business Opportunities With Us</b></h5>
+            <h6 class="ml-2">Sign up with LawTally, add relevant information, write about your work giving as much
+                information as
+                possible, add your photos and/or videos, choose your practice area, you could add links of your own
+                website and social media accounts to enhance your profile.</h6>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-4">
+            <h5><b>2 Get Discovered By Visitors & Generate Leads</b></h5>
+            <h6 class="ml-2">Upon confirmation, your listing will appear on the website and will be available for search
+                to visitors. Visitors can now search you using criteria such as lawyer category or city or state. A
+                badge will be added to your listing to mark it as official.</h6>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-4 mb-4">
+            <h5><b>3 Grow Your Business with Us & Feel the difference...</b></h5>
+            <h6 class="ml-2">Customer's will discover you on LawTally and contact you with their issues. It is your job
+                from here to give them satisfactory results and earn positive reviews from them. More positive reviews
+                mean more visibility and more business.</h6>
+        </div>
+    </div>
+</div>
+<!-- FOOTER -->
+<app-main-footer></app-main-footer>

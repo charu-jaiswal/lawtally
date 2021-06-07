@@ -1,0 +1,91 @@
+<div class="listing-details-banner-section-main listing-details-normal-profile">
+
+    <!-- HEADER -->
+    <app-main-header></app-main-header>
+
+    <div class="blank-div-section"></div>
+
+    <div class="container">
+        <div class="google-adds-section-block">
+            <img src="assets/images/google-ad-img.jpg" alt="" />
+        </div>
+    </div>
+
+    <div id="overview" class="lawyer-info-section-main page-section">
+        <div class="container" *ngFor="let user of usersService.AdminDetails">
+            <div class="breadcurm-section-main">
+                <div class="breadcurm-txt-section">
+                    <ul>
+                        <li routerLink="/"><span>Home</span> <span class="breadcurm-arrow-section"><i
+                                    class="fal fa-angle-right"></i></span></li>
+                        <li><span>Find a Lawyer</span> <span class="breadcurm-arrow-section"><i
+                                    class="fal fa-angle-right"></i></span></li>
+                        <li><span>Criminal Defense</span> <span class="breadcurm-arrow-section"><i
+                                    class="fal fa-angle-right"></i></span></li>
+                        <li><span>Christopher Sorenson</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="lawyer-info-section">
+                <div class="lawyer-img-section">
+                    <img *ngIf="user?.profile_image == ''" src="assets/images/user.png"
+                        style="width: 140px;height: 180px;" alt="" />
+                    <img *ngIf="user?.profile_image != ''" src="{{user?.profile_image}}"
+                        style="width: 140px;height: 180px;" alt="" />
+
+                    <div class="lawyer-social-links-section">
+                        <ul>
+                            <li><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="javascript:void(0)"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="javascript:void(0)"><i class="fab fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="img-lable-tag-section">
+                        Elite
+                    </div>
+                </div>
+                <div class="lawyer-info-text-section">
+                    <div class="lawyer-info-name">
+                        {{user.full_name}} <img src="assets/images/verify-icon-img.png" alt="" />
+                    </div>
+                    <div class="lawyer-info-rating-section">
+                        <i class="fas fa-star star-active-section"></i>
+                        <i class="fas fa-star star-active-section"></i>
+                        <i class="fas fa-star star-active-section"></i>
+                        <i class="fas fa-star star-active-section"></i>
+                        <i class="fas fa-star star-active-section"></i>
+                        <span>2 Review</span>
+                    </div>
+                    <div class="lawyer-info-address-section">
+                        <i class="fas fa-map-marker-alt"></i>{{user.address}}
+                    </div>
+                    <div class="lawyer-info-email-website-section">
+                        <ul>
+                            <li><i class="fas fa-envelope"></i>{{user.email}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="normal-profile-send-enquiry">
+                <div class="send-enquiry-share-btns share-top-section">
+                    <a href="javascript:void(0)"><i class="fas fa-share-alt"></i> Share</a>
+                    <a href="javascript:void(0)"><i class="fal fa-heart"></i> Favorite</a>
+                </div>
+                <div class="contact-numner-new-client">
+                    <a class="listing-doctor-action-btn" href="javascript:void(0)"><i
+                            class="fas fa-phone"></i>{{user.mobile_number}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+</div>
+
+<!-- FOOTER -->
+<app-main-footer></app-main-footer>
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

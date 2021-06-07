@@ -1,0 +1,87 @@
+<form [formGroup]="reviewForm" name="reviewForm">
+    <div class="form-group reviewrating-stars">
+        Select a rating for your lawyer<br>
+        <ngb-rating formControlName="rating" [(rate)]="currentRate" max="5" (rateChange)="rate($event)">
+            <ng-template let-fill="fill" let-index="index">
+                <span class="star" [class.filled]="fill === 100">&#9733;</span>
+            </ng-template>
+        </ngb-rating>
+        <div class="ratingtypename" *ngIf="ratingtype">
+            {{ratingtype}}
+        </div>
+        <div *ngIf="reviewForm.get('rating').status==='INVALID'" class="error-msg">
+            <ng-container *ngIf="submitted==true">
+                * Rating is required.
+            </ng-container>
+        </div>
+    </div>
+
+    <!-- <div class="form-group form-group-section">
+        Enter Your Description<br>
+        <input type="text" formControlName="review" required>
+        <div *ngIf="reviewForm.get('review').status==='INVALID'" class="error-msg">
+            <ng-container *ngIf="submitted==true">
+                * Description is required.
+            </ng-container>
+        </div>
+    </div> -->
+
+    <div class="form-group form-group-section">
+        Enter Your Description<br>
+        <textarea formControlName="review" maxlength="1000" required></textarea>
+        <div *ngIf="reviewForm.get('review').status==='INVALID'" class="error-msg">
+            <ng-container *ngIf="submitted==true">
+                * Description is required.
+            </ng-container>
+
+        </div>
+        <div *ngIf="reviewForm.get('review').status==='VALID'" class="error-msg">
+            <ng-container *ngIf="descLengthMin">
+                * Minimum 50 Characters Required.
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="form-group form-group-section drop-section-icon-main">
+        Was this just a consultation or did you hire this attorney?<br>
+        <ng-select [clearable]="false" [items]="consultation" bindLabel="name" bindValue="_id"
+            formControlName="review_type" required>
+        </ng-select>
+        <span class="drop-section-icon"><i class="fal fa-angle-down"></i></span>
+        <div *ngIf="reviewForm.get('review_type').status==='INVALID'" class="error-msg">
+            <ng-container *ngIf="submitted==true">
+                * consultation is required.
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="form-group form-group-section drop-section-icon-main">
+        Would you recommend this lawyer?<br>
+        <ng-select [clearable]="false" [items]="recommend" bindLabel="name" bindValue="_id"
+            formControlName="recommended" required>
+        </ng-select>
+        <span class="drop-section-icon"><i class="fal fa-angle-down"></i></span>
+        <div *ngIf="reviewForm.get('recommended').status==='INVALID'" class="error-msg">
+            <ng-container *ngIf="submitted==true">
+                * Recommendation is required.
+            </ng-container>
+        </div>
+    </div>
+
+    <!-- <div class="form-group form-group-section col-md-6">
+        Post your review anonymously?<br>
+        <ng-select [clearable]="false" [items]="anonymousData" bindLabel="name" bindValue="_id"
+            formControlName="anonymous" required>
+        </ng-select>
+        <div *ngIf="reviewForm.get('anonymous').status==='INVALID'" class="error-msg">
+            <ng-container *ngIf="submitted==true">
+                * Review Type is required.
+            </ng-container>
+        </div>
+    </div> -->
+</form>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary" (click)="onSubmit(reviewForm)">Save</button>
+    <!-- <button type="button" class="btn btn-outline-danger" (click)="onDiscard()">Discard</button> -->
+</div>

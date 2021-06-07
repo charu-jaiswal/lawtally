@@ -1,0 +1,19 @@
+.gender-radio-secion-main .check{top: 0px;}
+.gender-radio-secion-main label{padding-left: 30px;font-size: 15px;color: #333333;margin-top: 0;margin-bottom: 15px;}
+.active-star{color: #ffb321 !important;}
+.txt-read-more{
+    color: #ff3b4b;
+    cursor: pointer;
+}
+.star[_ngcontent-toi-c6] {
+    font-size: 30px !important;
+    color: #ffb321 !important ;
+}
+.featured-doctor-rating span {
+    font-size: 20px !important;
+}
+.left-star {
+    color: #ffb321 !important;
+    font-size: 32px !important;
+    
+}

@@ -1,0 +1,18 @@
+.hg-profile-button {
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;    
+    line-height: 20px;
+    outline: none;
+    -webkit-transition: background-color .2s,-webkit-box-shadow .2s;
+    transition: background-color .2s,-webkit-box-shadow .2s;
+    transition: box-shadow .2s,background-color .2s;
+    transition: box-shadow .2s,background-color .2s,-webkit-box-shadow .2s;
+    white-space: nowrap;
+    font-size: 16px;    
+    padding: .55rem 1.25rem .65rem;    
+    background: #ff3b4b;
+    border: 1px solid #ff3b4b;
+    color: #fff;
+}
+.hg-profile-button:hover{background: transparent;color: #ff3b4b}

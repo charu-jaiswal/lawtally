@@ -1,0 +1,4 @@
+.card{max-width: 498px !important;margin-left: auto !important;margin-right: auto !important;padding: 15px !important;padding-bottom: 10px !important;margin-top: 150px !important;margin-bottom: 90px !important;z-index: 9999 !important;}
+.card > hr{margin-top: 5px;}
+.enable{background: white;}
+.black{color: black !important;}

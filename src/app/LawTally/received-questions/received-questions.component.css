@@ -1,0 +1,42 @@
+.no-records-found-section {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  height: 200px;
+  text-align: center;
+  font-size: 18px;
+  color: red;
+  margin-top: 20px;
+}
+
+.no-records-found-txt {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+
+.inquiries-reply-btn{
+  position: absolute;
+    top: 0;
+    /* bottom: 0; */
+    right: 25px;
+    height: 32px;
+    width: 103px;
+    background: #ff3b4b;
+    color: white !important;
+    margin: auto;
+    text-align: center;
+    padding-top: 6px;
+    border: 1px solid #ff3b4b;
+    display: block;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.inquiries-reply-btn:hover {
+  background: 0 0;
+  color: #ff3b4b !important;
+}

@@ -1,0 +1,116 @@
+<div class="inner-page-middle-seciton-main">
+    <div class="black-bg-section"></div>
+
+    <app-sidebar></app-sidebar>
+
+    <div class="inner-page-middle-seciton">
+
+        <app-dashboard-header></app-dashboard-header>
+
+        <div class="dashboard-page-content-seciton trassaction-history-page-seciton">
+            <div class="notification-head-section-main">
+                <div class="notification-head-section">
+                    Transaction History
+                </div>
+                <div class="breadcurm-section-block">
+                    <ul>
+                        <li><a routerLink="/lawyer-directory/dashboard">Home</a><span><i
+                                    class="fal fa-angle-right"></i></span></li>
+                        <li>Transaction History</li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="trassaction-history-table-seciton">
+                <div class="search-filter-section search-filter-section-transaction">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 p-r-10 search-filter-col">
+                            <div class="form-group">
+                                <label class="">From</label>
+                                <input type="text" id="fromdatepicker" name="fromdate" placeholder="Select Date"
+                                    class="form-control" style="cursor: pointer;">
+                                <span class="calendar-icon-seciton"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 p-r-10 p-l-10 search-filter-col">
+                            <div class="form-group">
+                                <label class="">To</label>
+                                <input type="text" name="todate" id="todatepicker" placeholder="Select Date"
+                                    class="form-control" style="cursor: pointer;">
+                                <span class="calendar-icon-seciton"><i class="far fa-calendar-alt"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-2 p-r-10 p-l-10 search-filter-col">
+                            <div class="form-group">
+                                <label class="">Select</label>
+                                <select class="form-control" (change)="getselecttype($event)">
+                                    <option>Select Type</option>
+                                    <option value="card">Card</option>
+                                    <option value="stripe">Stripe</option>
+                                </select>
+                                <span class="select-arrow-section"><i class="fas fa-caret-down"></i> </span>
+                            </div>
+                        </div>
+                        <div
+                            class="col-sm-12 col-md-3 col-lg-3 col-xl-2 p-l-10 search-filter-col search-filter-col-btn-section">
+                            <div class="form-group">
+                                <label class="">&nbsp;</label>
+                                <a class="btn-list-ur-account" href="javascript:void(0)" (click)="apply_filters()">Apply
+                                    Filters</a>
+                            </div>
+                        </div>
+                        <div
+                            class="col-sm-12 col-md-3 col-lg-3 col-xl-2 p-l-10 pull-right search-filter-col search-filter-col-btn-section">
+                            <div class="form-group">
+                                <label class="">&nbsp;</label>
+                                <a class="btn-list-ur-account export-file-btn-section" href="javascript:void(0)"
+                                    (click)="exportAsXLSX()">Export File</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive" *ngIf="usersService.transmessage=='Transactions displayed successfully'">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Sr No.</th>
+                                <th>Date</th>
+                                <th>Package Name</th>
+                                <th>Amount</th>
+                                <th>Transaction_Id</th>
+                                <th>VIA</th>
+                                <th>Status</th>
+                                <!-- <th style="text-align: center;white-space: nowrap">Options</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let transhistory of usersService.getTranscationHistory | paginate : {itemsPerPage: 5, currentPage: cp}">
+                                <td>{{transhistory.sr_no}}</td>
+                                <td>{{transhistory.created_at}}</td>
+                                <td>{{transhistory.package_name}}</td>
+                                <td>{{transhistory.amount}}</td>
+                                <td>{{transhistory.transaction_id}}</td>
+                                <td>{{transhistory.payment_type}}</td>
+                                <td>{{transhistory.status}}</td>
+                                <!-- <td style="text-align: center;white-space: nowrap"><a href="javascript:void(0)"><i class="far fa-eye"></i></a><a href="javascript:void(0)"><i class="fal fa-times"></i></a></td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagenation-seciton-block" *ngIf="usersService.getTranscationHistory?.length>5">
+                        <pagination-controls (pageChange)="cp=$event"></pagination-controls>
+                    </div>
+                </div>
+                <div class="table-responsive" *ngIf="usersService.transmessage =='No transaction available '">
+                    <div class="no-records-found-section">
+                        <div class="no-records-found-txt">No records found</div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

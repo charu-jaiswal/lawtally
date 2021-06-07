@@ -1,0 +1,109 @@
+<div class="blank-div-section"></div>
+
+<!-- HEADER -->
+<app-main-header></app-main-header>
+
+<div class="container">            
+    <div class="cliam-profile-details">
+        <h2 class="lawyers-name-list-head">Choose how you want to claim</h2>
+        <div class="cliam-profile-list-breadcurmb">
+            <ul>
+                <li><a routerLink="/">Home</a><span><i class="fal fa-angle-right"></i></span></li>
+                <!-- <li><a href="javascript:void(0)">Browse Questions from others</a><span><i class="fal fa-angle-right"></i></span></li> -->
+                <li><a routerLink="/lawyer-directory/cliam-profile">Claim-Profile</a><span><i class="fal fa-angle-right"></i></span></li>
+                <li><a routerLink="/lawyer-directory/cliam-profile-details">Claim your free</a><span><i class="fal fa-angle-right"></i></span></li>
+                <li>Claim method</li>
+            </ul>
+        </div> 
+        <div class="clearfix"></div>
+    </div>       
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
+            <div class="business-details-section-block">
+                <div class="row">
+                    <label class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                        <div class="instructions-txt-section-block">
+                            We’ll send an email with instructions to the address on file with your state bar or licensing
+                            organization: <b>{{user.email}}</b>
+                        </div>
+                    </label>
+                    <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2"></div>
+                    <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                        <a class="choose-you-want-email-btn" data-toggle="modal" data-target="#myModal">
+                            <div class="input-group" (click)="openEmail()">
+                                <span class="input-group-addon">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <span class="btn-text-seciton-block">
+                                    Email
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <hr>
+                <div class="row">
+                    <label class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                        <div class="instructions-txt-section-block">
+                            Our automated phone system will call you at the number we have on file
+                            <b>{{user.mobile_number}}</b>
+                        </div>
+                    </label>
+                    <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2"></div>
+                    <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2">
+                        <a class="choose-you-want-email-btn" data-toggle="modal" data-target="#myModal">
+                            <div class="input-group" (click)="openPhone()">
+                                <span class="input-group-addon">
+                                    <i class="fas fa-phone"></i>
+                                </span>
+                                <span class="btn-text-seciton-block" (click)="openPhone()">
+                                    Phone Call
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FOOTER -->
+<app-main-footer></app-main-footer>
+
+<shared-modal id="emailForm" modalTitle="Claim by email">
+    <div class="text-center" id="claimEmail">
+        <img src="assets/images/email-claim-img.png"><br>
+        <label class="mt-2">We sent an email to this address: <br> <b>{{user.email}}</b></label><br>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text" id="btnGroupAddon"><i class="fal fa-envelope"></i></div>
+            </div>
+            <input type="text" [(ngModel)]="otp" class="form-control" placeholder="OTP" aria-label="Input group example"
+                aria-describedby="btnGroupAddon">
+        </div><br>
+        <p class="error" *ngIf="error">{{error}}</p>
+        <button class="btn btn-block btn-primary org" [disabled]="req" (click)="chckOTP()">
+            Verify
+        </button>
+    </div>
+</shared-modal>
+
+<shared-modal id="phoneForm" modalTitle="Claim by phone">
+    <div class="text-center" id="claimPhone">
+        <img src="assets/images/mobile-claim-img.png"><br>
+        <label class="mt-2">OTP has been sent to <b>{{user.mobile_number}}</b></label><br>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text" id="btnGroupAddon"><i class="fal fa-mobile"></i></div>
+            </div>
+            <input type="text" [(ngModel)]="otp" class="form-control" placeholder="OTP" aria-label="Input group example"
+                aria-describedby="btnGroupAddon">
+        </div><br>
+        <p class="error" *ngIf="error">{{error}}</p>
+        <button class="btn btn-block btn-primary org" [disabled]="req" (click)="chckOTP()">
+            Verify
+        </button>
+    </div>
+</shared-modal>

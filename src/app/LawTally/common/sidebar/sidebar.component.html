@@ -1,0 +1,149 @@
+<div class="inner-page-menu-section">
+      <span class="close-menu-responsive">
+            <i class="fal fa-times"></i>
+      </span>
+  <div class="inner-page-logo-section">
+    <a routerLink="/">
+      <img src="assets/images/logo-white.png" alt="" class="dashboard-white-logo" />
+      <img src="assets/images/logo.png" alt="" class="dashboard-red-logo" />
+    </a>
+  </div>
+  <div class="inner-page-menus">
+    <ul>
+      <li>
+            <a routerLink="/lawyer-directory/dashboard" (click)="menuclose()">
+                  <span class="dash-menu-icon dash-icon"></span> 
+                  <span class="dash-menu-icon-text">Dashboard</span>
+            </a>
+      </li>
+      <li>
+            <a href="javascript:void(0)" (click)="getUserProfile()">
+                  <span class="dash-menu-icon profile-icon"></span>
+                  <span class="dash-menu-icon-text">Profile</span>
+            </a>
+      </li>
+      <!-- <li><a routerLink="/lawyer-directory/subscription" (click)="menuclose()"><span class="dash-menu-icon subscrip-icon"></span> <span class="dash-menu-icon-text">Subscriptions</span></a></li> -->
+      <li>
+            <a routerLink="/lawyer-directory/notification" (click)="menuclose()">
+                  <span class="dash-menu-icon noti-icon"></span> 
+                  <span class="dash-menu-icon-text">Notification</span>
+            </a>
+      </li>
+      <li>
+            <a routerLink="/lawyer-directory/reviews" (click)="menuclose()">
+                  <span class="dash-menu-icon review-icon"></span> 
+                  <span class="dash-menu-icon-text">Reviews</span>
+            </a>
+      </li>      
+      <li class="submenu-main-section">
+            <a href="javascript:void(0)">
+                  <span class="dash-menu-icon inquiries-icon"></span> 
+                  <span class="dash-menu-icon-text">Collect Review</span>
+                  <span class="drop-arrow-span"><i class="fal fa-angle-down"></i></span>
+            </a>
+            <ul>
+                  <li>
+                        <a routerLink="/lawyer-directory/collect-review-listing" (click)="menuclose()"> 
+                              <span class="dash-menu-icon inquiries-icon"></span> 
+                              <span class="dash-menu-icon-text">Collect review list</span>
+                        </a>
+                  </li>
+                  <li>
+                        <a routerLink="/lawyer-directory/collect-review" (click)="menuclose()"> 
+                              <span class="dash-menu-icon inquiries-icon"></span> 
+                              <span class="dash-menu-icon-text">Collect review form</span>
+                        </a>
+                  </li>
+            </ul>
+      </li>
+      
+      <li>
+            <a routerLink="/lawyer-directory/enquiry" (click)="menuclose()">
+                  <span class="dash-menu-icon inquiries-icon"></span> 
+                  <span class="dash-menu-icon-text">Enquiries</span>
+            </a>
+      </li>
+      <li class="submenu-main-section">
+            <a href="javascript:void(0)">
+                  <span class="dash-menu-icon inquiries-icon"></span> 
+                  <span class="dash-menu-icon-text">Manage Questions</span>
+                  <span class="drop-arrow-span">
+                        <i class="fal fa-angle-down"></i>
+                  </span>
+            </a>
+            <ul>
+                  <li>
+                        <a routerLink="/lawyer-directory/asked-questions" (click)="menuclose()"> 
+                              <span class="dash-menu-icon inquiries-icon"></span> 
+                              <span class="dash-menu-icon-text">Asked Questions</span>
+                        </a>
+                  </li>
+                  <li *ngIf="rolesLength>1">
+                        <a routerLink="/lawyer-directory/received-questions" (click)="menuclose()"> 
+                              <span class="dash-menu-icon inquiries-icon"></span> 
+                              <span class="dash-menu-icon-text">Received Questions</span>
+                        </a>
+                  </li>
+            </ul>
+      </li>
+      <li *ngxPermissionsOnly="['LAWYER']">
+            <a routerLink="/lawyer-directory/transaction-history" (click)="menuclose()">
+                  <span class="dash-menu-icon transaction-icon"></span> 
+                  <span class="dash-menu-icon-text">Transaction History</span>
+            </a>
+      </li>
+
+      <li class="submenu-main-blog">
+            <a href="javascript:void(0)">
+                  <span class="dash-menu-icon inquiries-icon"></span> 
+                  <span class="dash-menu-icon-text">Blog</span>
+                  <span class="drop-arrow-span"><i class="fal fa-angle-down"></i></span>
+            </a>
+            <ul>
+                  <li>
+                        <a routerLink="/lawyer-directory/blog-list" (click)="menuclose()"> 
+                              <span class="dash-menu-icon inquiries-icon"></span> 
+                              <span class="dash-menu-icon-text">Blog List</span>
+                        </a>
+                  </li>
+                  <li>
+                        <a routerLink="/lawyer-directory/manage-blog" (click)="menuclose()"> 
+                              <span class="dash-menu-icon inquiries-icon"></span> 
+                              <span class="dash-menu-icon-text">Add Blog</span>
+                        </a>
+                  </li>
+            </ul>
+      </li>
+
+      <li *ngxPermissionsOnly="['LAWYER']">
+            <a href="javascript:void(0)" (click)="menuclose()">
+                  <span class="dash-menu-icon widget-icon"></span> 
+                  <span class="dash-menu-icon-text">Widget</span>
+            </a>
+      </li>
+     
+      <li class="submenu-main-setting">
+            <a href="javascript:void(0)">
+                  <span class="dash-menu-icon setting-icon"></span> 
+                  <span class="dash-menu-icon-text">Setting</span>
+                  <span class="drop-arrow-span"><i class="fal fa-angle-down"></i></span>
+            </a>
+            <ul>
+                  <li>
+                        <a routerLink="/lawyer-directory/change-password" (click)="menuclose()"> 
+                              <span class="dash-menu-icon inquiries-icon"></span> 
+                              <span class="dash-menu-icon-text">Change Password</span>
+                        </a>
+                  </li>
+                  <li>
+                        <a routerLink="/lawyer-directory/edit-profile" (click)="menuclose()"> 
+                              <span class="dash-menu-icon inquiries-icon"></span> 
+                              <span class="dash-menu-icon-text">Edit Profile</span>
+                        </a>
+                  </li>
+            </ul>
+      </li>
+</ul>
+
+  </div>
+</div>

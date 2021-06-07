@@ -1,0 +1,103 @@
+<div class="blank-div-section"></div>
+
+<!-- HEADER -->
+<app-main-header></app-main-header>
+
+<div class="blog-tab-section how-it-works-banner-section">
+    <div class="main-blog-bx">
+        <div class="main-blog-img">
+            <img src="images/how-it-works-banner-img.jpg" alt="img" />
+        </div>
+        <div class="how-it-works-banner-content">
+            <div class="how-it-works-banner-head">
+                <h1>Free Q&amp;A with attorneys</h1>
+            </div>
+            <div class="how-it-works-meni-head">
+                <h2>Every 5 seconds someone gets free legal advice from LawTally</h2>
+                <div class="bottom-underline-white"></div>
+            </div>
+            <div class="breadcurm-section-main">
+                <ul>
+                    <li><a href="javascript:void(0);">Home</a> <span class="breadcurm-arrow-section"><i
+                                class="fal fa-angle-right"></i></span></li>
+                    <li>Ask a Lawyer</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="how-it-works-contnet-section-main">
+    <div class="container">
+        <form #askquestionform="ngForm" id="askquestionform" data-parsley-validate>
+            <div class="question-form-main-section">
+                <div class="question-form-head-section">
+                    Free Q&amp;A with attorneys
+                </div>
+                <!-- <div class="form-group form-group-section">
+                    <select id="last">
+                        <option hidden>How It Work</option>
+                        <option>1</option>
+                        <option>2</option>
+                    </select>                    
+                    <span class="select-drop-icon"><i class="fal fa-angle-down"></i></span>
+                </div> -->
+
+                <div class="form-group active form-group-section">
+                    <ng-multiselect-dropdown name="practice_area" id="last" #practice_area="ngModel" ngModel required
+                        [placeholder]="'Select practice area'" [data]="usersService.practiceAreaList"
+                        [settings]="dropdownSettings">
+                    </ng-multiselect-dropdown>
+
+                    <label for="last">Select Practice area</label>
+                    <span class="select-drop-icon mt-4"><i class="fal fa-angle-down"></i></span>
+
+                    <div *ngIf="practice_area.invalid && (practice_area.dirty || practice_area.touched) && askquestionform?.submitted==true"
+                        class="error-msg">
+                        <div *ngIf="practice_area?.errors.required">
+                            * Practice area is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-box-right">
+                    <div class="input-name">Ask your question</div>
+                    <!-- <input type="text" name="email" placeholder="Start your question with 'how', 'what', 'why', 'when', 'can I...' 'do I...' or 'will I...'"> -->
+                    <input id="question" type="text" name="question" placeholder="Enter your Question"
+                        data-parsley-required="true" data-parsley-required-message="* This field is required."
+                        #question="ngModel" [(ngModel)]="ask_question" ngModel required data-parsley-maxlength="200"
+                        data-parsley-maxlength-message="* Max limit is 200 characters.">
+                </div>
+                <div class="input-box-right">
+                    <div class="input-name">Explain your situation</div>
+                    <!-- <textarea class="form-control" placeholder="Provide key details. No need to get it perfect-you can always make clarifications or ask follow-up questions later."></textarea> -->
+                    <textarea class="form-control" name="description" placeholder="Explain your situation"
+                        data-parsley-required="true" data-parsley-required-message="* This field is required." ngModel
+                        required></textarea>
+                </div>
+                <div class="input-box-right">
+                    <div class="input-name">Location</div>
+                    <!-- <input type="text" name="email" placeholder="alexandraba@gmail.com">   -->
+                    <!-- <input id="address" type="text" name="address" data-parsley-required="true" data-parsley-required-message="* This field is required."
+                    #address="ngModel" ngModel required> -->
+                    <input ngx-google-places-autocomplete id="address" type="text" name="address" #address="ngModel"
+                        [(ngModel)]="googleAddress" required (onAddressChange)="handleAddressChange($event)"
+                        data-parsley-required="true" data-parsley-required-message="* This field is required." />
+                    <div class="location-note-section">
+                        We use your location to provide state-specific advice from local lawyers.
+                    </div>
+                </div>
+                <div class="question-form-submit">
+                    <button class="add-doctor-menu" (click)="onAskquestionform(askquestionform)">Submit</button>
+                    <!--                    <a class="add-doctor-menu" href="javascript:void(0)">Add Lawyer</a>-->
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- FOOTER -->
+<app-main-footer></app-main-footer>
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

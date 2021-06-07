@@ -1,0 +1,43 @@
+<form [formGroup]="enquiryForm" name="enquiryForm">
+    <!-- <div class="row"> -->
+        <div class="form-group form-group-section drop-section-icon-main">
+            <div class="input-name">Select your practice areas</div>
+            <ng-select [clearable]="false" [items]="usersService.practiceAreaList" bindLabel="name" bindValue="_id"
+                formControlName="practice_area_id" required (change)="onSelectedArea($event)">
+            </ng-select>
+            <span class="drop-section-icon"><i class="fal fa-angle-down"></i></span>
+            <div *ngIf="enquiryForm.get('practice_area_id').status==='INVALID' && submitted==true" class="error-msg">
+                * practice areas is required.
+            </div>
+        </div>
+        <div class="form-group form-group-section">
+            <div class="input-name">Enter Your Description</div>
+            <textarea type="text" rows="5" formControlName="inquiry" required></textarea>
+            <div *ngIf="enquiryForm.get('inquiry').status==='INVALID' && submitted==true" class="error-msg">
+                * Description is required.
+            </div>
+        </div>
+        <div class="form-group form-group-section">
+            <div class="input-name">Enter Your Phone Number</div>
+            <input type="number" min="1" formControlName="phone_no" required>
+            <div *ngIf="enquiryForm.get('phone_no').status==='INVALID' && submitted==true" class="error-msg">
+                * Phone Number is required.
+            </div>
+        </div>
+        <div class="form-group form-group-section drop-section-icon-main">
+            <div class="input-name">Reply Time</div>
+            <ng-select [clearable]="false" [items]="Times" bindLabel="name" bindValue="_id" formControlName="reply_time"
+                required>
+            </ng-select>
+            <span class="drop-section-icon"><i class="fal fa-angle-down"></i></span>
+            <div *ngIf="enquiryForm.get('reply_time').status==='INVALID' && submitted==true" class="error-msg">
+                * Reply Time is required.
+            </div>
+        </div>
+    <!-- </div> -->
+</form>
+
+<div class="write-review-btn-seciton enquiryForm-buttons">
+    <button type="button" class="btn-list-ur-account" (click)="onSubmit(enquiryForm)">Save</button>
+    <button type="button" class="btn-list-ur-account" (click)="onDiscard()">Discard</button>
+</div>

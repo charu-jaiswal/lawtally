@@ -1,0 +1,88 @@
+<div class="inner-page-middle-seciton-main">
+    <div class="black-bg-section" (click)="menuclose()"></div>
+    <app-sidebar></app-sidebar>
+
+    <div class="inner-page-middle-seciton">
+        <app-dashboard-header></app-dashboard-header>
+
+        <div class="dashboard-page-content-seciton notification-page-content-seciton">
+            <div class="notification-head-section-main">
+                <div class="notification-head-section">
+                    Notification
+                </div>
+                <div class="breadcurm-section-block">
+                    <ul>
+                        <li><a routerLink="/lawyer-directory/dashboard">Home</a><span><i
+                                    class="fal fa-angle-right"></i></span></li>
+                        <li>Notification</li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div *ngIf="usersService.notiMsg == 'No Notifications.'">
+                <div class="message-section-main">
+                    <div class="message-text-content-section-main">
+                        <div class="message-text-content-section">
+                            <div class="message-text-head-section">
+                                No Notification
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div *ngIf="usersService.notiMsg != 'No Notifications.'">
+                <div
+                    *ngFor="let noti of usersService.getNotificationList | paginate : {itemsPerPage: 2, currentPage: cp}">
+                    <div class="message-section-main">
+                        <div class="message-date-time-section">
+                            <div class="message-date-time-block">
+                                <div class="message-date-section">
+                                    {{noti.created_at}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message-text-content-section-main">
+                            <div *ngIf="noti?.profile_image == '' " class="message-sender-img-section">
+                                <img src="assets/images/unknown-man.jpg" alt="" />
+                            </div>
+                            <div *ngIf="noti?.profile_image != ''" class="message-sender-img-section">
+                                <img src="{{noti.profile_image}}" alt="" />
+                            </div>
+
+                            <div class="message-text-content-section">
+                                <div class="message-text-head-section">
+                                    {{ noti.full_name }}
+                                </div>
+                                <div class="message-text-content">
+                                    <span>{{noti.description}}</span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <a class="notification-close-btn" (click)="onDeleteNotification(noti.id)"></a>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="pagenation-seciton-block" >
+        <ul>
+            <li><a href="javascript:void(0)"><i class="fal fa-angle-left"></i></a></li>
+            <li><a href="javascript:void(0)" class="active">1</a></li>
+            <li><a href="javascript:void(0)">2</a></li>
+            <li><a href="javascript:void(0)">3</a></li>
+            <li><a href="javascript:void(0)" class="active"><i class="fal fa-angle-right"></i></a></li>
+        </ul>
+      </div> -->
+            <div class="pagenation-seciton-block" *ngIf="usersService.getNotificationList != '' && usersService.getNotificationList?.length>2">
+                <pagination-controls (pageChange)="cp=$event"></pagination-controls>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>

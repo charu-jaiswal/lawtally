@@ -1,0 +1,91 @@
+<div class="blank-div-section"></div>
+    <div id="main"></div>
+   <app-main-header></app-main-header>
+    <div class="blog-tab-section how-it-works-banner-section questions-on-business"> 
+        <div class="main-blog-bx">
+            <div class="main-blog-img">
+                <img src="images/how-it-works-banner-img.jpg" alt="img" />
+            </div>
+            <div class="how-it-works-banner-content">
+                <div class="container">
+                    <div class="how-it-works-banner-head">
+                        <h1>Find a lawyer <br>Search the attorney directory</h1>
+                    </div>
+                    <div class="search-section-main">
+                        <div class="all-state-drop-section select-section">
+                            <select>
+                                <option>All States</option>
+                                <option>States1</option>
+                                <option>States1</option>
+                                <option>States1</option>
+                            </select>
+                            <span><i class="fas fa-caret-down"></i></span>
+                        </div>
+                        <div class="search-input-section input-section">
+                            <input type="text" name="search" placeholder="input your search" />
+                        </div>
+                        <div class="search-btn-section">
+                            <button class="search-section-btn" type="submit" name="search-btn">Search</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>               
+    </div>
+    <div class="how-it-works-contnet-section-main questions-on-business-main">
+        <div class="container">
+            <div class="search-list-section-main" *ngIf="practiceAreaList">
+                <div class="search-list-head-section">
+                    See lawyers by practice area
+                    <span></span>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3" *ngFor="let get of practiceAreaList">
+                        <div class="city-name-section">
+                            <a href="javascript:void(0);" (click)="selectPracticArea(get)">
+                              {{get.name}}
+                            </a>
+                        </div>
+                                              
+                    </div>
+                                 
+                </div>
+            </div>
+            <div class="search-list-section-main" *ngIf="stateList">
+                <div class="search-list-head-section">
+                    View attorneys by state
+                    <span></span>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3" *ngFor="let get of stateList">
+                        <div class="city-name-section" >
+                            <a href="javascript:void(0);" (click)="selectState(get)">{{get.state_name}}</a>                            
+                        </div>
+                       
+                    </div>
+                                 
+                </div>
+            </div>
+            <div class="search-list-section-main" *ngIf="cityList">
+                <div class="search-list-head-section">
+                    View attorneys by city
+                    <span></span>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 col-lg-3" *ngFor="let get of cityList">
+                        <div class="city-name-section">
+                            <a href="javascript:void(0);" (click)="selectCity(get)">{{get.city_name}}</a>                            
+                        </div>
+                       
+                    </div>
+                                 
+                </div>
+            </div>            
+        </div>
+    </div>    
+   <app-main-footer></app-main-footer>
+    <!-- back to Top Start Here  -->
+    <a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>   
+    
+ 

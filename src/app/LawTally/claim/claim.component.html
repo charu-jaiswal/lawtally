@@ -1,0 +1,107 @@
+<div class="blank-div-section"></div>
+
+<!-- HEADER -->
+<app-main-header></app-main-header>
+
+<div class="blog-tab-section how-it-works-banner-section questions-on-business">
+    <div class="main-blog-bx">
+        <div class="main-blog-img">
+            <img src="assets/images/how-it-works-banner-img.jpg" alt="img" />
+        </div>
+        <div class="how-it-works-banner-content">
+            <div class="container">
+                <form #filterform="ngForm" id="filterform">
+                    <div class="how-it-works-banner-head">
+                        <h1>Be Found.<br> Claim your profile.</h1>
+                    </div>
+                    <div class="search-section-main">
+                        <div class="all-state-drop-section select-section">
+                            <!-- <input type="text" name="search" placeholder="input your search" /> -->
+                            <input id="keyword" type="text" name="keyword" placeholder="First or last name"
+                                #keyword="ngModel" ngModel>
+                        </div>
+                        <div class="search-input-section input-section">
+                            <!-- <input type="text" name="search" placeholder="input your search" /> -->
+                            <input ngx-google-places-autocomplete id="address" type="text" name="address"
+                                #address="ngModel" [(ngModel)]="googleAddress" required
+                                (onAddressChange)="handleAddressChange($event)" />
+                        </div>
+                        <div class="search-btn-section">
+                            <button class="search-section-btn" type="submit" name="search-btn"
+                                (click)="onfilterform(filterform)">Search</button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="how-it-works-contnet-section-main questions-on-business-main">
+    <div class="container">
+        <h2 class="lawyers-name-list-head">Lawyers named A TO Z</h2>
+        <div class="cliam-profile-list-breadcurmb">
+            <ul>
+                <li><a routerLink="/">Home</a><span><i class="fal fa-angle-right"></i></span></li>
+                <!-- <li><a href="javascript:void(0)">Browse Questions from others</a><span><i class="fal fa-angle-right"></i></span></li> -->
+                <li>Claim Profile</li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">                        
+            <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                <div class="business-details-section-block" *ngFor="let profile of profiles">
+                    <!-- <div class="doctor-listing-section-main"> -->
+                    <div class="claim-img-section">
+                        <img [src]="profile?.profile_image" alt="" />
+                    </div>
+                    <div class="doctor-information-section-claim mt-2">
+                        <div class="listing-doctor-name">
+                            <span style="cursor: pointer">{{profile.full_name}}</span>
+                        </div>
+                        <div class="listing-doctor-speficality-section" *ngIf="profile.practice_area.length">
+                            <i class="fas fa-university"></i>
+                            <ng-container *ngFor="let prac of profile.practice_area;let idx=index">
+                                {{prac.practice_area_name}}
+                                <ng-container *ngIf="idx != profile.practice_area.length-1">
+                                    {{', '}}
+                                </ng-container>
+                            </ng-container>
+                        </div><br>
+                        <div class="listing-doctor-speficality-section">
+                            <i class="fas fa-map-marker-alt"></i> {{profile.address}}
+                        </div>
+                    </div>
+                    <div class="claim-profile-btn-seciton">
+                        <a class="btn-claim-profile-seciton" (click)="openClaimProfile(profile)">Claim Profile</a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="text-center mt-5" *ngIf="!profiles.length">
+                    <hr>
+                    <h5>No Lawyers Found !</h5>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="cliam-profile-right-bar">
+                    <div class="cliam-profile-right-head">Claiming your free LawTally
+                        profile</div>
+                    <div class="cliam-profile-right-content-text">
+                        <i class="far fa-check-circle"></i>Set yourself apart from your colleagues to attract new
+                        business
+                    </div>
+                    <div class="cliam-profile-right-content-text">
+                        <i class="far fa-check-circle"></i>Update your profile with as much information as you want,
+                        as often as you want
+                    </div>
+                    <div class="cliam-profile-right-content-text">
+                        <i class="far fa-check-circle"></i>Request reviews and peer endorsements
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FOOTER -->
+    <app-main-footer></app-main-footer>

@@ -1,0 +1,282 @@
+<div class="blank-div-section"></div>
+
+<!-- HEADER -->
+<app-main-header></app-main-header>
+
+<div class="how-it-works-contnet-section-main questions-on-business-main questions-on-business-details-main">
+    <div class="breadcurm-questions-on-business">
+        <div class="container">
+            <ul>
+                <li><a href="/">Home</a><span><i class="fal fa-angle-right"></i></span></li>
+                <li><a href="javascript:void(0)" routerLink="/lawyer-directory/see-all-questions">All
+                        questions</a><span><i class="fal fa-angle-right"></i></span></li>
+                <li>Question Details</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="left-filter-section">
+                    <div class="filter-head-section">
+                        Side Bar
+                    </div>
+                    <div class="question-leftbar-section">
+                        <div class="question-leftbar-head-section">
+                            Related topics
+                        </div>
+                        <div class="left-bar-points-section">
+                            <ul>
+                                <li><a href="javascript:void(0)"><span><i class="fal fa-angle-double-right"></i></span>
+                                        LLC (limited liability company)</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fal fa-angle-double-right"></i></span>
+                                        Small business taxes</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fal fa-angle-double-right"></i></span>
+                                        Lawsuits and disputes</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fal fa-angle-double-right"></i></span>
+                                        Tax Law</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fal fa-angle-double-right"></i></span>
+                                        Business contracts</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fal fa-angle-double-right"></i></span>
+                                        Real estate</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fal fa-angle-double-right"></i></span>
+                                        Business</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fal fa-angle-double-right"></i></span>
+                                        Employment law for businesses</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fal fa-angle-double-right"></i></span>
+                                        Business insurance</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fal fa-angle-double-right"></i></span>
+                                        Business real estate</a></li>
+                                <li><a href="javascript:void(0)"><span><i class="fal fa-angle-double-right"></i></span>
+                                        Employment</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="question-leftbar-section">
+                        <form #askquestionform="ngForm" id="askquestionform" data-parsley-validate>
+                            <div class="question-leftbar-head-section">
+                                Ask your own legal question, it's free
+                            </div>
+                            <div class="question-leftbar-textarea-main">
+                                <textarea autofocus="autofocus" name="question" id="question" #question="ngModel"
+                                    ngModel placeholder="Enter your question" data-parsley-required="true"
+                                    data-parsley-required-message="* This field is required." required></textarea>
+                            </div>
+                            <div *ngIf="question.invalid && (question.dirty && question?.errors.required) "
+                                class="error-msg">
+                                <div *ngIf="question.errors.required">
+                                    * This field is required.
+                                </div>
+                            </div>
+                            <div class="submit-question-btn-main">
+                                <button class="btn-submit-question" (click)="onsubmit(askquestionform)">Submit
+                                    Question</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="question-leftbar-section need-professional-help-main">
+                        <div class="need-professional-help-head">
+                            Need Professional Help?
+                        </div>
+                        <div class="need-profetional-help-semihead">
+                            Talk to a Business Law Attorney.
+                        </div>
+                        <div class="lawyer-near-me-btn">
+                            <a href="javascript:void(0)" class="btn-lawyer-near-me">Find A Lawyer Near Me</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-arrow-icon-section">
+                    <i class="fal fa-filter"></i>
+                    <i class="fal fa-times"></i>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8" *ngIf="usersService.questionDetailsMsg == 'SUCCESS' ">
+                <div class="business-details-section-block">
+                    <div class="business-details-block-head">
+                        {{ usersService.questionDetailsData.title }}
+                    </div>
+                    <div class="guides-label-section">
+                        <div class="guides-label-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="guides-label-txt" *ngFor="let practice of usersService.questionDetailsData.practice_area">
+                            {{ practice.practice_area_name}}, &nbsp;
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="guides-label-section">
+                        <i class="fas fa-user-circle"></i> Asked in {{ usersService.questionDetailsData.city }} |
+                        {{ usersService.questionDetailsData.created_at }}
+                    </div>                    
+                    <div class="business-details-block-content">
+                        <p>{{ usersService.questionDetailsData.question }} </p>
+                    </div>
+                    <div class="ask-lawyer-btn-secitons-main">
+                        <a class="details-ask-lawyer-btn" href="javascript:void(0)"
+                            routerLink="/lawyer-directory/ask-free-question">Ask a lawyer - it's free!</a>
+                        <a class="browse-related-questions" href="javascript:void(0)"
+                            (click)="related_questions()">Browse related questions</a>
+                    </div>
+                </div>
+                <div class="answers-section-main" *ngIf="usersService.questionDetailsData.get_answers !=''">
+                    <div class="answers-section-head">
+                        {{ usersService.questionDetailsData.count_of_answers1 }} Attorney Answers
+                        <div class="answers-section-bottom-border"></div>
+                    </div>
+                  
+                    <div class="answers-section" *ngFor="let answers of usersService.questionDetailsData.get_answers">
+                        <div class="answers-section-user-info">
+                            <div class="ans-sender-img">
+                                <img src="{{answers?.profile_image}}">
+                            </div>
+                            <div class="ans-sender-content">
+                                <div class="ans-sender-name">
+                                    <span>{{ answers.full_name }}</span> Posted on {{ answers.created_at }}
+                                </div>
+                                <div class="stars-section-details">
+
+                                    <span *ngFor="let i of counter(5) | slice:0:answers.average_ratings">
+                                        <i class="fas fa-star active-star"></i>
+                                    </span>
+                                    <span *ngFor="let i of counter(5) | slice:answers.average_ratings:5">
+                                        <i class="fas fa-star "></i>
+                                    </span>
+                                    <span> ({{ answers.average_ratings }}) Reviews</span>
+                                </div>
+                                <div class="guides-label-section">
+                                    <div class="guides-label-icon">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                    <div class="guides-label-txt" *ngFor="let practice_area of answers.practice_area">
+                                        {{practice_area.practice_area_name}}, &nbsp;
+                                    </div>
+                                     
+                                </div>
+                                <div class="comment-helpful-unhelpful" >
+                                    <a (click)="submitansweflagmethod(1,answers.id)">
+                                        <i [ngStyle]="{'color':answers.flag_status == '1' ? 'green' : '#ff3b4b' }" class="fas fa-thumbs-up" ></i> Helpful
+                                    </a>
+                                    <a (click)="submitansweflagmethod(0,answers.id)">
+                                        <i [ngStyle]="{'color':answers.flag_status == '0' ? 'green' : '#ff3b4b' }" class="fas fa-thumbs-down" ></i> Unhelpful
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="business-details-block-content">
+                            {{ answers.answer }}
+                        </div>
+                        <div class="ans-action-btns">
+                            <ul>
+                                <li (click)=sendEnquiryModal(answers.lawyer_id)><a ><i class="fas fa-envelope"></i> Private
+                                        Message</a><span>|</span></li>
+                                <li  *ngIf="!lawyerid"><a ><i class="fas fa-phone"></i> 
+                                    Reveal number</a><span>|</span></li>
+                                    <li  *ngIf="lawyerid"><a ><i class="fas fa-phone"></i> 
+                                        {{answers.mobile_number}}</a><span>|</span></li>
+                                <li class="comments-count-main" (click)="opencomment(answers)"><a ><i class="fas fa-comment"></i> {{answers.comments_count}} Comments</a></li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="reviews-section-main-block-main new-reviews-section-main-block">
+                            <h4 *ngIf="answers.comments">Comment :</h4>
+                            <div class="reviews-section-main-block" *ngFor="let rev of answers.comments">
+                                
+                                <div class="endorsment-relation-content">
+                                    <div class="endorsment-relation-pic-section">
+                                        <img src="{{rev?.profile_image}}" alt="" />
+                                    </div>
+                                    <div class="endorsment-relation-content-section">
+                                        <div class="endorsment-relation-name-head">
+                                            {{rev.full_name}}
+                                        </div>
+                                        <div class="review-date-seciton">
+                                            {{rev.created_at}}
+                                        </div>
+                                        <div style="word-wrap:break-word">
+                                            {{ rev.comment}}
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+                <div class="answers-section-main" *ngIf="usersService.questionDetailsData.get_answers ==''">
+                    <div class="no-records-found-section">
+                        <div class="no-records-found-txt">No Attorney Answers</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8" *ngIf="usersService.questionDetailsMsg == 'ERROR' ">
+                <div class="no-records-found-section">
+                    <div class="no-records-found-txt">No records found</div>
+                </div>
+            </div>
+        </div>
+        <div class="more-questions-seciton-main">
+            <div class="answers-section-head">
+                More questions like this
+                <div class="answers-section-bottom-border"></div>
+            </div>
+            <div class="row" *ngIf="usersService.questionDetailsData.similar != ''">
+                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6"
+                    *ngFor="let similars of usersService.questionDetailsData.similar">
+                    <div class="more-question-block">
+                        <a class="question-text-section-block" routerLink="/lawyer-directory/question-details"
+                            (click)="questionDetail(similars.id)">
+                            {{ similars.title }}
+                        </a>
+                        <div class="question-bottom-small-txt">
+                            {{ similars.city }} | {{ similars.count_of_answers2 }} attorney answers
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="usersService.questionDetailsData.similar == ''">
+                <div class="no-records-found-section">
+                    <div class="no-records-found-txt">No more similar questions</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<app-main-footer></app-main-footer>
+
+<!-- back to Top Start Here  -->
+<a href="#0" class="cd-top"><i class="fal fa-angle-up"></i></a>
+
+<shared-modal id="sendEnquiryForm" modalTitle="Send Enquiry" class="send-reviwe-modal-main">
+    <app-enquiry-form (formSubmitted)="sendEnquiry($event)"></app-enquiry-form>
+</shared-modal>
+
+ <!-- The Modal -->
+ <div class="modal fade" id="comment">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Comment</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="form-group">
+                <!-- <label for="comment">:</label> -->
+                <textarea class="form-control" rows="5" placeholder="write your comment" (keyup)="testmethod($event.target.value)"></textarea>
+              </div>
+        </div>
+        <div class="modal-footer" style="padding: 15px;">
+            <button type="button" class="btn btn-danger" (click)="submitcommentmethod()">Submit</button>
+          </div>
+
+        
+      </div>
+    </div>
+  </div>
